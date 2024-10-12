@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Navbar from "../../components/Navbar";
+
 import team from "../assets/IMG_1559.webp";
 import cord from "../assets/coords.webp";
 import group from "../assets/IMG_2739.webp";
@@ -102,7 +103,6 @@ export default function Home() {
       </motion.div>
 
       {/* What sets us apart */}
-      <div className="flex md:flex-row-reverse flex-col items-end md:items-start justify-start md:justify-center md:gap-8 bg-mainlight px-10 md:px-24 py-20">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +195,6 @@ export default function Home() {
               Learn More
             </a>
           </motion.div>
-
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
