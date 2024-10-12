@@ -7,11 +7,10 @@ import AnimatedSVG from "../../components/AnimatedSvg";
 import * as motion from "framer-motion/client";
 
 export default function Home() {
-
   return (
     <main>
       <Navbar />
-      <div className="flex md:flex-row flex-col items-center justify-between gap-[5rem] md:gap-[2rem] md:pl-5  py-[3rem] bg-mainlight">
+      <div className="flex md:flex-row flex-col items-center justify-between gap-[5rem] md:gap-[2rem] md:pl-5  py-[3rem] bg-mainlight overflow-hidden">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -31,12 +30,24 @@ export default function Home() {
             and Technology, Aligarh Muslim University.
           </p>
 
-          <div className="">
+          <div className="w-fit">
             <a
-              className="font-bold border-2 border-green-600 px-2 py-3 rounded-full"
+              className="group flex items-center gap-5 border-2 border-green-600 hover:bg-green-600 hover:text-white transition-colors duration-300 px-5 py-3 rounded-full font-bold text-[1.1rem]"
               href="https://drive.google.com/file/d/1RFu5NtxDXvg54ka9GJcrxYiexZaR1wXk/view?usp=sharing"
+              target="_blank" // Optional: Opens in a new tab
+              rel="noopener noreferrer" // Optional: Security for external links
             >
               Download Our APP
+              <span className="flex justify-end w-0 h-4 -ml-2 pointer-events-none overflow-hidden transition-[width] duration-300 group-hover:w-6">
+                <svg
+                  className="block w-4 h-4 flex-initial pointer-events-none fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M19 9h-4V2H9v7H5l7 7 7-7zm-7 9H5v2h14v-2h-7z" />
+                </svg>
+              </span>
             </a>
           </div>
         </motion.div>
@@ -58,7 +69,7 @@ export default function Home() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
@@ -71,10 +82,9 @@ export default function Home() {
         />
         <div className="relative md:w-[55%] -mt-10 md:pt-24">
           <div className="bg-lightblue p-5 md:mt-10 md:p-8 md:pl-24 md:-ml-20 rounded bg-brand-gray-light">
-            <h1 className="text-[1.7rem] md:text-[2.8rem] leading-[2rem] md:leading-[3.4rem] font-bold font-mont text-mainblue">
-              Innovating and overcoming today&apos;s robotics challenges to
-              create a smarter, more sustainable future for our campus and
-              beyond.
+            <h1 className="text-[2rem] md:text-[2.8rem] leading-[2rem] md:leading-[3.4rem] font-semibold font-mont text-mainblue">
+              What Opportunities Do We{" "}
+              <span className="text-gradient">Offer?</span>
             </h1>
             <p className="pt-12 font-mont font-medium text-mainblue/90 text-justify">
               AMURoboclub fosters interest and showcases talent in robotics and
@@ -107,10 +117,10 @@ export default function Home() {
           />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: -100 }}
+          initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true}}
-          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="relative md:w-[55%] -mt-10 md:pt-24"
         >
           <div className="bg-white p-5 -mt-5 md:mt-10 md:p-8 md:pr-24 md:-mr-20 rounded bg-brand-gray-light">
@@ -147,7 +157,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.6 }}
             className="md:w-[40vw] w-[85vw] flex flex-col items-start gap-5 relative p-10 bg-darkblue z-10 rounded-xl hover:shadow-xl hover:bg-white hover:-translate-y-6 transition ease-in-out duration-300  cursor-pointer"
           >
             <div className="absolute -top-5 z-1 w-14 h-14" aria-hidden="true">
