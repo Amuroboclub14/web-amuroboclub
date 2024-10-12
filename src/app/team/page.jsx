@@ -5,7 +5,7 @@ import { useState } from "react";
 import pic from "../../assets/profileSA1.jpg";
 import linkedin from "../../assets/linkedin.png";
 import x from "../../assets/x.png";
-import Navbar from "../../../components/Navbar";
+import Navbar from "../components/Navbar"; 
 
 const teamData = {
   cords: [

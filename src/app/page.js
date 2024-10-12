@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Navbar from "../../components/Navbar";
+import Navbar from "./components/Navbar";
 
 import team from "../assets/IMG_1559.webp";
 import cord from "../assets/coords.webp";
 import group from "../assets/IMG_2739.webp";
-import AnimatedSVG from "../../components/AnimatedSvg";
+import AnimatedSVG from "./components/AnimatedSvg";
 import * as motion from "framer-motion/client";
 
 export default function Home() {
@@ -103,6 +103,7 @@ export default function Home() {
       </motion.div>
 
       {/* What sets us apart */}
+      <div className="flex md:flex-row-reverse flex-col items-end md:items-start justify-start md:justify-center md:gap-8 bg-mainlight px-10 md:px-24 py-20">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -10,7 +10,7 @@ import {
   MapPin,
   Users,
 } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   Card,
   CardContent,
@@ -18,7 +18,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../components/ui/card";
+} from "../components/ui/card";
 import Image from "next/image";
 
 // Mock data for events
