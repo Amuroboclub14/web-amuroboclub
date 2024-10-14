@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Navbar from "./components/Navbar";
-
+import Footer from "./components/Footer";
 import team from "../assets/IMG_1559.webp";
 import cord from "../assets/coords.webp";
 import group from "../assets/IMG_2739.webp";
@@ -240,6 +240,7 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }
