@@ -4,7 +4,7 @@ import Logo from "../../assets/Vlogo.d83a8feb5370b0b7c52a.png";
 
 export default function Footer() {
 return (
-    <footer className="md:h-screen w-full flex flex-col gap-20 md:px-20 px-10 py-10 bg-mainblue text-white">
+    <footer className="md:min-h-screen w-full flex flex-col gap-20 md:px-20 px-10 py-10 bg-mainblue text-white">
         <div>
             <Image src={Logo} alt="AMURoboclub Logo" className="h-fit md:w-[30%] w-[80%]" />
         </div>
@@ -14,7 +14,6 @@ return (
                     <a href="/about">About Us</a>
                     <a href="/about">About Us</a>
                     <a href="/about">About Us</a>
-
                 </div>
                 <div className="flex flex-col gap-5">
                     <a href="/about">About Us</a>
@@ -32,7 +31,16 @@ return (
                     <a href="/about">About Us</a>
                 </div>
             </div>
-            <div className="flex md:flex-col items-center justify-between md:border-0 border-b-[1px] border-gray-400 pb-5 md:pb-0">
+            <div style={{ maxWidth: "100%", overflow: "hidden", color: "red" }}>
+                <div id="my-map-display" className="h-[40vh] md:w-[30vw] w-[80vw] max-w-full">
+                    <iframe
+                        style={{ height: "100%", width: "100%", border: 0 }}
+                        frameBorder="0"
+                        src="https://www.google.com/maps/embed/v1/place?q=amu+roboclub&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+                    ></iframe>
+                </div>
+            </div>
+            <div className="flex md:flex-col items-center justify-between md:justify-start md:border-0 border-b-[1px] border-gray-400 pb-5 md:pb-0 mb-10">
                 <a className="h-[2.7rem] flex items-center gap-5 border-2 border-white hover:bg-white hover:text-mainblue transition-colors duration-200 px-5 py-1 cursor-pointer rounded-full font-medium text-[1.15rem]">
                     Contact
                 </a>
@@ -72,17 +80,14 @@ return (
                 </div>
             </div>
         </div>
-        <div className="flex md:flex-row flex-col justify-between text-[1rem] gap-5 md:mt-20 border-t-[1px] border-gray-400 pt-10 font-medium">
+        <div className="flex md:flex-row flex-col justify-between text-[1rem] gap-5 md:mt-0 border-t-[1px] border-gray-400 pt-10 ">
             <p>&copy; 2024 AMURoboclub</p>
-            {/* <p>|</p> */}
             <p>
                 <a href="/privacy-policy">PRIVACY POLICY</a>
             </p>
-            {/* <p>|</p> */}
             <p>
                 <a href="/terms-of-service">TERMS OF SERVICE</a>
             </p>
-            {/* <p>|</p> */}
             <p>
                 <a href="/contact">CONTACT US</a>
             </p>
