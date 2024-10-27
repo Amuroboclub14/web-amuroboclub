@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
@@ -14,103 +14,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
-
-// Mock data for projects
-const projects = [
-  {
-    id: 1,
-    title: "GSM based Intruder Alarm",
-    description:
-      "This is a prototype device prepared for security purposes,made under the guidance of MOHD. TALHA. We have mainly used GSM 300 Module, PIR Sensor ,Cell Phone and ATMEGA 16 (or any other embedded system you like). The whole concept behind this is what whenever an intruder will pass infront of the PIR Sensor, according to the infrared changes , it detects ,correspondingly an alert message will be sent to the user’s cell phone.",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/amu-roboclub.appspot.com/o/projects%2FGSM%20based%20Intruder%20Alarm%2F52802546072518513995408544348591700?alt=media&token=2a36b4c8-bec0-46ce-adc9-a676e18f6dde",
-    date: "2017-05-18",
-    status: "completed",
-    team: [
-      {
-        name: "Manjari Agrawal",
-        // linkedin: "https://www.linkedin.com/in/johndoe",
-      },
-      {
-        name: "Suhani Pandey",
-        // linkedin: "https://www.linkedin.com/in/janesmith",
-      },
-    ],
-    // github: "https://github.com/AMURoboclub/autonomous-drone",
-    // demo: "https://amuroboclub.com/projects/autonomous-drone",
-    technologies: ["Atmega 16", "GSM 300 Sensor", "PIR Sensor"],
-  },
-  {
-    id: 2,
-    title: "Health Care Monitoring System For Pregnant Women Elderly People",
-    description:
-      "Health Care Monitoring System For Pregnant Women Elderly  People",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/amu-roboclub.appspot.com/o/projects%2FHealth%20Care%20Monitoring%20System%20For%20Pregnant%20Women%20Elderly%20%20People%2Fimg1.jpeg?alt=media&token=7e9754a7-7dd8-4209-a7b3-7fd56edd45fd",
-    date: "2022-09-01",
-    status: "completed",
-    team: [
-      {
-        name: "Megha Pachauri",
-        linkedin: "https://www.linkedin.com/in/megha-pachauri-6a0181203",
-      },
-      {
-        name: "Ayush Sharma",
-        // linkedin: "https://www.linkedin.com/in/janesmith",
-      },
-      {
-        name: "Saumya Agarwal",
-        linkedin: "https://www.linkedin.com/in/saumya-agarwal-591ab3243/",
-      },
-      {
-        name: "Lavish Upadhayay",
-        linkedin: "https://www.linkedin.com/in/lavish-upadhyay-35a782223/",
-      },
-    ],
-    // github: "https://github.com/AMURoboclub/agri-bot",
-    demo: "https://drive.google.com/file/d/1KN0WQwH-XvLa-e-373VtRDbTxWoTJCvd/view",
-    technologies: ["Arduino", "C++", "IoT"],
-  },
-  {
-    id: 3,
-    title: "Robotic Arm for Medical Assistance",
-    description:
-      "A precise robotic arm designed to assist surgeons in delicate medical procedures.",
-    image: "/placeholder.svg?height=200&width=300",
-    date: "2024",
-    status: "completed",
-    team: ["Eva Green", "Frank White", "Grace Lee"],
-    github: "https://github.com/AMURoboclub/medical-arm",
-    demo: "https://amuroboclub.com/projects/medical-arm",
-    technologies: ["ROS", "C++", "Computer Vision"],
-  },
-  {
-    id: 4,
-    title: "Swarm Robotics Platform",
-    description:
-      "A platform for developing and testing swarm robotics algorithms with multiple small robots.",
-    image: "/placeholder.svg?height=200&width=300",
-    date: "2023",
-    status: "completed",
-    team: ["David Miller", "Emma Wilson"],
-    github: "https://github.com/AMURoboclub/swarm-platform",
-    demo: "https://amuroboclub.com/projects/swarm-platform",
-    technologies: ["Python", "ROS", "Machine Learning"],
-  },
-  {
-    id: 5,
-    title: "Humanoid Robot",
-    description:
-      "A humanoid robot capable of natural movement and basic interaction with humans.",
-    image: "/placeholder.svg?height=200&width=300",
-    date: "2025",
-    status: "completed",
-    team: ["Sophia Chen", "Raj Patel", "Maria Garcia"],
-    github: "https://github.com/AMURoboclub/humanoid-robot",
-    demo: "https://amuroboclub.com/projects/humanoid-robot",
-    technologies: ["C++", "ROS", "AI", "Computer Vision"],
-  },
-];
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const getStatusInfo = (status) => {
   switch (status) {
@@ -123,8 +28,54 @@ const getStatusInfo = (status) => {
   }
 };
 
+const truncateText = (text, maxLength) => {
+  return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+};
+
 export default function ProjectsPage() {
+  const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "projects"));
+        const filteredProjects = querySnapshot.docs
+          .map((doc) => {
+            const data = doc.data();
+            return {
+              id: doc.id,
+              title: data.name,
+              date: data.date,
+              description: data.description,
+              image: data.projectImg?.[0] || "",
+              status: data.progress === "100" ? "completed" : "in_progress",
+              team:
+                data.teamMembers?.map((member) => ({
+                  name: member.member,
+                  linkedin: member.linkedinId,
+                })) || [],
+              github: data.github || null,
+              demo: data.link || null,
+              technologies: data.technologies || [],
+            };
+          })
+          .filter(
+            (project) =>
+              project.title &&
+              project.description &&
+              project.image &&
+              project.team.length > 0
+          );
+
+        setProjects(filteredProjects);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const handleSelectProject = (project) => {
     setSelectedProject(project);
@@ -161,8 +112,9 @@ export default function ProjectsPage() {
               <div className="p-4">
                 <h3 className="font-bold text-lg mb-2">{project.title}</h3>
                 <p className="text-sm text-gray-600 mb-2">
-                  {project.description}
+                  {truncateText(project.description, 100)}{" "}
                 </p>
+
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center text-gray-500">
                     <Calendar className="w-4 h-4 mr-1" />
@@ -200,7 +152,7 @@ export default function ProjectsPage() {
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 50, opacity: 0 }}
-                className="bg-white rounded-lg w-full max-w-2xl overflow-hidden"
+                className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="relative">
@@ -262,15 +214,17 @@ export default function ProjectsPage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {selectedProject.technologies.map((tech, index) => (
-                        <span
-                          key={index}
-                          className="px-2 py-1 bg-gray-200 rounded-full text-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                      {selectedProject.technologies &&
+                        selectedProject.technologies.map((tech, index) => (
+                          <span
+                            key={index}
+                            className="px-2 py-1 bg-gray-200 rounded-full text-sm"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                     </div>
+
                     <div className="flex space-x-4">
                       <a
                         href={selectedProject.github}

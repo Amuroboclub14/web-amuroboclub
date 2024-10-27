@@ -16,6 +16,7 @@ export default function Navbar() {
         <Link href={"/projects"}>Projects</Link>
         <Link href={"/team"}>Team</Link>
         <Link href={"/events"}>Events</Link>
+        <Link href={"/gallery"}>Gallery</Link>
         <Link href={"/contributors"}>Contributors</Link>
         <Link href={"/amusat"}>AMUSAT</Link>
         <div className="w-[10rem]">
