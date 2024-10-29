@@ -32,9 +32,25 @@ const truncateText = (text, maxLength) => {
   return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
 };
 
+// skeleton component
+const ProjectSkeleton = () => (
+  <div className="bg-gray-200 rounded-lg shadow-md overflow-hidden animate-pulse">
+    <div className="w-full h-48 bg-gray-300" />
+    <div className="p-4">
+      <div className="h-6 bg-gray-300 rounded mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+      <div className="flex items-center justify-between text-sm">
+        <div className="h-4 bg-gray-300 rounded w-1/4"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/4"></div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function ProjectsPage() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -71,6 +87,8 @@ export default function ProjectsPage() {
         setProjects(filteredProjects);
       } catch (error) {
         console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -94,49 +112,53 @@ export default function ProjectsPage() {
         </h1>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
-              onClick={() => handleSelectProject(project)}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={300}
-                height={200}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-2">{project.title}</h3>
-                <p className="text-sm text-gray-600 mb-2">
-                  {truncateText(project.description, 100)}{" "}
-                </p>
+          {loading
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <ProjectSkeleton key={index} />
+              ))
+            : projects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                  onClick={() => handleSelectProject(project)}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={300}
+                    height={200}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="font-bold text-lg mb-2">{project.title}</h3>
+                    <p className="text-sm text-gray-600 mb-2">
+                      {truncateText(project.description, 100)}{" "}
+                    </p>
 
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center text-gray-500">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    <span>{project.date}</span>
-                  </div>
-                  {(() => {
-                    const {
-                      color,
-                      icon: Icon,
-                      text,
-                    } = getStatusInfo(project.status);
-                    return (
-                      <div className={`flex items-center ${color}`}>
-                        <Icon className="w-4 h-4 mr-1" />
-                        <span>{text}</span>
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center text-gray-500">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        <span>{project.date}</span>
                       </div>
-                    );
-                  })()}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                      {(() => {
+                        const {
+                          color,
+                          icon: Icon,
+                          text,
+                        } = getStatusInfo(project.status);
+                        return (
+                          <div className={`flex items-center ${color}`}>
+                            <Icon className="w-4 h-4 mr-1" />
+                            <span>{text}</span>
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
         </div>
 
         <AnimatePresence>
