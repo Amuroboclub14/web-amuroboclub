@@ -10,7 +10,7 @@ import Faqs from "./components/Faqs";
 export default function Home() {
   return (
     <main>
-      <Navbar />
+      <Navbar bgColor={'mainlight'}/>
       <div className="flex md:flex-row flex-col items-center justify-between gap-[5rem] md:gap-[2rem] md:pl-5  py-[3rem] bg-mainlight overflow-hidden">
         <motion.div
           initial={{ opacity: 0, x: -50 }}

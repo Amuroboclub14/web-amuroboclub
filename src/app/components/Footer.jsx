@@ -4,7 +4,7 @@ import Logo from "../../assets/Vlogo.d83a8feb5370b0b7c52a.png";
 
 export default function Footer() {
 return (
-    <footer className="md:min-h-screen w-full flex flex-col gap-20 md:px-20 px-10 py-10 bg-mainblue text-white">
+    <footer className="md:min-h-screen w-full flex flex-col justify-between gap-20 md:px-20 px-10 pt-10 pb-5 bg-mainblue text-white">
         <div>
             <Image src={Logo} alt="AMURoboclub Logo" className="h-fit md:w-[30%] w-[80%]" />
         </div>
@@ -80,9 +80,9 @@ return (
                 </div>
             </div>
         </div>
-        <div className="flex md:flex-row flex-col justify-between text-[1rem] gap-5 md:mt-0 border-t-[1px] border-gray-400 pt-10 ">
-            <p>&copy; 2024 AMURoboclub</p>
-            <p>
+        <div className="flex md:flex-row flex-col justify-center text-[1rem] gap-5 md:mt-0 border-t-[1px] border-gray-400 pt-10 ">
+            <p>&copy; 2024 AMURoboclub | Developed by Web Developers Team 2024-2025</p>
+            {/* <p>
                 <a href="/privacy-policy">PRIVACY POLICY</a>
             </p>
             <p>
@@ -90,7 +90,7 @@ return (
             </p>
             <p>
                 <a href="/contact">CONTACT US</a>
-            </p>
+            </p> */}
         </div>
     </footer>
 );

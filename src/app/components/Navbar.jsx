@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../assets/Vlogo.d83a8feb5370b0b7c52a.png";
 
-export default function Navbar() {
+export default function Navbar({bgColor}) {
   return (
-    <nav className="flex justify-between items-center px-4 py-5 md:pt-10 md:h-[13vh] md:bg-mainlight bg-white">
+    <nav className={`flex justify-between items-center px-4 py-5 md:pt-10 md:h-[13vh] ${`md:bg-${bgColor}`} bg-white`}>
       <Link href={"/"}>
         <Image
           src={Logo}

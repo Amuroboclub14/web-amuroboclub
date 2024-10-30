@@ -136,7 +136,7 @@ export default function ProjectsPage() {
 
   return (
     <main className="bg-mainlight">
-      <Navbar />
+      <Navbar bgColor={'mainlight'}/>
       <div className="min-h-screen p-4 sm:p-8 bg-mainlight">
         <h1 className="text-4xl font-bold text-center mb-8 font-mont">
           AMURoboclub Projects

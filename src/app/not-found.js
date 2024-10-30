@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 export default function NotFound() {
   return (
     <main className='min-h-screen bg-mainlight flex flex-col '>
-    <Navbar />
+    <Navbar bgColor={'mainlight'}/>
     <div className="flex flex-col items-center justify-center  h-[87vh]">
       <h1 className="text-4xl md:text-6xl font-bold text-[#0b2059]">404 - Page Not Found</h1>
       <p className="text-lg text-[#0b2059]/90 mt-4">The page you&apos;re looking for doesn&apos;t exist.</p>
