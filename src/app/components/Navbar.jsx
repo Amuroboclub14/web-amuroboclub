@@ -13,12 +13,12 @@ export default function Navbar({bgColor}) {
         />
       </Link>
       <div className="hidden md:flex justify-between items-center gap-10 text-[1.1rem] text-[]">
-        <Link href={"/projects"}>Projects</Link>
-        <Link href={"/team"}>Team</Link>
-        <Link href={"/events"}>Events</Link>
-        <Link href={"/gallery"}>Gallery</Link>
-        <Link href={"/contributors"}>Contributors</Link>
-        <Link href={"/amusat"}>AMUSAT</Link>
+        <Link href={"/projects"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Projects</Link>
+        <Link href={"/team"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Team</Link>
+        <Link href={"/events"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Events</Link>
+        <Link href={"/gallery"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Gallery</Link>
+        <Link href={"/contributors"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Contributors</Link>
+        <Link href={"/amusat"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">AMUSAT</Link>
         <div className="w-[10rem]">
           <Link
             href="/contactus"
