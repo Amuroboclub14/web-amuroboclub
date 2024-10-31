@@ -16,6 +16,7 @@ import Image from "next/image";
 import Navbar from "../components/Navbar";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import Footer from "../components/Footer";
 
 const getStatusInfo = (status) => {
   switch (status) {
@@ -274,6 +275,7 @@ export default function ProjectsPage() {
           )}
         </AnimatePresence>
       </div>
+      <Footer />
     </main>
   );
 }

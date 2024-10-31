@@ -1,7 +1,7 @@
 "use client"; 
 
 import Image from "next/image";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import pic from "../../assets/nopicture.png";
 import linkedin from "../../assets/linkedin.png";
 import x from "../../assets/x.png";
@@ -10,42 +10,50 @@ import Footer from "../components/Footer";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
+// Skeleton component
+const MemberSkeleton = () => (
+  <div className="animate-pulse flex flex-col gap-5 mt-10 w-[40vw] md:w-[18rem]">
+    <div className="h-[70vh] w-full bg-gray-300 md:rounded-xl rounded-md"></div>
+    <div className="flex flex-col gap-3 pb-5">
+      <div className="h-8 bg-gray-300 rounded-md w-3/4 ml-5"></div>
+      <div className="h-6 bg-gray-300 rounded-md w-1/2 ml-5"></div>
+    </div>
+  </div>
+);
+
 export default function Team() {
   const [teamType, setTeamType] = useState("Coordinator");
   const [members, setMembers] = useState([]);
   const [filteredMembers, setFilteredMembers] = useState([]);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [year, setYear] = useState(2024); // State for selected year
 
   useEffect(() => {
-    
     const checkScreenSize = () => setIsSmallScreen(window.innerWidth < 768);
-
     checkScreenSize();
-
     window.addEventListener("resize", checkScreenSize);
-
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
-
 
   useEffect(() => {
     const fetchMembers = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "teams"));
-        const latestYear = querySnapshot.docs.length - 1; //-1 for 2024-2025
+        const latestYear = querySnapshot.docs.length - (2025 - year);  //-1 for 2024-2025
         const allMembers = querySnapshot.docs[latestYear]?._document.data.value.mapValue.fields.members.arrayValue.values || [];
         setMembers(allMembers);
       } catch (error) {
         console.error("Error fetching members:", error);
+      } finally {
+        setLoading(false); // Stop loading once data is fetched
       }
     };
     fetchMembers();
-  }, []);
+  }, [year]);
 
-  // Filtering members based on selected team type
   useEffect(() => {
     const excludedPositions = ["Coordinator", "Joint Coordinator", "Web Developer", "App Developer", "Volunteer"];
-
     const filterByTeamType = () => {
       return members.filter((member) => {
         const position = member.mapValue.fields.position.stringValue;
@@ -62,7 +70,8 @@ export default function Team() {
     <main className="w-full min-h-screen text-[#0b2059]">
       <Navbar bgColor={'white'}/>
       <section className="flex flex-col items-center px-5 md:px-[6.2rem] pt-20 font-mont">
-        <h1 className="text-3xl md:text-5xl font-medium text-center">AMURoboclub Team <br></br>2024-2025</h1>
+        <h1 className="text-3xl md:text-5xl font-medium text-center">AMURoboclub Team <br />{year}-{parseInt(year)+ 1}</h1>
+        
         <div className="hidden md:flex gap-5 font-medium text-[0.5rem] md:text-xl pt-10">
           {["Coordinator", "Joint Coordinator", "Web Developer", "App Developer", "Volunteer", "pr"].map((type) => (
             <h1
@@ -76,26 +85,35 @@ export default function Team() {
         </div>
 
         <div className="flex md:flex-row flex-col flex-wrap justify-center md:gap-[6rem] pb-20">
-        {(isSmallScreen ? members : filteredMembers).map((member, index) => {
-            const { name, position, profileImageUrl} = member.mapValue.fields;
-            return (
-              <div key={index} className="flex flex-col gap-5 mt-10 w-[40vw] md:w-[18rem]">
-                <Image src={profileImageUrl?.stringValue || pic} alt={name?.stringValue}width={300} height={600} className="h-[70vh] w-full md:rounded-xl rounded-md" />
-                <div className="flex flex-col gap-3 pb-5">
-                  <h1 className="text-[1.6rem] font-medium pl-5">{name?.stringValue}</h1>
-                  <h1 className="text-[1.15rem] font-normal pl-5">{position?.stringValue}</h1>
-                  {/* <div className="flex">
-                    {linkedin?.stringValue && (
-                      <Image src={linkedin} alt="LinkedIn" className="w-10 h-10 ml-5 cursor-pointer" onClick={handleLinkClick(linkedin?.stringValue)} />
-                    )}
-                    {x?.stringValue && (
-                      <Image src={x} alt="X" className="w-10 h-10 ml-5 cursor-pointer" onClick={handleLinkClick(x?.stringValue)} />
-                    )}
-                  </div> */}
-                </div>
-              </div>
-            );
-          })}
+          {loading
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <MemberSkeleton key={index} />
+              ))
+            : (isSmallScreen ? members : filteredMembers).map((member, index) => {
+                const { name, position, profileImageUrl } = member.mapValue.fields;
+                return (
+                  <div key={index} className="flex flex-col gap-5 mt-10 w-[40vw] md:w-[18rem]">
+                    <Image src={profileImageUrl?.stringValue || pic} alt={name?.stringValue} width={300} height={600} className="h-[70vh] w-full md:rounded-xl rounded-md" />
+                    <div className="flex flex-col gap-3 pb-5">
+                      <h1 className="text-[1.6rem] font-medium pl-5">{name?.stringValue}</h1>
+                      <h1 className="text-[1.15rem] font-normal pl-5">{position?.stringValue}</h1>
+                    </div>
+                  </div>
+                );
+              })}
+        </div>
+        <div className="flex justify-start items-center gap-5 py-10">
+          <p className="font-medium">View Past Teams:</p>
+          <select
+            className="border border-gray-300 rounded-md p-2"
+            onChange={(e) => setYear(e.target.value)}
+          >
+            {Array.from({ length: 6 }, (_, i) => 2024 - i).map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
         </div>
       </section>
       <Footer />
