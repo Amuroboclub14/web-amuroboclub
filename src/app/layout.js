@@ -33,7 +33,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html  className={` ${inter.variable} ${raleway.varaible} ${roboto.variable} ${mont.variable} `} lang="en">
+    <html  className={` ${inter.variable} ${raleway.variable} ${roboto.variable} ${mont.variable} `} lang="en">
       <body>
         <div className={` h-screen w-full`}>
           <div>{children}</div>

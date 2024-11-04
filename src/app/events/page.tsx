@@ -150,7 +150,7 @@ export default function EventsPage() {
 
   return (
     <main className=" md:bg-mainlight bg-white">
-      <Navbar />
+      <Navbar bgColor={'mainlight'}/>
       <div className="min-h-screen bg-mainlight p-4 sm:p-8">
         <h1 className="text-4xl font-mont font-bold text-center mb-8 text-mainblue">
           AMURoboclub Events
