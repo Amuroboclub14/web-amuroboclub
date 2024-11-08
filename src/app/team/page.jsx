@@ -26,7 +26,7 @@ export default function Team() {
   const [members, setMembers] = useState([]);
   const [filteredMembers, setFilteredMembers] = useState([]);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(false); // Loading state
   const [year, setYear] = useState(2024); // State for selected year
 
   useEffect(() => {
@@ -38,6 +38,7 @@ export default function Team() {
 
   useEffect(() => {
     const fetchMembers = async () => {
+      setLoading(true);
       try {
         const querySnapshot = await getDocs(collection(db, "teams"));
         const latestYear = querySnapshot.docs.length - (2025 - year); //-1 for 2024-2025

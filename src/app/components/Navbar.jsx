@@ -1,8 +1,31 @@
+"use client"
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../assets/Vlogo.d83a8feb5370b0b7c52a.png";
 
-export default function Navbar({bgColor}) {
+export default function Navbar({ bgColor }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+  const menuButtonRef = useRef(null);
+
+  // Close menu if clicked outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <nav className={`flex justify-between items-center px-4 py-5 md:pt-10 md:h-[13vh] ${`md:bg-${bgColor}`} bg-white`}>
       <Link href={"/"}>
@@ -12,13 +35,27 @@ export default function Navbar({bgColor}) {
           className="p-2 bg-black h-[40px] md:h-[50px] w-fit"
         />
       </Link>
-      <div className="hidden md:flex justify-between items-center gap-10 text-[1.1rem] text-[]">
+
+      {/* Hamburger Menu Button */}
+      <button
+        ref={menuButtonRef}
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden focus:outline-none"
+      >
+        <div className="space-y-2">
+          <span className="block w-8 h-0.5 bg-black"></span>
+          <span className="block w-8 h-0.5 bg-black"></span>
+          <span className="block w-8 h-0.5 bg-black"></span>
+        </div>
+      </button>
+
+      {/* Desktop Menu */}
+      <div className="hidden md:flex justify-between items-center gap-10 text-[1.1rem]">
         <Link href={"/projects"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Projects</Link>
         <Link href={"/team"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Team</Link>
         <Link href={"/events"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Events</Link>
         <Link href={"/gallery"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Gallery</Link>
-        <Link href={"/contributors"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Contributors</Link>
-        <Link href={"/amusat"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">AMUSAT</Link>
+        <Link href={"/alumnis"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Alumnis</Link>
         <div className="w-[10rem]">
           <Link
             href="/contactus"
@@ -38,6 +75,27 @@ export default function Navbar({bgColor}) {
           </Link>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div ref={menuRef} className="md:hidden absolute top-[15vh] left-0 w-full bg-white shadow-lg px-3 py-5">
+        <div className="grid grid-cols-2 gap-4">
+          <Link href={"/projects"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Projects</Link>
+          <Link href={"/team"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Team</Link>
+          <Link href={"/events"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Events</Link>
+          <Link href={"/gallery"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Gallery</Link>
+          <Link href={"/alumnis"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Alumnis</Link>
+          <Link
+            href="/contactus"
+            className="col-span-2 flex items-center justify-center border-2 border-blue-600 px-5 py-2 rounded-full font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300"
+            onClick={() => setIsOpen(false)}
+          >
+            About Us
+          </Link>
+        </div>
+      </div>
+      
+      )}
     </nav>
   );
 }
