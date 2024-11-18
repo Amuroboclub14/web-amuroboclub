@@ -78,7 +78,7 @@ export default function Navbar({ bgColor }) {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div ref={menuRef} className="md:hidden absolute top-[15vh] left-0 w-full bg-white shadow-lg px-3 py-5">
+        <div ref={menuRef} className="md:hidden absolute top-[13vh] left-0 w-full bg-white shadow-lg px-3 py-5">
         <div className="grid grid-cols-2 gap-4">
           <Link href={"/projects"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Projects</Link>
           <Link href={"/team"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Team</Link>
@@ -87,7 +87,8 @@ export default function Navbar({ bgColor }) {
           <Link href={"/alumnis"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Alumnis</Link>
           <Link
             href="/contactus"
-            className="col-span-2 flex items-center justify-center border-2 border-blue-600 px-5 py-2 rounded-full font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300"
+            className="hover:text-blue-600"
+            // className="flex items-center justify-center border-2 border-blue-600 px-5 py-2 rounded-full font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             About Us
