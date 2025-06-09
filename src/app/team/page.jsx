@@ -77,7 +77,7 @@ export default function Team() {
 
   return (
     <main className="w-full min-h-screen text-[#0b2059]">
-      <Navbar bgColor={"white"} />
+      <Navbar />
       <section className="flex flex-col items-center px-5 md:px-[6.2rem] pt-20 font-mont">
         <h1 className="text-3xl md:text-5xl font-medium text-center">
           AMURoboclub Team <br />
@@ -132,8 +132,10 @@ export default function Team() {
                         <h1 className="text-[1.6rem] font-medium pl-5">
                           {name?.stringValue}
                         </h1>
-                        <h1 className="block md:hidden text-[1.15rem] font-normal pl-5">{position?.stringValue}</h1>
-                        
+                        <h1 className="block md:hidden text-[1.15rem] font-normal pl-5">
+                          {position?.stringValue}
+                        </h1>
+
                         <div className="flex gap-3 pl-5">
                           {/* <Image
                             src={linkedin}

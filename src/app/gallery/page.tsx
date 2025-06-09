@@ -124,7 +124,7 @@ export default function PhotoGallery() {
 
   return (
     <main>
-      <Navbar bgColor={'mainlight'}/>
+      <Navbar />
       <div className="min-h-screen bg-mainlight p-8">
         <h1 className="text-4xl font-bold text-center mb-8">
           AMURoboclub Photo Gallery
