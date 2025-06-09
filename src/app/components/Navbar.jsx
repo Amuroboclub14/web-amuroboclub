@@ -1,10 +1,11 @@
-"use client"
+"use client";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../assets/Vlogo.d83a8feb5370b0b7c52a.png";
+import { Text } from "nes-ui-react";
 
-export default function Navbar({ bgColor }) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const menuButtonRef = useRef(null);
@@ -27,7 +28,9 @@ export default function Navbar({ bgColor }) {
   }, []);
 
   return (
-    <nav className={`flex justify-between items-center px-4 py-5 md:pt-10 md:h-[13vh] ${`md:bg-${bgColor}`} bg-white`}>
+    <nav
+      className={`flex justify-between items-center px-4 py-5 md:pt-10 md:h-[13vh]`}
+    >
       <Link href={"/"}>
         <Image
           src={Logo}
@@ -43,25 +46,50 @@ export default function Navbar({ bgColor }) {
         className="md:hidden focus:outline-none"
       >
         <div className="space-y-2">
-          <span className="block w-8 h-0.5 bg-black"></span>
-          <span className="block w-8 h-0.5 bg-black"></span>
-          <span className="block w-8 h-0.5 bg-black"></span>
+          <span className="block w-8 h-0.5 bg-white"></span>
+          <span className="block w-8 h-0.5 bg-white"></span>
+          <span className="block w-8 h-0.5 bg-white"></span>
         </div>
       </button>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex justify-between items-center gap-10 text-[1.1rem]">
-        <Link href={"/projects"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Projects</Link>
-        <Link href={"/team"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Team</Link>
-        <Link href={"/events"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Events</Link>
-        <Link href={"/gallery"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Gallery</Link>
-        <Link href={"/alumnis"} className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50">Alumnis</Link>
-        <div className="w-[10rem]">
+        <Link
+          href={"/projects"}
+          className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50"
+        >
+          <Text size="xlarge">PROJECTS</Text>
+        </Link>
+        <Link
+          href={"/team"}
+          className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50"
+        >
+          <Text size="xlarge">TEAM</Text>
+        </Link>
+        <Link
+          href={"/events"}
+          className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50"
+        >
+          <Text size="xlarge">EVENTS</Text>
+        </Link>
+        <Link
+          href={"/gallery"}
+          className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50"
+        >
+          <Text size="xlarge">GALLERY</Text>
+        </Link>
+        <Link
+          href={"/alumnis"}
+          className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50"
+        >
+          <Text size="xlarge">ALUMNIS</Text>
+        </Link>
+        <div className="w-[12rem]">
           <Link
             href="/contactus"
             className="group flex items-center gap-5 w-fit border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 px-5 py-2 rounded-full font-bold text-[1.1rem]"
           >
-            About Us
+            <Text size="xlarge">ABOUT US</Text>
             <span className="flex justify-end w-0 h-4 -ml-2 pointer-events-none overflow-hidden transition-[width] duration-300 group-hover:w-6">
               <svg
                 className="block w-4 h-4 flex-initial pointer-events-none fill-current"
@@ -78,24 +106,56 @@ export default function Navbar({ bgColor }) {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div ref={menuRef} className="md:hidden absolute top-[13vh] left-0 w-full bg-white shadow-lg px-3 py-5">
-        <div className="grid grid-cols-2 gap-4">
-          <Link href={"/projects"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Projects</Link>
-          <Link href={"/team"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Team</Link>
-          <Link href={"/events"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Events</Link>
-          <Link href={"/gallery"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Gallery</Link>
-          <Link href={"/alumnis"} className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Alumnis</Link>
-          <Link
-            href="/contactus"
-            className="hover:text-blue-600"
-            // className="flex items-center justify-center border-2 border-blue-600 px-5 py-2 rounded-full font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
-          >
-            About Us
-          </Link>
+        <div
+          ref={menuRef}
+          className="md:hidden absolute top-[13vh] left-0 w-full bg-black shadow-lg px-3 py-5"
+        >
+          <div className="grid grid-cols-2 gap-4">
+            <Link
+              href={"/projects"}
+              className="hover:text-blue-600 !text-[16px] pl-5"
+              onClick={() => setIsOpen(false)}
+            >
+              Projects
+            </Link>
+            <Link
+              href={"/team"}
+              className="hover:text-blue-600 !text-[16px] pl-5"
+              onClick={() => setIsOpen(false)}
+            >
+              Team
+            </Link>
+            <Link
+              href={"/events"}
+              className="hover:text-blue-600 !text-[16px] pl-5"
+              onClick={() => setIsOpen(false)}
+            >
+              Events
+            </Link>
+            <Link
+              href={"/gallery"}
+              className="hover:text-blue-600 !text-[16px] pl-5"
+              onClick={() => setIsOpen(false)}
+            >
+              Gallery
+            </Link>
+            <Link
+              href={"/alumnis"}
+              className="hover:text-blue-600 !text-[16px] pl-5"
+              onClick={() => setIsOpen(false)}
+            >
+              Alumnis
+            </Link>
+            <Link
+              href="/contactus"
+              className="hover:text-blue-600 !text-[16px] pl-5"
+              // className="flex items-center justify-center border-2 border-blue-600 px-5 py-2 rounded-full font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300"
+              onClick={() => setIsOpen(false)}
+            >
+              About Us
+            </Link>
+          </div>
         </div>
-      </div>
-      
       )}
     </nav>
   );
