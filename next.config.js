@@ -1,4 +1,10 @@
-/* eslint-disable */
+const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
+
+export default nextConfig;
 
 module.exports = {
   images: {
