@@ -4,8 +4,6 @@ import Image from "next/image";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import team from "../assets/IMG_1559.webp";
-import cord from "../assets/coords.webp";
-import group from "../assets/IMG_2739.webp";
 import amusat from "../assets/ssamusat.jpeg";
 import AnimatedSVG from "./components/AnimatedSvg";
 import * as motion from "framer-motion/client";
@@ -13,6 +11,7 @@ import Faqs from "./components/Faqs";
 import { setDarkModeActivation, Heading, Text } from "nes-ui-react";
 import { useEffect } from "react";
 import OpportunitiesOffered from "./components/OpportunitiesOffered";
+import WhatSetsUsApart from "./components/WhatSetsUsApart";
 
 export default function Home() {
   useEffect(() => setDarkModeActivation(true), []);
@@ -94,49 +93,15 @@ export default function Home() {
       </motion.div>
 
       {/* What sets us apart */}
-      <div className="flex md:flex-row-reverse flex-col items-end md:items-start justify-start md:justify-center md:gap-8 bg-mainlight px-10 md:px-24 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.3 }}
-          className="relative md:z-10"
-        >
-          <Image
-            src={group}
-            alt="team"
-            className=" md:w-[40vw] w-[90%]  md:rounded-[1rem] rounded-md -mr-5 shadow-xl"
-          />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative md:w-[55%] -mt-10 md:pt-24"
-        >
-          <div className="bg-white p-5 -mt-5 md:mt-10 md:p-8 md:pr-24 md:-mr-20 rounded bg-brand-gray-light">
-            <h1 className="text-[2rem] md:text-[2.8rem] leading-[2rem] md:leading-[3.4rem] font-semibold font-mont text-mainblue">
-              What Sets Our <br></br>Club{" "}
-              <span className="text-gradient">Apart</span>
-            </h1>
-            <p className="md:pt-12 pt-10 font-mont font-medium text-mainblue/90 text-justify">
-              AMURoboclub fosters interest and showcases talent in robotics and
-              engineering through engaging activities, competitions, projects,
-              and workshops year-round. We encourage participation in national
-              and international contests and support students of all branches
-              and years. Our experienced seniors and fresh innovators work
-              together to provide a training environment that leads to{" "}
-              <strong>successful careers</strong>. Our alumni excel in
-              prestigious companies and many achieve top ranks in exams like
-              GATE, securing positions in IITs for further studies.
-            </p>
-            <button className="font-medium text-xl border-2 border-blue-500 hover:bg-blue-500 transition hover:text-white px-4 py-2 mt-10 rounded-full">
-              Learn More
-            </button>
-          </div>
-        </motion.div>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative -mt-10 md:pt-24"
+      >
+        <WhatSetsUsApart />
+      </motion.div>
       {/* SSAMUSAT*/}
       <div className="flex md:flex-row-reverse flex-col items-end md:items-start justify-start md:justify-center md:gap-8 bg-mainlight px-10 md:px-24 py-20">
         <motion.div
