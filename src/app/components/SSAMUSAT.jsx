@@ -35,7 +35,7 @@ export default function SSAMUSAT() {
             SSSAMUSAT
           </h1>
           <p className="!text-[18px] text-blue-400 font-normal mb-8">
-            AMU's First Satellite Project
+            AMU&apos;s First Satellite Project
           </p>
           <div className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 py-3 rounded-full !text-[16px] font-semibold shadow-lg shadow-blue-600/30">
             🚀 Launched December 2021
@@ -52,17 +52,17 @@ export default function SSAMUSAT() {
               <span className="text-blue-400 !text-[16px] font-semibold">
                 SSSAMUSAT project
               </span>{" "}
-              marks AMU's groundbreaking entry into satellite technology,
+              marks AMU&apos;s groundbreaking entry into satellite technology,
               launched by students and alumni of Zakir Husain College of
-              Engineering and Technology. Inspired by NAAC's call for Aerial
-              Technology advancement, the initiative quickly evolved into
+              Engineering and Technology. Inspired by NAAC&apos;s call for
+              Aerial Technology advancement, the initiative quickly evolved into
               specialized teams focused on advanced satellite systems. With
               expert guidance from{" "}
               <span className="!text-[16px] text-blue-400 font-semibold">
                 ISRO professionals
               </span>
-              , it aims for Low Earth Orbit deployment— a milestone in AMU's
-              aerospace research.
+              , it aims for Low Earth Orbit deployment— a milestone in
+              AMU&apos;s aerospace research.
             </div>
 
             {/* Cards Grid */}
@@ -115,8 +115,8 @@ export default function SSAMUSAT() {
             Join the Mission
           </h3>
           <p className="text-gray-400 !text-lg lg:!text-xl mb-8 max-w-2xl mx-auto">
-            Be part of AMU's aerospace revolution and contribute to cutting-edge
-            satellite technology
+            Be part of AMU&apos;s aerospace revolution and contribute to
+            cutting-edge satellite technology
           </p>
           <button className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 text-white px-9 py-5 rounded-full !text-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-600/40 shadow-lg shadow-blue-600/30">
             Join Us
