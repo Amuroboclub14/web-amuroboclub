@@ -69,7 +69,10 @@ export default function SSAMUSAT() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {amusatFeatures.map((feature, idx) => {
                 return (
-                  <div className="bg-gray-900 border-2 border-gray-700 rounded-2xl p-4 transition-all duration-300 text-center hover:border-blue-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-400/10">
+                  <div
+                    key={idx}
+                    className="bg-gray-900 border-2 border-gray-700 rounded-2xl p-4 transition-all duration-300 text-center hover:border-blue-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-400/10"
+                  >
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl flex items-center justify-center !text-2xl mx-auto mb-4 shadow-lg shadow-blue-600/30">
                       {feature.icon}
                     </div>
