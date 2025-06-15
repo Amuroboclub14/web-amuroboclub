@@ -26,7 +26,7 @@ export default function Home() {
           transition={{ duration: 0.3 }}
           className="md:w-[45%] flex flex-col px-5"
         >
-          <Heading className="!text-[2.6rem] leading-[2.5rem] md:!leading-[4rem] md:!text-[3.5rem] font-bold text-left text-mainblue md:pt-[12vh]">
+          <Heading className="!text-[2.6rem] leading-[2.5rem] md:!leading-[4rem] md:!text-[3.5rem] font-bold text-justify text-mainblue md:pt-[12vh]">
             To create a better future, you need an AV system that imagines{" "}
             <span className="text-gradient !text-[inherit] !font-[inherit] !text-[2.6rem] md:!text-[3.5rem] leading-[2.5rem] md:!leading-[4rem]">
               every possibility

@@ -78,7 +78,7 @@ export default function WhatSetsUsApart() {
                 <span className={`!text-[24px] block mb-2 `}>
                   {impact.icon}
                 </span>
-                <div className="!text-[16px] text-center md:text-left lg:!text-[18px] text-gray-400">
+                <div className="!text-[16px] text-center md:text-justify lg:!text-[18px] text-gray-400">
                   {impact.text}
                 </div>
               </div>

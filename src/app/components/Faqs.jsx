@@ -75,7 +75,7 @@ export default function Faqs() {
             >
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full text-left focus:outline-none"
+                className="w-full text-justify focus:outline-none"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3 sm:gap-4 flex-1">
@@ -146,7 +146,7 @@ export default function Faqs() {
             Still Have Questions?
           </h3>
           <p className="text-gray-400 !text-lg sm:!text-xl mb-8 sm:mb-10">
-            Get in touch with us and we'll be happy to help!
+            Get in touch with us and we&apos;ll be happy to help!
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-start sm:items-center gap-6 sm:gap-12">
             <div className="flex items-center gap-3 sm:gap-4 text-gray-300">
