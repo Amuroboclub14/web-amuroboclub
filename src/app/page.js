@@ -4,7 +4,6 @@ import Image from "next/image";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import team from "../assets/IMG_1559.webp";
-import amusat from "../assets/ssamusat.jpeg";
 import AnimatedSVG from "./components/AnimatedSvg";
 import * as motion from "framer-motion/client";
 import Faqs from "./components/Faqs";
@@ -12,6 +11,7 @@ import { setDarkModeActivation, Heading, Text } from "nes-ui-react";
 import { useEffect } from "react";
 import OpportunitiesOffered from "./components/OpportunitiesOffered";
 import WhatSetsUsApart from "./components/WhatSetsUsApart";
+import SSAMUSAT from "./components/SSAMUSAT";
 
 export default function Home() {
   useEffect(() => setDarkModeActivation(true), []);
@@ -102,57 +102,18 @@ export default function Home() {
       >
         <WhatSetsUsApart />
       </motion.div>
+
       {/* SSAMUSAT*/}
-      <div className="flex md:flex-row-reverse flex-col items-end md:items-start justify-start md:justify-center md:gap-8 bg-mainlight px-10 md:px-24 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.3 }}
-          className="relative md:z-10"
-        >
-          <Image
-            src={amusat}
-            alt="team"
-            className=" md:w-[40vw] w-[90%]  md:rounded-[1rem] rounded-md -mr-5 shadow-xl"
-          />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative md:w-[55%] -mt-10 md:pt-24"
-        >
-          <div className="bg-white p-5 -mt-5 md:mt-10 md:p-8 md:pr-24 md:-mr-20 rounded bg-brand-gray-light">
-            <h1 className="text-[2rem] md:text-[2.8rem] leading-[2rem] md:leading-[3.4rem] font-semibold font-mont text-mainblue">
-              <span className="font-bold">SSAMUSAT</span> - AMU&apos;s <br></br>
-              <span className="text-gradient">First</span> Satellite Project{" "}
-            </h1>
-            <p className="md:pt-12 pt-10 font-mont font-medium text-mainblue/90 text-justify">
-              The SS AMU SAT project, launched in December 2021 by students and
-              alumni of Zakir Husain College of Engineering and Technology, is
-              Aligarh Muslim University&apos;s first satellite initiative.
-              Inspired by the NAAC committee&apos;s recommendation to innovate
-              in Aerial Technology, the project rapidly expanded into
-              specialized teams focused on Power, Payload, Control, and
-              Communication systems. With guidance from ISRO experts and
-              seasoned satellite designers, the team aims for successful
-              deployment in Low Earth Orbit, marking a significant milestone in
-              AMU&apos;s aerospace research journey.
-            </p>
-            <div className="mt-10">
-              <a
-                className="font-medium text-xl border-2 border-blue-500 hover:bg-blue-500 transition hover:text-white px-4 py-2 rounded-full"
-                href="https://amu-sat.github.io/"
-                target="_blank"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative -mt-10 md:pt-8"
+      >
+        <SSAMUSAT />
+      </motion.div>
+
       <div className="h-fit relative py-10 bg-lightblue">
         <div className="hidden md:block absolute inset-0 w-full h-60 z-0 mt-10">
           <AnimatedSVG />
