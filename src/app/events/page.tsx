@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft,
@@ -31,7 +31,7 @@ const events = [
     date: new Date(2024, 9, 5),
     status: "past",
     description:
-      "A 2-day workshop, where basics of designing and fabricating Printed Cirtuit Boards (PCBs) from strach were covered.",
+      "A 2-day workshop, where basics of designing and fabricating Printed Circuit Boards (PCBs) from scratch were covered.",
     location: "HPCL Lab. Electronics Department",
     attendees: 37,
     image: "/pcbDesignWorkshop.JPG",
@@ -83,7 +83,7 @@ const monthNames = [
   "December",
 ];
 
-const formatDate = (date: Date) => {
+const formatDate = (date) => {
   return date.toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "2-digit",
@@ -91,26 +91,59 @@ const formatDate = (date: Date) => {
   });
 };
 
+const getEventColor = (status) => {
+  switch (status) {
+    case "past":
+      return "bg-gray-400";
+    case "ongoing":
+      return "bg-green-500";
+    case "future":
+      return "bg-blue-500";
+    default:
+      return "bg-gray-400";
+  }
+};
+
+// Memoized Event Card Component
+const EventCard = ({ event, onSelect }) => (
+  <div
+    className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col"
+    onClick={() => onSelect(event)}
+  >
+    <Image
+      src={event.image}
+      alt={event.title}
+      width={300}
+      height={200}
+      className="w-full h-48 object-cover"
+      loading="lazy"
+      placeholder="blur"
+      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+    />
+    <div className="p-4 flex-grow">
+      <h3 className="font-bold text-lg mb-2">{event.title}</h3>
+      <p className="text-sm text-gray-600 mb-2">{formatDate(event.date)}</p>
+      <p className="text-sm text-gray-600 whitespace-pre-wrap">
+        {event.description}
+      </p>
+    </div>
+    <div className="px-4 py-2 bg-gray-100 flex items-center">
+      <div
+        className={`w-3 h-3 rounded-full ${getEventColor(event.status)} mr-2`}
+      ></div>
+      <span className="text-sm capitalize">{event.status}</span>
+    </div>
+  </div>
+);
+
 export default function EventsPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  const getEventColor = (status) => {
-    switch (status) {
-      case "past":
-        return "bg-gray-400";
-      case "ongoing":
-        return "bg-green-500";
-      case "future":
-        return "bg-blue-500";
-      default:
-        return "bg-gray-400";
-    }
-  };
-
-  const getDaysInMonth = (date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
+  // Memoize calendar days calculation
+  const calendarDays = useMemo(() => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -122,40 +155,55 @@ export default function EventsPage() {
       days.push(new Date(year, month, i));
     }
     return days;
-  };
+  }, [currentDate]);
 
-  const changeMonth = (increment) => {
-    const newDate = new Date(currentDate);
-    newDate.setMonth(newDate.getMonth() + increment);
-    setCurrentDate(newDate);
-  };
+  // Memoize events by date mapping
+  const eventsByDate = useMemo(() => {
+    const map = new Map();
+    events.forEach((event) => {
+      const dateKey = `${event.date.getFullYear()}-${event.date.getMonth()}-${event.date.getDate()}`;
+      if (!map.has(dateKey)) {
+        map.set(dateKey, []);
+      }
+      map.get(dateKey).push(event);
+    });
+    return map;
+  }, []);
 
-  const handleSelectEvent = (event) => {
+  const getEventsForDate = useCallback(
+    (date) => {
+      if (!date) return [];
+      const dateKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      return eventsByDate.get(dateKey) || [];
+    },
+    [eventsByDate]
+  );
+
+  const changeMonth = useCallback((increment) => {
+    setCurrentDate((prev) => {
+      const newDate = new Date(prev);
+      newDate.setMonth(newDate.getMonth() + increment);
+      return newDate;
+    });
+  }, []);
+
+  const handleSelectEvent = useCallback((event) => {
     setSelectedEvent(event);
-  };
+  }, []);
 
-  const closeEventDetails = () => {
+  const closeEventDetails = useCallback(() => {
     setSelectedEvent(null);
-  };
-
-  const getEventsForDate = (date) => {
-    if (!date) return [];
-    return events.filter(
-      (event) =>
-        event.date.getDate() === date.getDate() &&
-        event.date.getMonth() === date.getMonth() &&
-        event.date.getFullYear() === date.getFullYear()
-    );
-  };
+  }, []);
 
   return (
-    <main className=" md:bg-mainlight bg-white">
+    <main className="md:bg-mainlight bg-white">
       <Navbar />
       <div className="min-h-screen bg-mainlight p-4 sm:p-8">
         <h1 className="text-4xl font-mont font-bold text-center mb-8 text-mainblue">
           AMURoboclub Events
         </h1>
 
+        {/* Calendar Section */}
         <div className="bg-white rounded-lg shadow-md mb-8 p-4 sm:p-6 max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-4">
             <button
@@ -174,6 +222,7 @@ export default function EventsPage() {
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
+
           <div className="grid grid-cols-7 gap-2">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <div
@@ -183,7 +232,7 @@ export default function EventsPage() {
                 {day}
               </div>
             ))}
-            {getDaysInMonth(currentDate).map((date, index) => {
+            {calendarDays.map((date, index) => {
               const dayEvents = getEventsForDate(date);
               return (
                 <div
@@ -216,42 +265,18 @@ export default function EventsPage() {
           </div>
         </div>
 
+        {/* Events Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto font-mono">
           {events.map((event) => (
-            <div
+            <EventCard
               key={event.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col"
-              onClick={() => handleSelectEvent(event)}
-            >
-              <Image
-                src={event.image}
-                alt={event.title}
-                width={300}
-                height={200}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4 flex-grow">
-                <h3 className="font-bold text-lg mb-2">{event.title}</h3>
-                <p className="text-sm text-gray-600 mb-2">
-                  {formatDate(event.date)}
-                </p>
-                {/* <p className="text-sm text-gray-600">{event.description}</p> */}
-                <p className="text-sm text-gray-600 whitespace-pre-wrap">
-                  {event.description}
-                </p>
-              </div>
-              <div className="px-4 py-2 bg-gray-100 flex items-center">
-                <div
-                  className={`w-3 h-3 rounded-full ${getEventColor(
-                    event.status
-                  )} mr-2`}
-                ></div>
-                <span className="text-sm capitalize">{event.status}</span>
-              </div>
-            </div>
+              event={event}
+              onSelect={handleSelectEvent}
+            />
           ))}
         </div>
 
+        {/* Event Details Modal */}
         <AnimatePresence>
           {selectedEvent && (
             <motion.div
@@ -271,6 +296,7 @@ export default function EventsPage() {
                   width={400}
                   height={200}
                   className="w-full h-48 object-cover"
+                  loading="lazy"
                 />
                 <div className="p-4">
                   <h2 className="text-2xl font-bold mb-2">
@@ -294,7 +320,6 @@ export default function EventsPage() {
                       <Users className="w-5 h-5 mr-2 text-gray-500" />
                       <span>{selectedEvent.attendees} Attendees</span>
                     </div>
-                    {/* <p>{selectedEvent.description}</p> */}
                     <p className="whitespace-pre-wrap">
                       {selectedEvent.description}
                     </p>

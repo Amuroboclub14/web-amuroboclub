@@ -18,18 +18,17 @@ async function fetchImagesFromFirestore() {
 
     const listResult = await listAll(imagesFolderRef);
 
-    for (const item of listResult.items) {
+    const imagePromises = listResult.items.map(async (item) => {
       const downloadURL = await getDownloadURL(item);
-
-      const image = {
+      return {
         id: item.name,
         src: downloadURL,
         alt: item.name,
       };
+    });
 
-      images.push(image);
-      console.log(images);
-    }
+    const images = await Promise.all(imagePromises);
+    return images;
   } catch (error) {
     console.error("Error fetching images:", error);
   }

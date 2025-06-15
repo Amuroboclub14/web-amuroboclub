@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import pic from "../../assets/nopicture.png";
-import linkedin from "../../assets/linkedin.png";
-import x from "../../assets/x.png";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { db } from "../firebase";

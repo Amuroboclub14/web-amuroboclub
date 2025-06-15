@@ -68,6 +68,7 @@ export default function Navbar() {
         </Link>
         <Link
           href={"/events"}
+          prefetch={true}
           className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50"
         >
           <Text size="xlarge">EVENTS</Text>
