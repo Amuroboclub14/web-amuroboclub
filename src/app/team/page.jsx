@@ -27,7 +27,7 @@ export default function Team() {
   const [filteredMembers, setFilteredMembers] = useState([]);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [loading, setLoading] = useState(false); // Loading state
-  const [year, setYear] = useState(2024); // State for selected year
+  const [year, setYear] = useState(2025); // State for selected year
 
   useEffect(() => {
     const checkScreenSize = () => setIsSmallScreen(window.innerWidth < 768);
@@ -41,7 +41,7 @@ export default function Team() {
       setLoading(true);
       try {
         const querySnapshot = await getDocs(collection(db, "teams"));
-        const latestYear = querySnapshot.docs.length - (2025 - year); //-1 for 2024-2025
+        const latestYear = querySnapshot.docs.length - (2026 - year); //-1 for latest year, as latest team last item of collection teams
         const allMembers =
           querySnapshot.docs[latestYear]?._document.data.value.mapValue.fields
             .members.arrayValue.values || [];
@@ -66,7 +66,7 @@ export default function Team() {
     const filterByTeamType = () => {
       return members.filter((member) => {
         const position = member.mapValue.fields.position.stringValue;
-        if (teamType === "pr") return !excludedPositions.includes(position);
+        if (teamType === "PR") return !excludedPositions.includes(position);
         return position === teamType;
       });
     };
@@ -84,20 +84,21 @@ export default function Team() {
           {year}-{parseInt(year) + 1}
         </h1>
 
-        <div className="hidden md:flex gap-5 font-medium text-[0.5rem] md:text-xl pt-10">
+        <div className="flex flex-row gap-x-20">
+          <div className="hidden md:flex flex-col gap-5 font-medium text-[0.5rem] md:text-xl pt-10">
           {[
             "Coordinator",
             "Joint Coordinator",
             "Web Developer",
             "App Developer",
             "Volunteer",
-            "pr",
+            "PR",
           ].map((type) => (
             <h1
               key={type}
               className={`cursor-pointer py-5 px-1 ${
                 teamType === type
-                  ? "border-b-2 border-blue-800"
+                  ? "border-2 border-blue-800"
                   : "text-[#0b2059]/80"
               }`}
               onClick={() => setTeamType(type)}
@@ -107,7 +108,7 @@ export default function Team() {
           ))}
         </div>
 
-        <div className="flex md:flex-row flex-col flex-wrap justify-center md:gap-[6rem] pb-20">
+        <div className="flex md:flex-row flex-col flex-wrap justify-center md:gap-[5rem] pb-20">
           {loading
             ? Array.from({ length: 3 }).map((_, index) => (
                 <MemberSkeleton key={index} />
@@ -128,7 +129,7 @@ export default function Team() {
                         height={600}
                         className="md:h-[384px] h-full md:w-[576px] md:rounded-xl rounded-md"
                       />
-                      <div className="flex flex-col gap-3 pb-5">
+                      <div className="flex flex-col gap-2">
                         <h1 className="text-[1.6rem] font-medium pl-5">
                           {name?.stringValue}
                         </h1>
@@ -172,13 +173,14 @@ export default function Team() {
                 }
               )}
         </div>
+        </div>
         <div className="flex justify-start items-center gap-5 py-10">
           <p className="font-medium">View Past Teams:</p>
           <select
             className="border border-gray-300 rounded-md p-2"
             onChange={(e) => setYear(e.target.value)}
           >
-            {Array.from({ length: 6 }, (_, i) => 2024 - i).map((year) => (
+            {Array.from({ length: 6 }, (_, i) => 2025 - i).map((year) => (
               <option key={year} value={year}>
                 {year}
               </option>
