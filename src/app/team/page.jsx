@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import pic from "../../assets/nopicture.png";
-import linkedin from "../../assets/linkedin.png";
-import x from "../../assets/x.png";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { db } from "../firebase";
@@ -43,8 +41,10 @@ export default function Team() {
         const querySnapshot = await getDocs(collection(db, "teams"));
         const latestYear = querySnapshot.docs.length - (2025 - year); //-1 for 2024-2025
         const allMembers =
-          querySnapshot.docs[latestYear]?._document.data.value.mapValue.fields
-            .members.arrayValue.values || [];
+          querySnapshot.docs.map((doc) => ({
+            id: doc.id, // document ID if needed
+            ...doc.data(),
+          }))[latestYear].members || [];
         setMembers(allMembers);
       } catch (error) {
         console.error("Error fetching members:", error);
@@ -65,7 +65,7 @@ export default function Team() {
     ];
     const filterByTeamType = () => {
       return members.filter((member) => {
-        const position = member.mapValue.fields.position.stringValue;
+        const position = member.position;
         if (teamType === "pr") return !excludedPositions.includes(position);
         return position === teamType;
       });
@@ -77,7 +77,7 @@ export default function Team() {
 
   return (
     <main className="w-full min-h-screen text-[#0b2059]">
-      <Navbar bgColor={"white"} />
+      <Navbar />
       <section className="flex flex-col items-center px-5 md:px-[6.2rem] pt-20 font-mont">
         <h1 className="text-3xl md:text-5xl font-medium text-center">
           AMURoboclub Team <br />
@@ -114,26 +114,27 @@ export default function Team() {
               ))
             : (isSmallScreen ? members : filteredMembers).map(
                 (member, index) => {
-                  const { name, position, profileImageUrl } =
-                    member.mapValue.fields;
+                  const { name, position, profileImageUrl } = member;
                   return (
                     <div
                       key={index}
                       className="flex flex-col gap-5 mt-10 w-[40vw] md:w-[18rem]"
                     >
                       <Image
-                        src={profileImageUrl?.stringValue || pic}
-                        alt={name?.stringValue}
+                        src={profileImageUrl || pic}
+                        alt={name}
                         width={300}
                         height={600}
                         className="md:h-[384px] h-full md:w-[576px] md:rounded-xl rounded-md"
                       />
                       <div className="flex flex-col gap-3 pb-5">
                         <h1 className="text-[1.6rem] font-medium pl-5">
-                          {name?.stringValue}
+                          {name}
                         </h1>
-                        <h1 className="block md:hidden text-[1.15rem] font-normal pl-5">{position?.stringValue}</h1>
-                        
+                        <h1 className="block md:hidden text-[1.15rem] font-normal pl-5">
+                          {position}
+                        </h1>
+
                         <div className="flex gap-3 pl-5">
                           {/* <Image
                             src={linkedin}
@@ -150,9 +151,7 @@ export default function Team() {
                             strokeWidth={1.5}
                             stroke="currentColor"
                             className="w-5 h-5 cursor-pointer"
-                            onClick={handleLinkClick(
-                              `mailto:${member.mapValue.fields.email?.stringValue}`
-                            )}
+                            onClick={handleLinkClick(`mailto:${member.email}`)}
                           >
                             <path
                               strokeLinecap="round"

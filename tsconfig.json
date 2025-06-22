@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/app/events/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

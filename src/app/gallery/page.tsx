@@ -18,18 +18,17 @@ async function fetchImagesFromFirestore() {
 
     const listResult = await listAll(imagesFolderRef);
 
-    for (const item of listResult.items) {
+    const imagePromises = listResult.items.map(async (item) => {
       const downloadURL = await getDownloadURL(item);
-
-      const image = {
+      return {
         id: item.name,
         src: downloadURL,
         alt: item.name,
       };
+    });
 
-      images.push(image);
-      console.log(images);
-    }
+    const images = await Promise.all(imagePromises);
+    return images;
   } catch (error) {
     console.error("Error fetching images:", error);
   }
@@ -124,7 +123,7 @@ export default function PhotoGallery() {
 
   return (
     <main>
-      <Navbar bgColor={'mainlight'}/>
+      <Navbar />
       <div className="min-h-screen bg-mainlight p-8">
         <h1 className="text-4xl font-bold text-center mb-8">
           AMURoboclub Photo Gallery
