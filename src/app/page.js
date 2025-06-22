@@ -113,6 +113,7 @@ export default function Home() {
         <SSAMUSAT />
       </motion.div>
       <Faqs />
+      <br/>
       <Footer />
     </main>
   );
