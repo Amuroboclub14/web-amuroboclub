@@ -79,12 +79,7 @@ export default function Navbar() {
         >
           <Text size="xlarge">GALLERY</Text>
         </Link>
-        <Link
-          href={"/alumnis"}
-          className="hover:border-mainblue border-b-2 border-transparent transition-all duration-50"
-        >
-          <Text size="xlarge">ALUMNIS</Text>
-        </Link>
+        
         <div className="w-[12rem]">
           <Link
             href="/contactus"

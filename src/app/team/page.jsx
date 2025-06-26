@@ -8,11 +8,18 @@ import Footer from "../components/Footer";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { setDarkModeActivation,Text,Heading } from "nes-ui-react";
+import {  Drawer,  DrawerContent,  DrawerHeader,  DrawerBody,  DrawerFooter} from "@heroui/drawer";
+import { Button } from "@heroui/button";
+import { useDisclosure } from "@heroui/use-disclosure";
+import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+
+
 
 // Skeleton component
 const MemberSkeleton = () => (
   <div className="animate-pulse flex flex-col gap-5 mt-10 w-[40vw] md:w-[18rem]">
-    <div className="h-[70vh] w-full bg-gray-300 md:rounded-xl rounded-md"></div>
+    <div className="h-[45vh] md:h-[384px] w-full bg-gray-300 md:rounded-xl rounded-md"></div>
     <div className="flex flex-col gap-3 pb-5">
       <div className="h-8 bg-gray-300 rounded-md w-3/4 ml-5"></div>
       <div className="h-6 bg-gray-300 rounded-md w-1/2 ml-5"></div>
@@ -28,6 +35,8 @@ export default function Team() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [loading, setLoading] = useState(false); // Loading state
   const [year, setYear] = useState(2025); // State for selected year
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
 
   useEffect(() => setDarkModeActivation(true), []);
 
@@ -70,7 +79,7 @@ export default function Team() {
     const filterByTeamType = () => {
       return members.filter((member) => {
         const position = member.position;
-        if (teamType === "pr") return !excludedPositions.includes(position);
+        if (teamType === "PR") return !excludedPositions.includes(position);
         return position === teamType;
       });
     };
@@ -84,55 +93,124 @@ export default function Team() {
       <Navbar />
       <section className="flex flex-col items-center px-5 md:px-[6.2rem] pt-7 font-mont">
         
-        
+          <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.9 }}
+                  className="md:w-[45%] flex flex-col px-5"
+                >
          <h1 className="!text-[2.6rem] md:!leading-[5rem] md:!text-[4.9rem] font-bold text-justify md:pt-[12vh] !leading-tight bg-gradient-to-br from-white to-sky-300 bg-clip-text text-transparent pb-10">
-          AMURoboclub Team <br />
+         AMURoboclub Team <br/>
           {year}-{parseInt(year) + 1}
-        </h1>
+        </h1></motion.div>
         
-        <div className="hidden md:flex gap-5 font-medium text-[0.5rem] md:text-xl pt-10">
+      {isSmallScreen ? (
+  <>
+    <Button onPress={onOpen} className="mt-5 mb-5 !text-lg font-semibold">
+  Select Team Role -&nbsp;
+  <span className="border-b-2 border-blue-800 text-gradient !text-[inherit] !font-[inherit] !text-3xl ">
+      {teamType}
+  </span>
+  <ChevronRight className="w-5 h-5" />
+</Button>
+
+
+<Drawer isOpen={isOpen} onOpenChange={onOpenChange}>
+  {isOpen && (
+  <div className="fixed inset-0 bg-black/3 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
+)}
+
+  <DrawerContent className="fixed right-0 top-0 h-full w-[60vw] sm:w-[24rem] bg-[#151516] z-50 shadow-lg rounded-none ">
+    {(onClose) => (
+      <>
+        <DrawerHeader className="!text-[1.75rem] font-bold text-white">
+          Team 
+        </DrawerHeader>
+
+        <DrawerBody className="flex flex-col gap-4 !text-[2.55rem]">
           {[
             "Coordinator",
             "Joint Coordinator",
             "Web Developer",
             "App Developer",
             "Volunteer",
-            "pr",
+            "PR",
           ].map((type) => (
-            <h1
+            <Button
               key={type}
-              className={`nes-cursor py-5 px-1 md:!text-[1.8rem] gap-8 ${
+              onPress={() => {
+                setTeamType(type);
+                onClose();
+              }}
+              className={`w-full justify-start text-left ${
                 teamType === type
-                  ? "border-b-2 border-blue-800 text-gradient !text-[inherit] !font-[inherit] !text-[2.6rem] md:!text-[3.5rem] leading-[2.5rem] md:!leading-[4rem]"
-                  : "text-white"
+                  ? "bg-blue-500 text-black"
+                  : "bg-[#7e7f83] text-white"
               }`}
-              onClick={() => setTeamType(type)}
             >
               {type.toUpperCase().replace("_", " ")}
-            </h1>
+            </Button>
           ))}
-        </div>
+        </DrawerBody>
 
-        <div className="flex md:flex-row flex-col flex-wrap justify-center md:gap-[6rem] pb-20">
+        <DrawerFooter>
+          <Button color="danger" variant="light" onPress={onClose}>
+            Cancel
+          </Button>
+        </DrawerFooter>
+      </>
+    )}
+  </DrawerContent>
+</Drawer>
+
+
+  </>
+) : (
+  <div className="md:flex gap-5 font-medium text-[0.5rem] md:text-xl pt-10">
+    {[
+      "Coordinator",
+      "Joint Coordinator",
+      "Web Developer",
+      "App Developer",
+      "Volunteer",
+      "PR",
+    ].map((type) => (
+      <h1
+        key={type}
+        className={`nes-cursor py-5 px-1 md:!text-[1.8rem] gap-8 ${
+          teamType === type
+            ? "border-b-2 border-blue-800 text-gradient !text-[inherit] !font-[inherit] !text-[2.6rem] md:!text-[3.5rem] leading-[2.5rem] md:!leading-[4rem]"
+            : "text-white"
+        }`}
+        onClick={() => setTeamType(type)}
+      >
+        {type.toUpperCase().replace("_", " ")}
+      </h1>
+    ))}
+  </div>
+)}
+
+
+        <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 md:gap-[6rem] pb-20">
           {loading
             ? Array.from({ length: 3 }).map((_, index) => (
                 <MemberSkeleton key={index} />
               ))
-            : (isSmallScreen ? members : filteredMembers).map(
-                (member, index) => {
+            : (isSmallScreen ? filteredMembers : filteredMembers).map((member, index) => {
                   const { name, position, profileImageUrl } = member;
                   return (
                     <div
                       key={index}
                       className="flex flex-col gap-5 mt-10 w-[40vw] md:w-[32rem]  border-blue-400 bg-gray-800 shadow-lg lg:bg-gray-900 border lg:border-gray-700 rounded-xl p-6 transition-all duration-300 overflow-hidden group hover:-translate-y-2 lg:hover:border-blue-400 lg:hover:bg-gray-800 lg:hover:shadow-lg lg:hover:shadow-blue-400/15"
                     >
-                      <Image
-                        src={profileImageUrl || pic}
-                        alt={name}
-                        width={300}
-                        height={600}
-                        className="md:h-[384px] h-full md:w-[576px] md:rounded-xl rounded-md"
-                      />
+                     <Image
+                      src={profileImageUrl || pic}
+                      alt={name}
+                      width={576}
+                      height={384}
+                      className="w-full h-[45vh] md:h-[384px] object-cover rounded-md md:rounded-xl"/>
+
                       <div className="flex flex-col gap-3 pb-5">
 
                         <h1 className="text-[2.6rem] md:!text-[1.7rem] font-medium pl-5">
@@ -179,7 +257,7 @@ export default function Team() {
               )}
         </div>
         <div className="flex justify-start items-center gap-5 py-10">
-          <p className="font-medium md:!text-[1.5rem]">View Past Teams:</p>
+          <p className="font-large text-lg md:!text-[2.5rem]">View Past Teams:</p>
           <select
             className="border text-black border-gray-300 rounded-md p-2 md:!text-[1.3rem]"
             onChange={(e) => setYear(e.target.value)}
