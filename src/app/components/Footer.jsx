@@ -15,7 +15,9 @@ export default function Footer() {
             Where Innovation Meets Implementation
           </p>
           <p className="text-sm">📍 AMU, Aligarh</p>
-          <p className="text-sm">📧 roboclub@amu.ac.in</p>
+          <p className="text-sm"><a href="mailto:amuroboclub@gmail.com" className="text-sm hover:underline">
+  📧 amuroboclub@gmail.com
+</a></p>
         </div>
 
         {/* Navigation Links */}
@@ -53,7 +55,7 @@ export default function Footer() {
 
         {/* Social Icons */}
         <div className="flex items-center gap-5">
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:bg-white transition-all duration-200 hover:rounded-full p-2 group">
+          <a href="https://www.linkedin.com/company/amuroboclub/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BGvhzPw1ES5CjysMwoTzrWA%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:bg-white transition-all duration-200 hover:rounded-full p-2 group">
           <svg className="w-6 h-6 fill-current group-hover:fill-mainblue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
         <path d="M100.28 448H7.4V148.9h92.88zm-46.44-341a53.41 53.41 0 1 1 53.4-53.4 53.4 53.4 0 0 1-53.4 53.4zM447.9 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.8-43.8 31V448h-92.6s1.2-270.8 0-298.9h92.6v42.4c12.3-19 34.2-46.1 83.4-46.1 60.8 0 106.4 39.7 106.4 125.1z" />
 
@@ -61,7 +63,7 @@ export default function Footer() {
               <title>LinkedIn</title>
             </svg>
           </a>
-          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="hover:bg-white transition-all duration-200 hover:rounded-full p-2 group">
+          <a href="https://www.instagram.com/amuroboclub?igsh=eWtoeGIzOXFvZW5u" target="_blank" rel="noopener noreferrer" className="hover:bg-white transition-all duration-200 hover:rounded-full p-2 group">
             <svg className="w-6 h-6 fill-current group-hover:fill-mainblue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
         <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9-51.3-114.9-114.9-114.9zm0 189.6c-41.2 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8s-26.8-12-26.8-26.8 12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9s-58-34.4-93.9-36.2C293.7 32 256 32 224 32s-69.7 0-92.5 1.4c-35.9 1.7-67.7 9.9-93.9 36.2s-34.4 58-36.2 93.9C0 186.3 0 224 0 256s0 69.7 1.4 92.5c1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c22.8 1.4 60.5 1.4 92.5 1.4s69.7 0 92.5-1.4c35.9-1.7 67.7-9.9 93.9-36.2s34.4-58 36.2-93.9c1.4-22.8 1.4-60.5 1.4-92.5s0-69.7-1.4-92.5zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
 
@@ -74,7 +76,7 @@ export default function Footer() {
 
       {/* Footer Bottom */}
       <div className="text-center text-xs text-gray-400 mt-4">
-        &copy; 2025 AMURoboclub | Developed by Web Developers Team 2025–2026
+        &copy; 2025 AMURoboclub | Web Development Team
       </div>
     </footer>
   );
