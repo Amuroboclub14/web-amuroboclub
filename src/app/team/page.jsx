@@ -98,17 +98,17 @@ export default function Team() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
                   transition={{ duration: 0.9 }}
-                  className="md:w-[45%] flex flex-col px-5"
+                  className="md:w-[65%] flex flex-col px-5"
                 >
-         <h1 className="!text-[2.6rem] md:!leading-[5rem] md:!text-[4.9rem] font-bold text-justify md:pt-[12vh] !leading-tight bg-gradient-to-br from-white to-sky-300 bg-clip-text text-transparent pb-10">
+         <h1 className="!text-[2.6rem] md:!leading-[5rem] font-serif tracking-wider md:!text-[4.9rem] font-bold text-justify md:pt-[12vh] !leading-tight bg-gradient-to-br from-white to-sky-300 bg-clip-text text-transparent pb-10">
          AMURoboclub Team <br/>
           {year}-{parseInt(year) + 1}
         </h1></motion.div>
         
       {isSmallScreen ? (
   <>
-    <Button onPress={onOpen} className="mt-5 mb-5 !text-lg font-semibold">
-  Select Team Role -&nbsp;
+    <Button onPress={onOpen} className="mt-5 mb-5 !text-md font-semibold">
+  Select Team -&nbsp;
   <span className="border-b-2 border-blue-800 text-gradient !text-[inherit] !font-[inherit] !text-3xl ">
       {teamType}
   </span>
@@ -180,7 +180,7 @@ export default function Team() {
         key={type}
         className={`nes-cursor py-5 px-1 md:!text-[1.8rem] gap-8 ${
           teamType === type
-            ? "border-b-2 border-blue-800 text-gradient !text-[inherit] !font-[inherit] !text-[2.6rem] md:!text-[3.5rem] leading-[2.5rem] md:!leading-[4rem]"
+            ? "border-b-2 border-blue-800 text-gradient !text-[inherit] !font-[inherit] !text-[2.0rem] md:!text-[2.0rem] leading-[2.5rem] md:!leading-[4rem]"
             : "text-white"
         }`}
         onClick={() => setTeamType(type)}
@@ -192,7 +192,7 @@ export default function Team() {
 )}
 
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 md:gap-[6rem] pb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-[6rem] pb-20">
           {loading
             ? Array.from({ length: 3 }).map((_, index) => (
                 <MemberSkeleton key={index} />
@@ -202,7 +202,8 @@ export default function Team() {
                   return (
                     <div
                       key={index}
-                      className="flex flex-col gap-5 mt-10 w-[40vw] md:w-[32rem]  border-blue-400 bg-gray-800 shadow-lg lg:bg-gray-900 border lg:border-gray-700 rounded-xl p-6 transition-all duration-300 overflow-hidden group hover:-translate-y-2 lg:hover:border-blue-400 lg:hover:bg-gray-800 lg:hover:shadow-lg lg:hover:shadow-blue-400/15"
+                      className="flex flex-col gap-5 mt-10 w-[90vw] sm:w-[40vw] md:w-[32rem]
+      border-blue-400 bg-gray-800 shadow-lg lg:bg-gray-900 border lg:border-gray-700 rounded-xl p-6 transition-all duration-300 overflow-hidden group hover:-translate-y-2 lg:hover:border-blue-400 lg:hover:bg-gray-800 lg:hover:shadow-lg lg:hover:shadow-blue-400/15"
                     >
                      <Image
                       src={profileImageUrl || pic}
@@ -211,9 +212,9 @@ export default function Team() {
                       height={384}
                       className="w-full h-[45vh] md:h-[384px] object-cover rounded-md md:rounded-xl"/>
 
-                      <div className="flex flex-col gap-3 pb-5">
+                      <div className="flex flex-col items-center gap-3 pb-5">
 
-                        <h1 className="text-[2.6rem] md:!text-[1.7rem] font-medium pl-5">
+                        <h1 className="!text-[1.5rem] md:!text-[1.7rem] font-large pl-5">
                           {name}
                         </h1>
                         <h1 className="block md:hidden text-[1.15rem] font-normal pl-5">
