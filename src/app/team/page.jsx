@@ -202,7 +202,7 @@ export default function Team() {
                   return (
                     <div
                       key={index}
-                      className="flex flex-col gap-5 mt-10 w-[90vw] sm:w-[40vw] md:w-[32rem]
+                      className="flex flex-col gap-3 mt-10 w-[90vw] sm:w-[40vw] md:w-[32rem]
       border-blue-400 bg-gray-800 shadow-lg lg:bg-gray-900 border lg:border-gray-700 rounded-xl p-6 transition-all duration-300 overflow-hidden group hover:-translate-y-2 lg:hover:border-blue-400 lg:hover:bg-gray-800 lg:hover:shadow-lg lg:hover:shadow-blue-400/15"
                     >
                      <Image
@@ -212,16 +212,16 @@ export default function Team() {
                       height={384}
                       className="w-full h-[45vh] md:h-[384px] object-cover rounded-md md:rounded-xl"/>
 
-                      <div className="flex flex-col items-center gap-3 pb-5">
+                      <div className="flex flex-col items-center gap-2 ">
 
-                        <h1 className="!text-[1.5rem] md:!text-[1.7rem] font-large pl-5">
+                        <h1 className="!text-[1.75rem] md:!text-[1.7rem] font-semibold pl-5">
                           {name}
                         </h1>
-                        <h1 className="block md:hidden text-[1.15rem] font-normal pl-5">
+                        <h1 className="block md:hidden !text-[1.35rem] font-normal pl-3">
                           {position}
                         </h1>
 
-                        <div className="flex gap-3 pl-5">
+                        <div className="flex gap-1 pl-5">
                           {/* <Image
                             src={linkedin}
                             alt="LinkedIn"
