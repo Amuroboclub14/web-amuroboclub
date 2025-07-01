@@ -58,10 +58,10 @@ export default function Faqs() {
       <div className="max-w-7xl mx-auto px-8 py-12 sm:py-16 lg:py-20">
         {/* Header Section */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h1 className="!text-4xl sm:!text-5xl lg:!text-6xl font-bold text-white mb-4 tracking-tight">
+          <h1 className="text-[20px] lg:text-[24px] font-bold text-white mb-4 tracking-tight">
             Frequently Asked Questions
           </h1>
-          <p className="!text-lg sm:!text-xl text-blue-400 font-medium">
+          <p className="text-[16px] !font-mono text-blue-400 font-medium">
             Everything you need to know about our Robotics club
           </p>
         </div>
@@ -71,18 +71,18 @@ export default function Faqs() {
           {faqData.map((faq, index) => (
             <div
               key={index}
-              className="bg-gray-900 border-2 border-gray-800 rounded-2xl p-6 sm:p-8 transition-all duration-300 hover:border-blue-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-400/10"
+              className="!font-mono bg-gray-900 border-2 border-gray-800 rounded-2xl p-6 sm:p-8 transition-all duration-300 hover:border-blue-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-400/10"
             >
               <button
                 onClick={() => toggleItem(index)}
                 className="w-full text-justify focus:outline-none"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-start gap-3 sm:gap-4 flex-1">
+                <div className=" flex items-start justify-between gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4 flex-1">
                     <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                       <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
-                    <h3 className="!text-lg sm:!text-xl font-semibold text-blue-400 leading-tight">
+                    <h3 className=" text-[14px] sm:text-[16px] font-semibold text-blue-400 leading-tight">
                       {faq.question}
                     </h3>
                   </div>
@@ -104,7 +104,7 @@ export default function Faqs() {
                 }`}
               >
                 <div className="ml-11 sm:ml-14">
-                  <p className="text-gray-300 !text-base sm:!text-lg leading-relaxed">
+                  <p className="text-gray-300 text-[12px] sm:text-[14px] leading-relaxed">
                     {faq.answer
                       .split(
                         /(\bAMURoboclub Android App\b|\bnominal membership fee of Rs\. 200\/-\b|\bvariety of robot types\b|\bMS-18, Department of Mechanical Engineering, AMU Campus\b|\bparts library\b|\b3D printers, laser cutters and a full workshop\b|\bnational competitions\b|\binternational ones\b|\bNo experience required!\b)/g
@@ -142,18 +142,18 @@ export default function Faqs() {
 
         {/* Contact Section */}
         <div className="text-center bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 sm:p-12 border-2 border-gray-700">
-          <h3 className="!text-2xl sm:!text-3xl font-bold text-blue-400 mb-4 sm:mb-6">
-            Still Have Questions?
+          <h3 className="text-[16px] sm:text-[18px] font-bold text-blue-400 mb-4 sm:mb-6">
+            Still Curious?
           </h3>
-          <p className="text-gray-400 !text-lg sm:!text-xl mb-8 sm:mb-10">
+          <p className="text-gray-400 text-[16px] !font-mono mb-8 sm:mb-10">
             Get in touch with us and we&apos;ll be happy to help!
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-start sm:items-center gap-6 sm:gap-12">
-            <div className="flex items-center gap-3 sm:gap-4 text-gray-300">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center !text-xl sm:!text-2xl">
+            <div className="flex items-center justify-between gap-3 sm:gap-4 text-gray-300">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center text-xl sm:!text-2xl">
                 📍
               </div>
-              <span className="!text-base sm:!text-lg font-medium">
+              <span className="!font-mono text-justify text-base sm:text-lg font-medium">
                 WS-18, Department of Mechnical Engineering, AMU Campus
               </span>
             </div>
@@ -161,8 +161,8 @@ export default function Faqs() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center !text-xl sm:!text-2xl">
                 📱
               </div>
-              <span className="!text-base sm:!text-lg font-medium">
-                090454 14527
+              <span className="!font-mono text-base sm:text-lg font-medium">
+                +91 7906350149
               </span>
             </div>
           </div>

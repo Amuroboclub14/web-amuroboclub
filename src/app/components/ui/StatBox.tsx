@@ -40,10 +40,10 @@ export default function StatBox({ number, label }: StatBoxProps) {
 
   return (
     <div ref={ref} className="text-center">
-      <span className="!text-[40px] font-bold text-blue-400 block leading-none">
+      <span className="text-[20px] font-bold text-blue-400 block leading-none">
         {currentNumber}+
       </span>
-      <span className="text-xs text-gray-500 uppercase tracking-wider mt-2 block">
+      <span className="text-[12px] text-gray-500 uppercase tracking-wider mt-2 block">
         {label}
       </span>
     </div>

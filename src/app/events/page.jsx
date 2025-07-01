@@ -4,41 +4,25 @@ import { useState, useEffect, useCallback } from "react";
 import Navbar from "../components/Navbar";
 import { db } from "../firebase";
 import { collection, getDocs, addDoc } from "firebase/firestore";
-import { X, Calendar, Clock, MapPin, ExternalLink } from "lucide-react";
+import {
+  X,
+  Calendar,
+  Clock,
+  MapPin,
+  ExternalLink,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
+import Footer from "../components/Footer";
 
 const AMURoboclubEvents = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const [events, setEvents] = useState([]);
 
-  // adding an upcoming event for testing purposes only- will remove when deploying to prod
-  const eventObj = {
-    eventName: "Orientation Ceremony 2025",
-    category: "Onboarding",
-    date: "2025-07-20",
-    startTime: "10:00 AM",
-    endTime: "01:00 PM",
-    place: "Main Auditorium",
-    details: "Introduction, Projects, Robocon, Web Tour, App Tour, QnA.",
-    regFormLink: "https://example.com/register",
-
-    status: "Upcoming",
-  };
-
-  const addEvent = async (eventObj) => {
-    try {
-      const docRef = await addDoc(collection(db, "events"), eventObj);
-      console.log("Event added with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding event: ", e);
-    }
-  };
-
-  useEffect(() => {
-    addEvent(eventObj);
-  }, []);
   useEffect(() => {
     const fetchAllEvents = async () => {
       try {
@@ -48,8 +32,6 @@ const AMURoboclubEvents = () => {
           id: doc.id, // document ID if needed
           ...doc.data(), // spreads all fields like eventName, date, etc.
         }));
-
-        console.log("events", allEvents);
 
         setEvents(allEvents);
       } catch (error) {
@@ -69,7 +51,6 @@ const AMURoboclubEvents = () => {
     ([category, count], idx) => ({ id: idx, category, count })
   );
 
-  console.log("categories", categories);
   const filteredEvents = events.filter((event) => {
     // Category filtering logic
     let categoryMatch = false;
@@ -89,6 +70,24 @@ const AMURoboclubEvents = () => {
 
     return categoryMatch && statusMatch;
   });
+
+  const handleCategorySelect = (category) => {
+    setActiveCategory(category);
+    setIsDropdownOpen(false);
+  };
+  const getActiveCategoryData = () => {
+    if (activeCategory === "all")
+      return {
+        category: "All Categories",
+        count: categories.reduce((sum, cat) => sum + cat.count, 0),
+      };
+    return (
+      categories.find((cat) => cat.category === activeCategory) || {
+        category: "All Categories",
+        count: 0,
+      }
+    );
+  };
 
   const getStatusBadge = (status) => {
     const baseClasses =
@@ -140,10 +139,10 @@ const AMURoboclubEvents = () => {
     if (!event) return null;
 
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <div className="!font-mono fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
         <div className="bg-gray-900 border border-gray-700 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <div className="flex justify-between items-center p-6 border-b border-gray-700">
-            <h2 className="!text-2xl font-bold text-white">
+            <h2 className="text-[16px] font-bold text-white">
               {event.eventName}
             </h2>
             <button
@@ -254,58 +253,148 @@ const AMURoboclubEvents = () => {
       <main className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Page Header */}
-          <div className="text-center mb-16">
-            <h1 className="!text-4xl sm:!text-5xl lg:!text-6xl font-bold mb-5 bg-gradient-to-r from-white to-cyan-400 bg-clip-text text-transparent">
+          <div className="text-center mb-10">
+            <h1 className="text-[32px] md:text-[40px] font-bold mb-5 bg-gradient-to-r from-white to-cyan-400 bg-clip-text text-transparent">
               Discover Events
             </h1>
-            <p className="!text-lg sm:!text-xl text-gray-400 max-w-3xl mx-auto !leading-relaxed">
+            <p className="!font-mono text-[18px] text-gray-400 max-w-3xl mx-auto !leading-relaxed">
               Explore our robotics workshops, competitions, and community
               activities designed to foster innovation and hands-on learning.
             </p>
           </div>
 
           {/* Categories Section */}
-          {categories.length > 1 && (
-            <section className="mb-20">
-              <div className="flex items-center justify-between mb-10">
-                <h2 className="!text-2xl sm:!text-3xl font-semibold text-white mb-2">
+          {categories.length >= 1 && (
+            <section className="mb-10">
+              <div className="flex flex-col gap-5 sm:flex-row items-center justify-between mb-10">
+                <h2 className="font-mono text-white text-opacity-40 mx-auto md:mx-0 text-xl font-semibold">
                   Browse by Category
                 </h2>
                 {activeCategory !== "all" && (
                   <button
                     onClick={() => setActiveCategory("all")}
-                    className="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 hover:border-cyan-400 text-white rounded-full !text-sm font-medium transition-all duration-300 flex items-center gap-2"
+                    className="px-4 text-sm font-mono py-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 hover:border-cyan-400 text-white rounded-full font-medium transition-all duration-300 flex items-center gap-2"
                   >
                     <X className="w-4 h-4" />
                     Remove Filter
                   </button>
                 )}
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5">
+
+              {/* Mobile Dropdown (visible on small screens) */}
+              <div className="block sm:hidden mb-6">
+                <div className="relative">
+                  <button
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="w-full font-mono bg-gray-900 border border-gray-800 rounded-2xl px-6 py-4 text-left cursor-pointer transition-all duration-300 hover:border-cyan-400 relative overflow-hidden group flex items-center justify-between"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
+                    <div className="relative z-10">
+                      <div
+                        className={`text-lg font-semibold mb-1 ${
+                          activeCategory !== "all"
+                            ? "text-cyan-400"
+                            : "text-white"
+                        }`}
+                      >
+                        {getActiveCategoryData().category}
+                      </div>
+                      <div className="text-gray-400 text-sm">
+                        {getActiveCategoryData().count} Events
+                      </div>
+                    </div>
+                    <div className="relative z-10">
+                      {isDropdownOpen ? (
+                        <ChevronUp className="w-5 h-5 text-gray-400" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-gray-400" />
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  {isDropdownOpen && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden z-50 shadow-2xl">
+                      <div
+                        onClick={() => handleCategorySelect("all")}
+                        className={`font-mono px-6 py-4 cursor-pointer transition-all duration-300 hover:bg-gray-800 hover:border-l-4 hover:border-l-cyan-400 border-l-4 border-l-transparent ${
+                          activeCategory === "all"
+                            ? "bg-cyan-400/5 border-l-cyan-400"
+                            : ""
+                        }`}
+                      >
+                        <div
+                          className={`text-lg font-semibold mb-1 ${
+                            activeCategory === "all"
+                              ? "text-cyan-400"
+                              : "text-white"
+                          }`}
+                        >
+                          All Categories
+                        </div>
+                        <div className="text-gray-400 text-sm">
+                          {categories.reduce((sum, cat) => sum + cat.count, 0)}{" "}
+                          Events
+                        </div>
+                      </div>
+
+                      {categories.map((category) => (
+                        <div
+                          key={category.id}
+                          onClick={() =>
+                            handleCategorySelect(category.category)
+                          }
+                          className={`font-mono px-6 py-4 cursor-pointer transition-all duration-300 hover:bg-gray-800 hover:border-l-4 hover:border-l-cyan-400 border-l-4 border-l-transparent ${
+                            activeCategory === category.category
+                              ? "bg-cyan-400/5 border-l-cyan-400"
+                              : ""
+                          }`}
+                        >
+                          <div
+                            className={`text-lg font-semibold mb-1 ${
+                              activeCategory === category.category
+                                ? "text-cyan-400"
+                                : "text-white"
+                            }`}
+                          >
+                            {category.category}
+                          </div>
+                          <div className="text-gray-400 text-sm">
+                            {category.count} Events
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Desktop Grid (hidden on small screens) */}
+              <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5">
                 {categories.map((category) => (
                   <div
                     key={category.id}
                     onClick={() => setActiveCategory(category.category)}
                     className={`
-                      bg-gray-900 border rounded-2xl px-6 py-4 sm:px-8 sm:py-6 text-center cursor-pointer transition-all duration-300 hover:border-cyan-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-400/10 relative overflow-hidden group
-                      ${
-                        activeCategory === category.category
-                          ? "border-cyan-400 bg-cyan-400/5"
-                          : "border-gray-800"
-                      }
-                    `}
+                     font-mono bg-gray-900 border rounded-2xl px-6 py-4 sm:px-8 sm:py-6 text-center cursor-pointer transition-all duration-300 hover:border-cyan-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-400/10 relative overflow-hidden group
+                     ${
+                       activeCategory === category.category
+                         ? "border-cyan-400 bg-cyan-400/5"
+                         : "border-gray-800"
+                     }
+                   `}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
                     <div
-                      className={`!text-lg sm:!text-xl font-semibold mb-2 ${
-                        activeCategory === category.id
+                      className={`text-lg sm:text-xl font-semibold mb-2 relative z-10 ${
+                        activeCategory === category.category
                           ? "text-cyan-400"
                           : "text-white"
                       }`}
                     >
                       {category.category}
                     </div>
-                    <div className="text-gray-400 !text-sm">
+                    <div className="text-gray-400 text-sm relative z-10">
                       {category.count} Events
                     </div>
                   </div>
@@ -315,7 +404,7 @@ const AMURoboclubEvents = () => {
           )}
 
           {/* Event Filters */}
-          <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4 mb-12">
+          <div className="!font-mono flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4 mb-12">
             {[
               { id: "all", label: "All Events" },
               { id: "ongoing", label: "Ongoing" },
@@ -342,8 +431,8 @@ const AMURoboclubEvents = () => {
           {/* Events Grid */}
           {filteredEvents.length === 0 ? (
             <div className="text-center py-20">
-              <div className="text-gray-400 !text-lg mb-4">No events found</div>
-              <p className="text-gray-500 !text-sm">
+              <div className="text-gray-400 text-lg mb-4">No events found</div>
+              <p className="text-gray-500 text-[16px] !font-mono">
                 Try adjusting your filters to see more events
               </p>
             </div>
@@ -375,9 +464,9 @@ const AMURoboclubEvents = () => {
                         </span>
                       </div>
                     )}
-                    <div className="absolute top-4 right-4">
+                    <div className="absolute top-4 right-4 !font-mono">
                       <span
-                        className={`!text-lg ${getStatusBadge(event.status)}`}
+                        className={`!text-lg  ${getStatusBadge(event.status)}`}
                       >
                         {event.status}
                       </span>
@@ -385,23 +474,25 @@ const AMURoboclubEvents = () => {
                   </div>
 
                   {/* Event Content */}
-                  <div className=" flex flex-col justify-between p-6 sm:p-8">
+                  <div className=" flex flex-col justify-between p-6 sm:p-8 ">
                     <div className="text-cyan-400 !text-sm font-medium mb-3 flex items-center gap-4">
-                      <span className="!text-lg">{formatDate(event.date)}</span>
+                      <span className="!text-lg  !font-mono">
+                        {formatDate(event.date)}
+                      </span>
                       {event.startTime && (
-                        <span className="flex !text-lg items-center gap-1">
+                        <span className="flex !text-lg  !font-mono items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {formatTime(event.startTime)}
                         </span>
                       )}
                     </div>
 
-                    <h3 className="!text-lg sm:!text-xl font-semibold text-white mb-3 !leading-tight">
+                    <h3 className="!text-[14px] sm:!text-xl leading-[1.5rem] font-semibold text-white mb-3">
                       {event.eventName}
                     </h3>
 
                     {event.details && (
-                      <p className="text-gray-400 !text-sm sm:!text-lg !leading-relaxed mb-4">
+                      <p className=" !font-mono text-gray-400 !text-sm sm:!text-lg !leading-relaxed mb-4">
                         {truncateText(
                           event.details
                             .replace(/\*([^*]+)\*/g, "$1")
@@ -410,12 +501,12 @@ const AMURoboclubEvents = () => {
                       </p>
                     )}
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between  !font-mono">
                       <span className="!text-sm text-gray-500 bg-gray-800 px-2 py-1 rounded">
                         {event.category}
                       </span>
                       {event.place && (
-                        <span className="!text-sm text-gray-400 flex items-center gap-1">
+                        <span className="!text-sm text-gray-400  !font-mono flex items-center gap-1">
                           <MapPin className="w-3 h-3" />
                           {event.place}
                         </span>
@@ -428,6 +519,7 @@ const AMURoboclubEvents = () => {
           )}
         </div>
       </main>
+      <Footer />
 
       {/* Event Modal */}
       {selectedEvent && (
