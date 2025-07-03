@@ -7,6 +7,7 @@ import Image from "next/image";
 import { storage } from "../firebase";
 import { ref, getDownloadURL, listAll } from "firebase/storage";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const galleryImages = [];
 
@@ -122,10 +123,10 @@ export default function PhotoGallery() {
   };
 
   return (
-    <main>
+    <main className="bg-black">
       <Navbar />
-      <div className="min-h-screen bg-mainlight p-8">
-        <h1 className="text-4xl font-bold text-center mb-8">
+      <div className="min-h-screen  p-8">
+        <h1 className="text-[32px] font-bold text-white text-center mb-8">
           AMURoboclub Photo Gallery
         </h1>
 
@@ -236,6 +237,7 @@ export default function PhotoGallery() {
           )}
         </AnimatePresence>
       </div>
+      <Footer />
     </main>
   );
 }

@@ -6,19 +6,16 @@ import Footer from "./components/Footer";
 import team from "../assets/IMG_1559.webp";
 import * as motion from "framer-motion/client";
 import Faqs from "./components/Faqs";
-import { setDarkModeActivation, Heading, Text } from "nes-ui-react";
-import { useEffect } from "react";
 import OpportunitiesOffered from "./components/OpportunitiesOffered";
 import WhatSetsUsApart from "./components/WhatSetsUsApart";
 import SSAMUSAT from "./components/SSAMUSAT";
+import OurProjects from "./components/OurProjects";
 
 export default function Home() {
-  useEffect(() => setDarkModeActivation(true), []);
-
   return (
-    <main>
+    <main className="bg-black">
       <Navbar />
-      <div className="flex md:flex-row flex-col items-center justify-between gap-[5rem] md:gap-[2rem] px-2 md:pl-5  py-[3rem] overflow-hidden">
+      <div className="flex md:flex-row flex-col items-center justify-between gap-[5rem] md:gap-[2rem] px-2 md:pl-5 py-[3rem] overflow-hidden">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -26,23 +23,17 @@ export default function Home() {
           transition={{ duration: 0.3 }}
           className="md:w-[45%] flex flex-col px-5"
         >
-          <Heading className="!text-[2.6rem] leading-[2.5rem] md:!leading-[4rem] md:!text-[3.5rem] font-bold text-justify text-mainblue md:pt-[12vh]">
-            To create a better future, you need an AV system that imagines{" "}
-            <span className="text-gradient !text-[inherit] !font-[inherit] !text-[2.6rem] md:!text-[3.5rem] leading-[2.5rem] md:!leading-[4rem]">
-              every possibility
-            </span>
-            .
-          </Heading>
-          <Text
-            size="xlarge"
-            className="text-justify font-medium text-mainblue/90 mb-[2rem]"
-          >
-            AMURoboclub nurtures curious minds with its motto, &apos;Where
-            Innovation Meets Implementation.&apos; It offers a dynamic learning
-            environment and hands-on experience with robotics technologies,
-            guided by faculty advisors from Zakir Husain College of Engineering
-            and Technology, Aligarh Muslim University.
-          </Text>
+          <p className="text-[1rem] leading-[1.5rem] mb-[1rem] md:leading-[2rem] md:text-[1.5rem] text-white font-bold text-justif-start pt-[1rem] text-mainblue ">
+            Where Innovation meets{" "}
+            <span className="text-gradient ">Implementation</span>.
+          </p>
+          <p className="text-justify text-[18px] text-white font-mono font-medium text-mainblue/90 mt-[15px] mb-[2rem]">
+            At AMURoboClub, it&apos;s not just about building robots—it&apos;s
+            about helping students become creative thinkers and problem-solvers.
+            With awesome support from our ZHCET faculty, this is a space where
+            ideas come to life, experiments are fun, and learning happens by
+            doing cool projects together.
+          </p>
 
           <div className="w-fit">
             <a
@@ -51,7 +42,9 @@ export default function Home() {
               target="_blank" // Optional: Opens in a new tab
               rel="noopener noreferrer" // Optional: Security for external links
             >
-              <Text size="xlarge">Download Our APP</Text>
+              <p className="text-[18px] text-white !font-mono">
+                Download Our APP
+              </p>
               <span className="flex justify-end w-0 h-4 -ml-2 pointer-events-none overflow-hidden transition-[width] duration-300 group-hover:w-6">
                 <svg
                   className="block w-4 h-4 flex-initial pointer-events-none fill-current"
@@ -102,6 +95,16 @@ export default function Home() {
         <WhatSetsUsApart />
       </motion.div>
 
+      {/* Our Projects */}
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <OurProjects />
+      </motion.div>
+
       {/* SSAMUSAT*/}
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -113,7 +116,7 @@ export default function Home() {
         <SSAMUSAT />
       </motion.div>
       <Faqs />
-      <br/>
+      <br />
       <Footer />
     </main>
   );
