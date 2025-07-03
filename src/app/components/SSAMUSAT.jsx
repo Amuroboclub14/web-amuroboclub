@@ -1,6 +1,7 @@
 import React from "react";
 import amusat from "../../assets/ssamusat.jpeg";
 import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 
 export default function SSAMUSAT() {
   const amusatFeatures = [
@@ -89,26 +90,34 @@ export default function SSAMUSAT() {
           </div>
 
           {/* Team Section */}
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/50">
-            {/* Placeholder SVG Team Image */}
-            <div className="w-full h-full transition-transform duration-300 group-hover:scale-105">
-              <Image
-                src={amusat}
-                alt="team"
-                className="w-full md:rounded-[1rem] rounded-md -mr-5 shadow-xl"
-              />
+          <div className="flex flex-col justify-between items-center gap-8">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/50">
+              {/* Placeholder SVG Team Image */}
+              <div className="w-full h-full transition-transform duration-300 group-hover:scale-105">
+                <Image
+                  src={amusat}
+                  alt="team"
+                  className="w-full md:rounded-[1rem] rounded-md -mr-5 shadow-xl"
+                />
 
-              {/* Overlay */}
-              <div className="absolute p-3 bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-black/30">
-                <h4 className="text-blue-400 text-[12px] mb-2">
-                  SSAMUSAT- Project Team
-                </h4>
-                <p className="!font-mono text-gray-300 text-[8px] lg:!text-lg">
-                  Students & Alumni of Zakir Husain College of Engineering and
-                  Technology
-                </p>
+                {/* Overlay */}
+                <div className="absolute p-3 bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-black/30">
+                  <h4 className="text-blue-400 text-[12px] mb-2">
+                    SSAMUSAT- Project Team
+                  </h4>
+                  <p className="!font-mono text-gray-300 text-[8px] lg:!text-lg">
+                    Students & Alumni of Zakir Husain College of Engineering and
+                    Technology
+                  </p>
+                </div>
               </div>
             </div>
+            <a href="https://amu-sat.github.io/" target="_blank">
+              <button className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 text-gray-300 border border-gray-700 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-300 text-sm font-mono">
+                <ExternalLink className="w-4 h-4" />
+                Checkout the Project
+              </button>
+            </a>
           </div>
         </div>
 

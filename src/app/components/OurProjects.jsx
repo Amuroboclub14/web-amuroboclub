@@ -48,8 +48,6 @@ const OurProjects = () => {
     fetchProjects();
   }, []);
 
-  console.log("special projects", projects);
-
   const truncateText = (text, maxLength) => {
     return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
   };
@@ -122,7 +120,6 @@ const OurProjects = () => {
                 </p>
 
                 {/* Technologies */}
-                {console.log("tech", project.technologies)}
                 {project.technologies.length > 0 ? (
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech, techIndex) => (
