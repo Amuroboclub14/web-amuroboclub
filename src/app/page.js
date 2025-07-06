@@ -13,7 +13,7 @@ import OurProjects from "./components/OurProjects";
 
 export default function Home() {
   return (
-    <main className="bg-black">
+    <main className="bg-black max-w-[100vw] overflow-x-hidden">
       <Navbar />
       <div className="flex md:flex-row flex-col items-center justify-between gap-[5rem] md:gap-[2rem] px-2 md:pl-5 py-[3rem] overflow-hidden">
         <motion.div
@@ -70,7 +70,7 @@ export default function Home() {
             src={team}
             alt="team"
             placeholder="blur"
-            className="md:w-[40vw] rounded-l-[3rem] relative"
+            className="w-full md:w-[40vw] rounded-l-[3rem] relative max-w-full"
           />
         </motion.div>
       </div>
