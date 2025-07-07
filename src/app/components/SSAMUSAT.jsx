@@ -29,7 +29,7 @@ export default function SSAMUSAT() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <div className="mx-auto px-20 py-8">
+      <div className="mx-auto px-8 py-8">
         {/* Project Header */}
         <div className="text-center mb-12">
           <h1 className="text-[24px] lg:text-[32px] font-bold text-white mb-1 tracking-tight">
@@ -119,20 +119,6 @@ export default function SSAMUSAT() {
               </button>
             </a>
           </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center mt-24 p-8 p-8 bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl border-2 border-gray-700">
-          <h3 className="text-blue-400 !font-mono text-[22px] mb-5">
-            Join the Mission
-          </h3>
-          <p className="text-gray-400 !font-mono text-[14px] mb-8 max-w-2xl mx-auto">
-            Be part of AMU&apos;s aerospace revolution and contribute to
-            cutting-edge satellite technology
-          </p>
-          <button className="inline-block !font-mono bg-gradient-to-r from-blue-600 to-blue-400 text-white px-9 py-5 rounded-full !text-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-600/40 shadow-lg shadow-blue-600/30">
-            Become a part NOW!
-          </button>
         </div>
       </div>
     </div>

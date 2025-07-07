@@ -33,8 +33,8 @@ export default function OpportunitiesOffered() {
 
   const badges = ["🤖", "⚡", "🚀"];
   return (
-    <div className="bg-[#161616] min-h-screen text-white overflow-hidden relative">
-      <div className="flex items-start min-h-screen px-12 gap-12  lg:gap-24 mb-16  max-w-screen-xl mx-auto mt-8 flex-col lg:flex-row py-16">
+    <div className="bg-[#161616] min-h-screen  text-white overflow-hidden relative">
+      <div className="flex items-start min-h-screen px-8 sm:px-12 gap-4 sm:gap-8 lg:gap-24 mb-16  mx-auto mt-8 flex-col lg:flex-row py-16">
         {/* Image Section */}
         <div className="flex-[0.7] relative h-full">
           <div className="w-full mx-auto">
@@ -78,7 +78,7 @@ export default function OpportunitiesOffered() {
         </div>
 
         {/* Content Section */}
-        <div className="flex-[1]">
+        <div className="flex-[1] max-w-[100%]">
           <h1 className="text-[24px] lg:!text-[32px] !leading-tight mb-8 text-white">
             What Opportunities Do We{" "}
             <span className="text-gradient relative inline-block font-extrabold !leading-tight">
