@@ -154,8 +154,8 @@ const AMURoboclubEvents = () => {
           </div>
 
           <div className="p-6">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4">
+            <div className="grid max-w-[90%] md:grid-cols-2 gap-8">
+              <div className="space-y-4 ">
                 {event.posterURL ? (
                   <img
                     src={event.posterURL}
