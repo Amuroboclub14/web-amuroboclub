@@ -154,7 +154,7 @@ const AMURoboclubEvents = () => {
           </div>
 
           <div className="p-6">
-            <div className="grid max-w-[90%] md:grid-cols-2 gap-8">
+            <div className="grid max-w-[90%] overflow-x-hidden md:grid-cols-2 gap-8">
               <div className="space-y-4 ">
                 {event.posterURL ? (
                   <img
@@ -182,16 +182,18 @@ const AMURoboclubEvents = () => {
 
               {/* Event Details */}
               <div className="space-y-6">
-                <div className="space-y-4">
+                <div className="space-y-2">
                   <div className="flex items-center gap-3 text-gray-300">
                     <Calendar className="w-5 h-5 text-cyan-400" />
-                    <span className="!text-xl">{formatDate(event.date)}</span>
+                    <span className="text-[16px] sm:text-xl">
+                      {formatDate(event.date)}
+                    </span>
                   </div>
 
                   {(event.startTime || event.endTime) && (
                     <div className="flex items-center gap-3 text-gray-300">
                       <Clock className="w-5 h-5 text-cyan-400" />
-                      <span className="!text-xl">
+                      <span className="text-[16px] sm:text-xl">
                         {event.startTime && formatTime(event.startTime)}
                         {event.startTime && event.endTime && " - "}
                         {event.endTime && formatTime(event.endTime)}
@@ -202,7 +204,9 @@ const AMURoboclubEvents = () => {
                   {event.place && (
                     <div className="flex items-center gap-3 text-gray-300">
                       <MapPin className="w-5 h-5 text-cyan-400" />
-                      <span className="!text-xl">{event.place}</span>
+                      <span className="text-[16px] sm:text-xl">
+                        {event.place}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -213,7 +217,7 @@ const AMURoboclubEvents = () => {
                       Event Details
                     </h3>
                     <div
-                      className="text-gray-300 !text-xl !leading-relaxed prose prose-invert max-w-none"
+                      className="text-gray-300 text-[16px] sm:text-xl leading-relaxed prose prose-invert max-w-[90%] text-wrap"
                       dangerouslySetInnerHTML={{
                         __html: formatDetailsText(event.details),
                       }}
@@ -227,7 +231,7 @@ const AMURoboclubEvents = () => {
                       href={event.regFormLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="!text-xl inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-3 rounded-full font-medium transition-colors"
+                      className="text-[16px] sm:text-xl inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-3 rounded-full font-medium transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
                       Registration / More Info

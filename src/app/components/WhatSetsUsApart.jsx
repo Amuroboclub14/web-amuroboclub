@@ -75,7 +75,7 @@ export default function WhatSetsUsApart() {
                   sm:flex sm:items-center sm:gap-3"
               >
                 <span className={`text-[24px] block mb-2 `}>{impact.icon}</span>
-                <div className="text-[16px] !font-mono text-center md:text-justify lg:!text-[18px] text-gray-400">
+                <div className="text-[14px] sm:text-[16px] !font-mono text-center md:text-justify lg:!text-[18px] text-gray-400">
                   {impact.text}
                 </div>
               </div>
