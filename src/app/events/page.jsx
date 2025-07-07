@@ -154,7 +154,7 @@ const AMURoboclubEvents = () => {
           </div>
 
           <div className="p-6">
-            <div className="grid max-w-[90%] overflow-x-hidden md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4 ">
                 {event.posterURL ? (
                   <img
@@ -478,7 +478,7 @@ const AMURoboclubEvents = () => {
                   </div>
 
                   {/* Event Content */}
-                  <div className=" flex flex-col justify-between p-6 sm:p-8 ">
+                  <div className=" flex flex-col justify-between p-4 sm:p-6 ">
                     <div className="text-cyan-400 !text-sm font-medium mb-3 flex items-center gap-4">
                       <span className="!text-lg  !font-mono">
                         {formatDate(event.date)}
