@@ -53,7 +53,7 @@ const OurProjects = () => {
   };
 
   return (
-    <section className="min-h-screen bg-black px-4 py-8">
+    <section className="min-h-screen bg-black px-4 py-8 mb-[24px]">
       <div className="max-w-7xl mx-auto">
         {/* Title Section */}
         <div className="text-center mb-16">

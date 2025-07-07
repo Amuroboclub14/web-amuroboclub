@@ -111,8 +111,6 @@ export default function ProjectsPage() {
     fetchProjects();
   }, []);
 
-  console.log("projects", projects);
-
   const handleSelectProject = (project) => {
     setSelectedProject(project);
   };
@@ -126,11 +124,11 @@ export default function ProjectsPage() {
       {/* Header */}
       <div className="bg-black/80 backdrop-blur-xl border-b border-gray-800/50">
         <Navbar />
-        <div className="max-w-7xl mx-auto px-6 py-6">
+        <div className="overflow-x-hidden  mx-auto py-6">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-[32px] mt-5 font-bold text-center bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+            className="text-[24px] sm:text-[32px] mt-5 font-bold text-center bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
           >
             AMURoboclub Projects
           </motion.h1>
@@ -138,7 +136,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* Projects Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-full mx-auto px-6 py-8">
         <div className="grid gap-12 sm:grid-cols-2 items-center justify-center lg:grid-cols-3">
           {loading
             ? Array.from({ length: 6 }).map((_, index) => (
@@ -164,7 +162,7 @@ export default function ProjectsPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="group w-[380px] bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800/50 hover:border-gray-700/70 cursor-pointer transition-all duration-300"
+                    className="group w-[300px] sm:w-[380px] bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800/50 hover:border-gray-700/70 cursor-pointer transition-all duration-300"
                     onClick={() => handleSelectProject(project)}
                     whileHover={{ y: -4, scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

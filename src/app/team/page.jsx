@@ -127,7 +127,7 @@ export default function Team() {
                       Team
                     </DrawerHeader>
 
-                    <DrawerBody className="flex flex-col gap-4 text-[1.5rem]">
+                    <DrawerBody className="flex flex-col gap-4 text-[14px] sm:text-[1.5rem]">
                       {[
                         "Coordinator",
                         "Joint Coordinator",

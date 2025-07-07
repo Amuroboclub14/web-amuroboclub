@@ -54,7 +54,7 @@ export default function WhatSetsUsApart() {
                 className="text-center p-8 lg:p-6 md:p-5 sm:p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg transition-all duration-300 hover:bg-blue-500/10 hover:-translate-y-1 active:scale-95 md:hover:transform-none md:active:bg-blue-500/15"
               >
                 <span className="text-[24px] block mb-4">{feature.icon}</span>
-                <div className="text-[10px]  text-gray-300 font-medium">
+                <div className="text-[8px] sm:text-[10px] leading-[16px] text-gray-300 font-medium">
                   {feature.text}
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function WhatSetsUsApart() {
                   sm:flex sm:items-center sm:gap-3"
               >
                 <span className={`text-[24px] block mb-2 `}>{impact.icon}</span>
-                <div className="text-[16px] !font-mono text-center md:text-justify lg:!text-[18px] text-gray-400">
+                <div className="text-[14px] sm:text-[16px] !font-mono text-center md:text-justify lg:!text-[18px] text-gray-400">
                   {impact.text}
                 </div>
               </div>
