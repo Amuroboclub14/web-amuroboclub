@@ -122,14 +122,6 @@ export default function Navbar() {
             >
               Events
             </Link>
-
-            <Link
-              href={"/alumnis"}
-              className="hover:text-blue-600 text-[white] !font-mono text-[16px] pl-5"
-              onClick={() => setIsOpen(false)}
-            >
-              Alumnis
-            </Link>
           </div>
         </div>
       )}

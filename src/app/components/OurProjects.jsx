@@ -111,7 +111,7 @@ const OurProjects = () => {
                   </div>
                 </div>
 
-                <h3 className="text-[14px] h-[56px] font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+                <h3 className="text-[14px] md:h-[99px] lg:h-[80px] font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
                   {project.title}
                 </h3>
 
@@ -137,11 +137,10 @@ const OurProjects = () => {
                     )}
                   </div>
                 ) : null}
-
                 {/* Action Buttons */}
                 <div className="flex gap-3">
-                  {project.githubUrl ? (
-                    <a href={project.githubUrl}>
+                  {project.github ? (
+                    <a href={project.github} target="_blank">
                       <button className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 text-gray-300 border border-gray-700 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-300 text-sm font-mono">
                         <ExternalLink className="w-4 h-4" />
                         Github Repo
