@@ -72,16 +72,18 @@ export default function Navbar() {
         >
           <p className="text-[14px]">EVENTS</p>
         </Link>
-        <Link 
+        <Link
           href={"/members"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50">
-           <p className="text-[14px]">MEMBERS</p>
-        </Link> <Link 
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+        >
+          <p className="text-[14px]">MEMBERS</p>
+        </Link>{" "}
+        <Link
           href={"/membershipForm"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50">
-           <p className="text-[14px]">MEMBERSHIP</p>
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+        >
+          <p className="text-[14px]">MEMBERSHIP</p>
         </Link>
-
         {/* <div className="w-[12rem]">
           <Link
             href="/contactus"
@@ -131,13 +133,19 @@ export default function Navbar() {
             >
               Events
             </Link>
-
             <Link
-              href={"/alumnis"}
+              href={"/members"}
               className="hover:text-blue-600 text-[white] !font-mono text-[16px] pl-5"
               onClick={() => setIsOpen(false)}
             >
-              Alumnis
+              <p className="text-[14px]">MEMBERS</p>
+            </Link>
+            <Link
+              href={"/membershipForm"}
+              className="hover:text-blue-600 text-[white] !font-mono text-[16px] pl-5"
+              onClick={() => setIsOpen(false)}
+            >
+              <p className="text-[14px]">MEMBERSHIP</p>
             </Link>
           </div>
         </div>
