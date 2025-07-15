@@ -10,6 +10,7 @@ import OpportunitiesOffered from "./components/OpportunitiesOffered";
 import WhatSetsUsApart from "./components/WhatSetsUsApart";
 import SSAMUSAT from "./components/SSAMUSAT";
 import OurProjects from "./components/OurProjects";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -38,13 +39,15 @@ export default function Home() {
           <div className="w-fit">
             <a
               className="group flex items-center gap-5 border-2 border-green-600 hover:bg-green-600 hover:text-white transition-colors duration-300 px-5 py-3 rounded-full font-bold text-[1.1rem]"
-              href="https://drive.google.com/file/d/1RFu5NtxDXvg54ka9GJcrxYiexZaR1wXk/view?usp=sharing"
+             // href="https://drive.google.com/file/d/1RFu5NtxDXvg54ka9GJcrxYiexZaR1wXk/view?usp=sharing"
               target="_blank" // Optional: Opens in a new tab
               rel="noopener noreferrer" // Optional: Security for external links
             >
+              <Link 
+          href={"/membershipForm"}>
               <p className="text-[18px] text-white !font-mono">
-                Download Our APP
-              </p>
+                Become a Member
+              </p></Link>
               <span className="flex justify-end w-0 h-4 -ml-2 pointer-events-none overflow-hidden transition-[width] duration-300 group-hover:w-6">
                 <svg
                   className="block w-4 h-4 flex-initial pointer-events-none fill-current"
