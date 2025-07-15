@@ -12,6 +12,7 @@ import {
   BadgeIcon as IdCard,
   Calendar,
 } from "lucide-react";
+import Footer from "../components/Footer";
 
 
 export default function Members() {
@@ -74,7 +75,8 @@ export default function Members() {
 
 
   return (
-    <main className="w-full min-h-screen bg-black">
+    <>
+    <main className="bg-black min-h-screen ">
       <Navbar />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 font-mont">
@@ -171,5 +173,7 @@ export default function Members() {
         )}
       </div>
     </main>
+    <Footer/>
+    </>
   );
 }
