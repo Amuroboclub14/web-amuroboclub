@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import team from "../assets/IMG_1559.webp";
+import team from "../assets/roboclub-team.jpeg";
 import * as motion from "framer-motion/client";
 import Faqs from "./components/Faqs";
 import OpportunitiesOffered from "./components/OpportunitiesOffered";
@@ -39,25 +39,15 @@ export default function Home() {
           <div className="w-fit">
             <a
               className="group flex items-center gap-5 border-2 border-green-600 hover:bg-green-600 hover:text-white transition-colors duration-300 px-5 py-3 rounded-full font-bold text-[1.1rem]"
-             // href="https://drive.google.com/file/d/1RFu5NtxDXvg54ka9GJcrxYiexZaR1wXk/view?usp=sharing"
+              // href="https://drive.google.com/file/d/1RFu5NtxDXvg54ka9GJcrxYiexZaR1wXk/view?usp=sharing"
               target="_blank" // Optional: Opens in a new tab
               rel="noopener noreferrer" // Optional: Security for external links
             >
-              <Link 
-          href={"/membershipForm"}>
-              <p className="text-[18px] text-white !font-mono">
-                Become a Member
-              </p></Link>
-              <span className="flex justify-end w-0 h-4 -ml-2 pointer-events-none overflow-hidden transition-[width] duration-300 group-hover:w-6">
-                <svg
-                  className="block w-4 h-4 flex-initial pointer-events-none fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M19 9h-4V2H9v7H5l7 7 7-7zm-7 9H5v2h14v-2h-7z" />
-                </svg>
-              </span>
+              <Link href={"/membershipForm"}>
+                <p className="text-[18px] text-white !font-mono">
+                  Become a Member
+                </p>
+              </Link>
             </a>
           </div>
         </motion.div>
@@ -73,7 +63,7 @@ export default function Home() {
             src={team}
             alt="team"
             placeholder="blur"
-            className="w-full md:w-[40vw] rounded-l-[3rem] relative max-w-full"
+            className="w-full  md:w-[40vw] rounded-l-[3rem] relative max-w-full"
           />
         </motion.div>
       </div>

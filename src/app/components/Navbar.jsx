@@ -72,22 +72,24 @@ export default function Navbar() {
         >
           <p className="text-[14px]">EVENTS</p>
         </Link>
-        <Link 
+        <Link
           href={"/members"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50">
-           <p className="text-[14px]">MEMBERS</p>
-        </Link> <Link 
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+        >
+          <p className="text-[14px]">MEMBERS</p>
+        </Link>{" "}
+        {/* <Link
           href={"/membershipForm"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50">
-           <p className="text-[14px]">MEMBERSHIP</p>
-        </Link>
-
-        {/* <div className="w-[12rem]">
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+        >
+          <p className="text-[14px]">MEMBERSHIP</p>
+        </Link> */}
+        <div>
           <Link
-            href="/contactus"
+            href="/membershipForm"
             className="group flex text-white items-center gap-5 w-fit border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 px-5 py-2 rounded-full font-bold text-[1.1rem]"
           >
-            <p className="text-[14px]">ABOUT US</p>
+            <p className="text-[14px]">Become a Member</p>
             <span className="flex justify-end w-0 h-4 -ml-2 pointer-events-none overflow-hidden transition-[width] duration-300 group-hover:w-6">
               <svg
                 className="block w-4 h-4 flex-initial pointer-events-none fill-current"
@@ -99,7 +101,7 @@ export default function Navbar() {
               </svg>
             </span>
           </Link>
-        </div> */}
+        </div>
       </div>
 
       {/* Mobile Menu */}

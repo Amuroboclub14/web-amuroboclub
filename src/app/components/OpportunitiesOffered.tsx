@@ -1,8 +1,7 @@
 import OpportunityCard from "./ui/OpportunityCard";
 import StatBox from "./ui/StatBox";
 import Image from "next/image";
-import cord from "../../assets/coords.webp";
-
+import team from "../../assets/roboclub-team.jpeg";
 export default function OpportunitiesOffered() {
   const opportunities = [
     {
@@ -41,9 +40,9 @@ export default function OpportunitiesOffered() {
             <div className="relative">
               <div className="flex flex-col items-center justify-center gap-[24px] max-w-[320px] w-full mx-auto">
                 <Image
-                  src={cord}
+                  src={team}
                   alt="AMURoboClub Team"
-                  className="h-80 lg:h-[420px] object-cover rounded-2xl border-2 border-blue-400 transition-all duration-300 filter brightness-90 group-hover:-translate-y-2 group-hover:border-cyan-400 group-hover:brightness-100 group-hover:shadow-xl group-hover:shadow-blue-400/20"
+                  className="h-80 lg:h-[420px] w-full object-cover rounded-2xl border-2 border-blue-400 transition-all duration-300 filter brightness-90 group-hover:-translate-y-2 group-hover:border-cyan-400 group-hover:brightness-100 group-hover:shadow-xl group-hover:shadow-blue-400/20"
                 />
                 {/* stats for large screens */}
                 <div className="hidden lg:flex flex-col items-stretch lg:items-center gap-10">
@@ -52,10 +51,6 @@ export default function OpportunitiesOffered() {
                     <StatBox number={100} label="Members" />
                     <StatBox number={25} label="Awards" />
                   </div>
-                  <button className="relative bg-blue-400 text-black border-none px-8 py-4 rounded-lg text-[14px] cursor-pointer transition-all duration-300 uppercase tracking-wider overflow-hidden hover:bg-cyan-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-400/30 group">
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
-                    Join Our Club
-                  </button>
                 </div>
               </div>
               {/* Floating badges*/}
