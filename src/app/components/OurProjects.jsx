@@ -78,12 +78,12 @@ const OurProjects = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
 
               {/* Project Image */}
-              <div className="relative h-48 bg-gray-800 overflow-hidden">
+              <div className="relative h-48 bg-gray-800 overflow-hidden flex items-center justify-center">
                 <Image
                   src={project.image}
-                  width={100}
-                  height={100}
-                  className="w-full object-cover"
+                  width={1080}
+                  height={1080}
+                  className="w-full h-full object-cover object-center"
                 />
 
                 {/* Status Badge */}

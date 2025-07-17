@@ -136,8 +136,8 @@ export default function ProjectsPage() {
       </div>
 
       {/* Projects Grid */}
-      <div className="max-w-full mx-auto px-6 py-8">
-        <div className="grid gap-12 sm:grid-cols-2 items-center justify-center lg:grid-cols-3">
+      <div className="max-w-full mx-auto px-12 py-8 overflow-x-hidden">
+        <div className="grid gap-x-24 gap-y-10 grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-center justify-center ">
           {loading
             ? Array.from({ length: 6 }).map((_, index) => (
                 <motion.div
@@ -191,7 +191,7 @@ export default function ProjectsPage() {
 
                     {/* Project Info */}
                     <div className="p-6">
-                      <h3 className="!font-mono text-[20px] leading-[1.2rem] font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">
+                      <h3 className="!font-mono h-[72px] text-[20px] leading-[1.2rem] font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">
                         {project.title}
                       </h3>
                       <p className="text-gray-400 !font-mono text-[16px] mb-4">
