@@ -434,7 +434,7 @@ export default function MemberForm() {
                         <SheetTrigger asChild>
                           <Button
                             variant="outline"
-                            className="w-full bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border-cyan-500/50 text-white hover:from-cyan-600/30 hover:to-emerald-600/30 hover:border-cyan-400 transition-all duration-200 h-12 text-sm font-medium"
+                            className="w-full bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border-cyan-500/50 text-white hover:from-cyan-600/30 hover:to-emerald-600/30 hover:border-cyan-400 transition-all duration-200 h-12 text-[12px] font-medium"
                           >
                             Show Payment QR Code
                           </Button>
