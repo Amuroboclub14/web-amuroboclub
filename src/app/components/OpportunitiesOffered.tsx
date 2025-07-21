@@ -106,17 +106,17 @@ export default function OpportunitiesOffered() {
             ))}
           </div>
           {/* stats for mobile */}
-          <div className="flex flex-col items-center gap-10 lg:hidden mt-8">
+          <div className="flex flex-col items-center gap-10 lg:hidden mt-8 ">
             <div className="flex gap-8 justify-center">
               <StatBox number={50} label="Projects" />
               <StatBox number={100} label="Members" />
               <StatBox number={25} label="Awards" />
             </div>
 
-            <button className="relative bg-blue-400 !text-black border-none px-8 py-4 rounded-lg !font-bold !text-[18px] cursor-pointer transition-all duration-300 uppercase tracking-wider overflow-hidden hover:bg-cyan-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-400/30 group">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
-              Join Our Club
-            </button>
+          
+              
+              
+            
           </div>
         </div>
       </div>

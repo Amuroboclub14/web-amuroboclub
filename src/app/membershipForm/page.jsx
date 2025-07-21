@@ -292,7 +292,7 @@ export default function MemberForm() {
                         onChange={mobileHandler}
                         type="text"
                         placeholder="Enter your mobile number"
-                        className="p-3 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200"
+                        className="p-0.9 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200"
                       />
                     </div>
                   </div>
@@ -361,7 +361,7 @@ export default function MemberForm() {
                           onChange={enrollmentHandler}
                           type="text"
                           placeholder="Enter enrollment number"
-                          className="p-3 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+                          className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
                         />
                       </div>
 
@@ -377,7 +377,7 @@ export default function MemberForm() {
                           onChange={facultyHandler}
                           type="text"
                           placeholder="Enter faculty number"
-                          className="p-3 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+                          className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
                         />
                       </div>
                     </div>
@@ -402,7 +402,7 @@ export default function MemberForm() {
                           onChange={(e) => setIDproof(e.target.files[0])}
                           key={fileInputKey + "_id"}
                           type="file"
-                          className="p-3 rounded-lg bg-gray-800/80 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-teal-600 file:text-white hover:file:bg-teal-700"
+                          className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-teal-600 file:text-white hover:file:bg-teal-700"
                         />
                       </div>
 
@@ -417,7 +417,7 @@ export default function MemberForm() {
                           onChange={(e) => setPaymentproof(e.target.files[0])}
                           key={fileInputKey + "_payment"}
                           type="file"
-                          className="p-3 rounded-lg bg-gray-800/80 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-teal-600 file:text-white hover:file:bg-teal-700"
+                          className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-teal-600 file:text-white hover:file:bg-teal-700"
                         />
                       </div>
                     </div>
@@ -434,9 +434,9 @@ export default function MemberForm() {
                         <SheetTrigger asChild>
                           <Button
                             variant="outline"
-                            className="w-full bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border-cyan-500/50 text-white hover:from-cyan-600/30 hover:to-emerald-600/30 hover:border-cyan-400 transition-all duration-200 h-12 text-[12px] font-medium"
+                            className="w-full bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border-cyan-500/50 text-white hover:from-cyan-600/30 hover:to-emerald-600/30 hover:border-cyan-400 transition-all duration-200 h-12 text-[10px] font-medium"
                           >
-                            Show Payment QR Code
+                            Show Payment <br/>QR Code
                           </Button>
                         </SheetTrigger>
                         <SheetContent

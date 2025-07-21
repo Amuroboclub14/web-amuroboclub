@@ -144,13 +144,20 @@ export default function Navbar() {
           style={{ zIndex: "100" }}
           className={`md:hidden absolute top-[13vh] left-0 w-full bg-black px-3 py-5 transition-all duration-400 transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
         >
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <Link
               href={"/projects"}
               className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${visibleItems[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               onClick={() => setIsOpen(false)}
             >
               Projects
+            </Link>
+              <Link
+              href={"/events"}
+              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${visibleItems[2] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              onClick={() => setIsOpen(false)}
+            >
+              Events
             </Link>
             <Link
               href={"/team"}
@@ -159,12 +166,13 @@ export default function Navbar() {
             >
               Team
             </Link>
-            <Link
-              href={"/events"}
+          
+             <Link
+              href={"/members"}
               className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${visibleItems[2] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               onClick={() => setIsOpen(false)}
             >
-              Events
+              Members
             </Link>
           </div>
           <div className={`mt-6 flex justify-center transition-all duration-500 transform ${visibleItems[3] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
