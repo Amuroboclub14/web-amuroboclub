@@ -29,7 +29,7 @@ export default function Faqs() {
       id: 3,
       question: "Where can I visit the club?",
       answer:
-        "WS-18, Department of Mechnical Engineering, AMU Campus · 090454 14527",
+        "WS-18, Department of Mechnical Engineering, AMU Campus · +91 7906350149 ",
     },
     {
       id: 4,
