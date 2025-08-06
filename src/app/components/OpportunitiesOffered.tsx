@@ -1,7 +1,7 @@
 import OpportunityCard from "./ui/OpportunityCard";
 import StatBox from "./ui/StatBox";
 import Image from "next/image";
-import team from "../../assets/roboclub-coord.JPG";
+import team from "../../assets/roboclub-coord.jpg";
 export default function OpportunitiesOffered() {
   const opportunities = [
     {
