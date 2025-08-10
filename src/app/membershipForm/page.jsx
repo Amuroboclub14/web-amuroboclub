@@ -402,7 +402,7 @@ export default function MemberForm() {
                           htmlFor="idproof"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          ID Proof *
+                          College Admission Card*
                         </label>
                         <Input
                           onChange={(e) => setIDproof(e.target.files[0])}
@@ -417,7 +417,7 @@ export default function MemberForm() {
                           htmlFor="paymentproof"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Payment Proof *
+                          Membership Fee Payment Proof *
                         </label>
                         <Input
                           onChange={(e) => setPaymentproof(e.target.files[0])}
