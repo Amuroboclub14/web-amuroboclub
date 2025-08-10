@@ -98,7 +98,8 @@ export default function ProjectsPage() {
               project.description &&
               project.image &&
               project.team.length > 0
-          );
+          )
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
 
         setProjects(filteredProjects);
       } catch (error) {
