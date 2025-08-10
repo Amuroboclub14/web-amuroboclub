@@ -158,6 +158,12 @@ export default function MemberForm() {
       description:
         "Access one-on-one help and expert support from experienced club members whenever needed.",
     },
+    {
+      icon: "🚀",
+      title: "Join Club Projects & Competitions",
+      description:
+        "Collaborate on exciting club-led projects and showcase your skills in inter-club and external competitions.",
+    },
   ];
 
   return (
@@ -436,7 +442,8 @@ export default function MemberForm() {
                             variant="outline"
                             className="w-full bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border-cyan-500/50 text-white hover:from-cyan-600/30 hover:to-emerald-600/30 hover:border-cyan-400 transition-all duration-200 h-12 text-[10px] font-medium"
                           >
-                            Show Payment <br/>QR Code
+                            Show Payment <br />
+                            QR Code
                           </Button>
                         </SheetTrigger>
                         <SheetContent
