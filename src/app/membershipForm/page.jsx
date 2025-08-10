@@ -258,7 +258,7 @@ export default function MemberForm() {
                           htmlFor="name"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Full Name *
+                          Full Name <span className="text-red-500">*</span>
                         </label>
                         <Input
                           value={name}
@@ -274,7 +274,7 @@ export default function MemberForm() {
                           htmlFor="email"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Email Address *
+                          Email Address <span className="text-red-500">*</span>
                         </label>
                         <Input
                           value={email}
@@ -291,7 +291,7 @@ export default function MemberForm() {
                         htmlFor="mobile"
                         className="!font-mono text-[18px] font-medium text-gray-300"
                       >
-                        Mobile Number *
+                        Mobile Number <span className="text-red-500">*</span>
                       </label>
                       <Input
                         value={mobile}
@@ -316,7 +316,7 @@ export default function MemberForm() {
                           htmlFor="course"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Course *
+                          Course <span className="text-red-500">*</span>
                         </label>
                         <select
                           value={course}
@@ -338,7 +338,7 @@ export default function MemberForm() {
                           htmlFor="year"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Year of Study *
+                          Year of Study <span className="text-red-500">*</span>
                         </label>
                         <select
                           value={year}
@@ -360,7 +360,7 @@ export default function MemberForm() {
                           htmlFor="enrollment"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Enrollment Number *
+                          Enrollment Number <span className="text-red-500">*</span>
                         </label>
                         <Input
                           value={enrollment}
@@ -376,7 +376,7 @@ export default function MemberForm() {
                           htmlFor="faculty"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Faculty Number *
+                          Faculty Number <span className="text-red-500">*</span>
                         </label>
                         <Input
                           value={faculty}
@@ -402,7 +402,7 @@ export default function MemberForm() {
                           htmlFor="idproof"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          College Admission Card*
+                          College ID Card <span className="text-red-500">*</span>
                         </label>
                         <Input
                           onChange={(e) => setIDproof(e.target.files[0])}
@@ -417,7 +417,7 @@ export default function MemberForm() {
                           htmlFor="paymentproof"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Membership Fee Payment Proof *
+                          Membership Fee Payment Proof <span className="text-red-500">*</span>
                         </label>
                         <Input
                           onChange={(e) => setPaymentproof(e.target.files[0])}
