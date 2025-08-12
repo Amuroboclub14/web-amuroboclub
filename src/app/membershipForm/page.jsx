@@ -360,7 +360,8 @@ export default function MemberForm() {
                           htmlFor="enrollment"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Enrollment Number <span className="text-red-500">*</span>
+                          Enrollment Number{" "}
+                          <span className="text-red-500">*</span>
                         </label>
                         <Input
                           value={enrollment}
@@ -402,7 +403,8 @@ export default function MemberForm() {
                           htmlFor="idproof"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          College ID Card <span className="text-red-500">*</span>
+                          College ID Card{" "}
+                          <span className="text-red-500">*</span>
                         </label>
                         <Input
                           onChange={(e) => setIDproof(e.target.files[0])}
@@ -417,7 +419,8 @@ export default function MemberForm() {
                           htmlFor="paymentproof"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Membership Fee Payment Proof <span className="text-red-500">*</span>
+                          Membership Fee Payment Proof{" "}
+                          <span className="text-red-500">*</span>
                         </label>
                         <Input
                           onChange={(e) => setPaymentproof(e.target.files[0])}
@@ -469,7 +472,7 @@ export default function MemberForm() {
 
                             <div className="text-center space-y-2 max-w-xs">
                               <p className="text-white font-medium text-lg">
-                                Membership Fee: ₹200
+                                Membership Fee: ₹250
                               </p>
                               <p className="text-gray-400 text-sm">
                                 After payment, upload the screenshot as payment
@@ -560,7 +563,7 @@ export default function MemberForm() {
                     <div className="space-y-4">
                       <div className="bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border border-cyan-500/30 rounded-lg p-4 backdrop-blur-sm">
                         <p className="text-cyan-400 font-semibold text-lg">
-                          Membership Fee: ₹200
+                          Membership Fee: ₹250
                         </p>
                       </div>
                       <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50">
