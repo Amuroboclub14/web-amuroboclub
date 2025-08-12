@@ -17,7 +17,7 @@ export default function Faqs() {
       question:
         "How can I join the robotics club? Is there an application process?",
       answer:
-        "You can download the AMURoboclub Android App and join the club from there. A nominal membership fee of Rs. 200/- is charged which gives you access to the club's inventory, experts and exclusive classes as well as discounts on various events we conduct throughout the year.",
+        "You can download the AMURoboclub Android App and join the club from there. A nominal membership fee of Rs.250/- is charged which gives you access to the club's inventory, experts and exclusive classes as well as discounts on various events we conduct throughout the year.",
     },
     {
       id: 2,
@@ -107,7 +107,7 @@ export default function Faqs() {
                   <p className="text-gray-300 text-[12px] sm:text-[14px] leading-relaxed">
                     {faq.answer
                       .split(
-                        /(\bAMURoboclub Android App\b|\bnominal membership fee of Rs\. 200\/-\b|\bvariety of robot types\b|\bMS-18, Department of Mechanical Engineering, AMU Campus\b|\bparts library\b|\b3D printers, laser cutters and a full workshop\b|\bnational competitions\b|\binternational ones\b|\bNo experience required!\b)/g
+                        /(\bAMURoboclub Android App\b|\bnominal membership fee of Rs\.250\/-\b|\bvariety of robot types\b|\bMS-18, Department of Mechanical Engineering, AMU Campus\b|\bparts library\b|\b3D printers, laser cutters and a full workshop\b|\bnational competitions\b|\binternational ones\b|\bNo experience required!\b)/g
                       )
                       .map((part, i) => {
                         const highlights = [
