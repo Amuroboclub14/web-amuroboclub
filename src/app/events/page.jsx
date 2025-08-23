@@ -481,7 +481,7 @@ const AMURoboclubEvents = () => {
                   <div className=" flex flex-col justify-between p-4 sm:p-6 ">
                     <div className="text-cyan-400 !text-sm font-medium mb-3 flex items-center gap-4">
                       <span className="!text-lg  !font-mono">
-                        {formatDate(event.date)}
+                        {event.date != "" ? formatDate(event.date) : "TBD"}
                       </span>
                       {event.startTime && (
                         <span className="flex !text-lg  !font-mono items-center gap-1">
