@@ -10,7 +10,12 @@ export default function Navbar() {
   const menuButtonRef = useRef(null);
 
   // For staggered animation
-  const [visibleItems, setVisibleItems] = useState([false, false, false, false]);
+  const [visibleItems, setVisibleItems] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
   // For container animation
   const [showMenuContainer, setShowMenuContainer] = useState(false);
 
@@ -106,11 +111,18 @@ export default function Navbar() {
           <p className="text-[14px]">EVENTS</p>
         </Link>
         <Link
+          href={"https://chat.whatsapp.com/ICdFEUDdiyp95wRIAA9cpQ"}
+          prefetch={true}
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+        >
+          <p className="text-[14px]">COMMMUNITY</p>
+        </Link>
+        <Link
           href={"/members"}
           className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
         >
           <p className="text-[14px]">MEMBERS</p>
-        </Link>{" "}
+        </Link>
         {/* <Link
           href={"/membershipForm"}
           className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
@@ -142,40 +154,77 @@ export default function Navbar() {
         <div
           ref={menuRef}
           style={{ zIndex: "100" }}
-          className={`md:hidden absolute top-[13vh] left-0 w-full bg-black px-3 py-5 transition-all duration-400 transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
+          className={`md:hidden absolute top-[13vh] left-0 w-full bg-black px-3 py-5 transition-all duration-400 transform ${
+            isOpen
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-4 pointer-events-none"
+          }`}
         >
           <div className="grid grid-cols-2 gap-4">
             <Link
               href={"/projects"}
-              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${visibleItems[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${
+                visibleItems[0]
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
               onClick={() => setIsOpen(false)}
             >
               Projects
             </Link>
-              <Link
+            <Link
               href={"/events"}
-              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${visibleItems[2] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${
+                visibleItems[2]
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
               onClick={() => setIsOpen(false)}
             >
               Events
             </Link>
             <Link
               href={"/team"}
-              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${visibleItems[1] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${
+                visibleItems[1]
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
               onClick={() => setIsOpen(false)}
             >
               Team
             </Link>
-          
-             <Link
+            <Link
+              href={"https://chat.whatsapp.com/ICdFEUDdiyp95wRIAA9cpQ"}
+              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${
+                visibleItems[1]
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Community
+            </Link>
+
+            <Link
               href={"/members"}
-              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${visibleItems[2] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${
+                visibleItems[2]
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
               onClick={() => setIsOpen(false)}
             >
               Members
             </Link>
           </div>
-          <div className={`mt-6 flex justify-center transition-all duration-500 transform ${visibleItems[3] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <div
+            className={`mt-6 flex justify-center transition-all duration-500 transform ${
+              visibleItems[3]
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+          >
             <Link
               href="/membershipForm"
               className="group flex text-white items-center gap-5 w-full border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 px-5 py-2 rounded-full font-bold text-[1.1rem] justify-center"
