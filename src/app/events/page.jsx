@@ -118,7 +118,7 @@ const AMURoboclubEvents = () => {
   };
 
   const formatTime = (timeString) => {
-    if (!timeString) return "";
+    if (!timeString) return "TBD";
     return timeString;
   };
 
@@ -186,7 +186,7 @@ const AMURoboclubEvents = () => {
                   <div className="flex items-center gap-3 text-gray-300">
                     <Calendar className="w-5 h-5 text-cyan-400" />
                     <span className="text-[16px] sm:text-xl">
-                      {formatDate(event.date)}
+                      {event.date != "" ? formatDate(event.date) : "TBD"}
                     </span>
                   </div>
 
