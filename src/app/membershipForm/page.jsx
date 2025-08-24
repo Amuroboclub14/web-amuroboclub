@@ -30,6 +30,7 @@ export default function MemberForm() {
   const [mobile, setMobile] = useState("");
   const [enrollment, setEnrollment] = useState("");
   const [faculty, setFaculty] = useState("");
+  const [discord, setDiscord] = useState("");
   const [year, setYear] = useState("");
   const [course, setCourse] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,6 +73,7 @@ export default function MemberForm() {
         paymentStatus: false,
         enrollmentNumber: enrollment,
         facultyNumber: faculty,
+        discordId: discord,
         mobile: mobile,
         idProofURL: idProofURL,
         paymentProofURL: paymentProofURL,
@@ -86,6 +88,7 @@ export default function MemberForm() {
       setCourse("");
       setEnrollment("");
       setFaculty("");
+      setDiscord("");
       setMobile("");
       setIDproof(null);
       setPaymentproof(null);
@@ -125,6 +128,9 @@ export default function MemberForm() {
 
   const facultyHandler = (e) => {
     setFaculty(e.target.value);
+  };
+  const discordHandler = (e) => {
+    setDiscord(e.target.value);
   };
 
   const membershipBenefits = [
@@ -384,6 +390,21 @@ export default function MemberForm() {
                           onChange={facultyHandler}
                           type="text"
                           placeholder="Enter faculty number"
+                          className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <label
+                          htmlFor="discordId"
+                          className="!font-mono text-[18px] font-medium text-gray-300"
+                        >
+                          Discord Id (Optional)
+                        </label>
+                        <Input
+                          value={faculty}
+                          onChange={discordHandler}
+                          type="text"
+                          placeholder="@abcd"
                           className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
                         />
                       </div>
