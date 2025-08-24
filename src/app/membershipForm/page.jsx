@@ -401,7 +401,7 @@ export default function MemberForm() {
                           Discord Id (Optional)
                         </label>
                         <Input
-                          value={faculty}
+                          value={discord}
                           onChange={discordHandler}
                           type="text"
                           placeholder="@abcd"
