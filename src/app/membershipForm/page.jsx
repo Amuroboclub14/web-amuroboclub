@@ -20,6 +20,7 @@ import { db, storage } from "../firebase";
 import { useState } from "react";
 import { v4 } from "uuid";
 import { motion } from "framer-motion";
+import ReCAPTCHAComponent from "../components/ReCAPTCHA";
 
 export default function MemberForm() {
   const [fileInputKey, setFileInputKey] = useState(0);
@@ -34,6 +35,7 @@ export default function MemberForm() {
   const [year, setYear] = useState("");
   const [course, setCourse] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -49,6 +51,11 @@ export default function MemberForm() {
       !paymentproof
     ) {
       alert("Please fill out all required fields before submitting.");
+      return;
+    }
+
+    if (!recaptchaToken) {
+      alert("Please complete the reCAPTCHA verification.");
       return;
     }
     setIsSubmitting(true);
@@ -77,6 +84,7 @@ export default function MemberForm() {
         mobile: mobile,
         idProofURL: idProofURL,
         paymentProofURL: paymentProofURL,
+        recaptchaToken: recaptchaToken,
       });
 
       // ✅ Alert on success
@@ -93,6 +101,7 @@ export default function MemberForm() {
       setIDproof(null);
       setPaymentproof(null);
       setYear("");
+      setRecaptchaToken(null);
       setFileInputKey((prev) => prev + 1);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -532,6 +541,26 @@ export default function MemberForm() {
                           </div>
                         </SheetContent>
                       </Sheet>
+                    </div>
+                  </div>
+
+                  {/* reCAPTCHA Verification */}
+                  <div className="space-y-4">
+                    <div className="border-l-4 border-amber-400 pl-4">
+                      <h3 className="text-2xl font-semibold mb-4 text-amber-400">
+                        Security Verification
+                      </h3>
+                    </div>
+                    <div className="flex justify-center">
+                      <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-4">
+                        <p className="text-gray-400 text-sm mb-4 text-center">
+                          Please verify you're not a robot
+                        </p>
+                        <ReCAPTCHAComponent 
+                          onVerify={setRecaptchaToken}
+                          onError={(error) => console.error("reCAPTCHA Error:", error)}
+                        />
+                      </div>
                     </div>
                   </div>
 
