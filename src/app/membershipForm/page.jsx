@@ -554,7 +554,7 @@ export default function MemberForm() {
                     <div className="flex justify-center">
                       <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-4">
                         <p className="text-gray-400 text-sm mb-4 text-center">
-                          Please verify you're not a robot
+                          Please verify you are not a robot
                         </p>
                         <ReCAPTCHAComponent 
                           onVerify={setRecaptchaToken}
