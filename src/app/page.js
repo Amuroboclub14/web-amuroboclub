@@ -36,18 +36,30 @@ export default function Home() {
             doing cool projects together.
           </p>
 
-          <div className="w-fit">
+          <div className="flex items-center justify-between gap-[24px] w-fit">
             <a
-              className="group flex items-center gap-5 border-2 border-green-600 hover:bg-green-600 hover:text-white transition-colors duration-300 px-5 py-3 rounded-full font-bold text-[1.1rem]"
-              // href="https://drive.google.com/file/d/1RFu5NtxDXvg54ka9GJcrxYiexZaR1wXk/view?usp=sharing"
+              className="group flex items-center gap-5 border-2 border-green-600 cursor-pointer bg-green-600 text-white transition-colors duration-300 px-5 py-3 rounded-full font-bold text-[1.1rem]"
               target="_blank" // Optional: Opens in a new tab
+              // href="https://drive.google.com/file/d/1RFu5NtxDXvg54ka9GJcrxYiexZaR1wXk/view?usp=sharing"
+
               rel="noopener noreferrer" // Optional: Security for external links
             >
               <Link href={"/membershipForm"}>
                 <p className="text-[18px] text-white !font-mono">
-                  Become a Member
+                  Become a member
                 </p>
               </Link>
+            </a>
+            <a
+              className="group cursor-pointer flex items-center gap-5 border-2 border-green-600  transition-colors duration-300 px-5 py-3 rounded-full font-bold text-[1.1rem]"
+              target="_blank" // Optional: Opens in a new tab
+              rel="noopener noreferrer" // Optional: Security for external links
+              download={true}
+              href="/app.apk"
+            >
+              <p className="text-[18px] text-white !font-mono">
+                Download the App
+              </p>
             </a>
           </div>
         </motion.div>
