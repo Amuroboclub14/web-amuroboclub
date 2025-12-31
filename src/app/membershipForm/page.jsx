@@ -345,6 +345,7 @@ export default function MemberForm() {
                           <option>M.Sc.</option>
                           <option>M.Tech.</option>
                           <option>Polytechnic</option>
+                          <option>Other</option>
                         </select>
                       </div>
 
@@ -365,6 +366,7 @@ export default function MemberForm() {
                           <option>2nd</option>
                           <option>3rd</option>
                           <option>4th</option>
+                          <option>Not Applicable (for other courses)</option>
                         </select>
                       </div>
                     </div>
@@ -454,8 +456,7 @@ export default function MemberForm() {
                           htmlFor="idproof"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          College ID Card{" "}
-                          <span className="text-red-500">*</span>
+                          ID Card <span className="text-red-500">*</span>
                         </label>
                         <Input
                           onChange={(e) => setIDproof(e.target.files[0])}
@@ -556,9 +557,11 @@ export default function MemberForm() {
                         <p className="text-gray-400 text-sm mb-4 text-center">
                           Please verify you are not a robot
                         </p>
-                        <ReCAPTCHAComponent 
+                        <ReCAPTCHAComponent
                           onVerify={setRecaptchaToken}
-                          onError={(error) => console.error("reCAPTCHA Error:", error)}
+                          onError={(error) =>
+                            console.error("reCAPTCHA Error:", error)
+                          }
                         />
                       </div>
                     </div>
