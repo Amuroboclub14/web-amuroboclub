@@ -17,7 +17,7 @@ import Footer from "../components/Footer";
 
 const AMURoboclubEvents = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [activeFilter, setActiveFilter] = useState("upcoming");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
