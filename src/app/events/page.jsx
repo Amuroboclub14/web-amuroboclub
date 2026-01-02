@@ -115,7 +115,7 @@ const AMURoboclubEvents = () => {
     return timeString;
   };
 
-  const truncateText = (text, maxLength = 120) => {
+  const truncateText = (text, maxLength = 100) => {
     if (!text) return "";
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
@@ -370,12 +370,12 @@ const AMURoboclubEvents = () => {
                         )}
                       </div>
 
-                      <h3 className="!text-[14px] sm:!text-xl leading-[1.5rem] font-semibold text-white mb-3">
+                      <h3 className="!text-[14px] sm:!text-xl leading-[1.5rem] h-[85px] font-semibold text-white mb-3">
                         {event.eventName}
                       </h3>
 
                       {event.details && (
-                        <p className="!font-mono text-gray-400 !text-sm sm:!text-lg !leading-relaxed mb-4 h-[80px]">
+                        <p className="!font-mono text-gray-400 !text-sm sm:!text-lg !leading-relaxed mb-4 h-[100px]">
                           {truncateText(
                             event.details
                               .replace(/\*([^*]+)\*/g, "$1")
