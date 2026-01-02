@@ -31,12 +31,21 @@ const MemberSkeleton = () => (
 );
 
 export default function Team() {
+  // Calculate the current academic year dynamically
+  const getCurrentAcademicYear = () => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth(); // 0-11 (0 = January)
+    // If Jan-June, academic year started last year; if July-Dec, started this year
+    return currentMonth < 6 ? currentYear - 1 : currentYear;
+  };
+
   const [teamType, setTeamType] = useState("Coordinator");
   const [members, setMembers] = useState([]);
   const [filteredMembers, setFilteredMembers] = useState([]);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [loading, setLoading] = useState(false); // Loading state
-  const [year, setYear] = useState(2025); // State for selected year
+  const [year, setYear] = useState(getCurrentAcademicYear()); // State for selected year - dynamically set
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
@@ -50,7 +59,20 @@ export default function Team() {
     const fetchMembers = async () => {
       setLoading(true);
       try {
-        const nextYear = new Date().getFullYear() + 1;
+        // Calculate the current academic year
+        // Academic year runs from July-June (e.g., 2025-26 means July 2025 to June 2026)
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth(); // 0-11 (0 = January)
+
+        // If we're in Jan-June (months 0-5), we're in the second half of the academic year
+        // So the academic year started last year
+        // If we're in July-Dec (months 6-11), we're in the first half of the academic year
+        // So the academic year started this year
+        const academicStartYear =
+          currentMonth < 6 ? currentYear - 1 : currentYear;
+        const nextYear = academicStartYear + 1;
+
         const querySnapshot = await getDocs(collection(db, "teams"));
         const latestYear = querySnapshot.docs.length - (nextYear - year); //-1 for 2024-2025
         const allMembers =
@@ -258,10 +280,14 @@ export default function Team() {
           <select
             className="border text-black border-gray-300 rounded-md p-2 md:!text-[1.3rem]"
             onChange={(e) => setYear(e.target.value)}
+            value={year}
           >
-            {Array.from({ length: 7 }, (_, i) => 2025 - i).map((year) => (
-              <option key={year} value={year}>
-                {year}
+            {Array.from(
+              { length: 7 },
+              (_, i) => getCurrentAcademicYear() - i
+            ).map((yearOption) => (
+              <option key={yearOption} value={yearOption}>
+                {yearOption}
               </option>
             ))}
           </select>
