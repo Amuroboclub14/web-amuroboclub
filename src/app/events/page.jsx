@@ -355,39 +355,43 @@ const AMURoboclubEvents = () => {
                   </div>
 
                   {/* Event Content */}
-                  <div className=" flex flex-col justify-between p-4 sm:p-6 ">
-                    <div className="text-cyan-400 !text-sm font-medium mb-3 flex items-center gap-4">
-                      <span className="!text-lg  !font-mono">
-                        {event.date != "" ? formatDate(event.date) : "TBD"}
-                      </span>
-                      {event.startTime && (
-                        <span className="flex !text-lg  !font-mono items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {formatTime(event.startTime)}
+                  <div className="flex flex-col p-4 sm:p-6 ">
+                    {/* Top Content - grows to push bottom content down */}
+                    <div className="flex-grow">
+                      <div className="text-cyan-400 !text-sm font-medium mb-3 flex items-center gap-4">
+                        <span className="!text-lg !font-mono">
+                          {event.date != "" ? formatDate(event.date) : "TBD"}
                         </span>
+                        {event.startTime && (
+                          <span className="flex !text-lg !font-mono items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {formatTime(event.startTime)}
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="!text-[14px] sm:!text-xl leading-[1.5rem] font-semibold text-white mb-3">
+                        {event.eventName}
+                      </h3>
+
+                      {event.details && (
+                        <p className="!font-mono text-gray-400 !text-sm sm:!text-lg !leading-relaxed mb-4 h-[80px]">
+                          {truncateText(
+                            event.details
+                              .replace(/\*([^*]+)\*/g, "$1")
+                              .replace(/\n/g, " ")
+                          )}
+                        </p>
                       )}
                     </div>
 
-                    <h3 className="!text-[14px] sm:!text-xl leading-[1.5rem] font-semibold text-white mb-3">
-                      {event.eventName}
-                    </h3>
-
-                    {event.details && (
-                      <p className=" !font-mono text-gray-400 !text-sm sm:!text-lg !leading-relaxed mb-4">
-                        {truncateText(
-                          event.details
-                            .replace(/\*([^*]+)\*/g, "$1")
-                            .replace(/\n/g, " ")
-                        )}
-                      </p>
-                    )}
-
-                    <div className="flex items-center justify-between  !font-mono">
+                    {/* Bottom Content - pinned to bottom */}
+                    <div className="flex items-center justify-between !font-mono mt-auto pt-4">
                       <span className="!text-sm text-gray-500 bg-gray-800 px-2 py-1 rounded">
                         {event.category}
                       </span>
                       {event.place && (
-                        <span className="!text-sm text-gray-400  !font-mono flex items-center gap-1">
+                        <span className="!text-sm text-gray-400 !font-mono flex items-center gap-1">
                           <MapPin className="w-3 h-3" />
                           {event.place}
                         </span>
