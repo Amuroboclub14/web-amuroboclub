@@ -1,24 +1,17 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import { db } from "../firebase";
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import {
-  X,
-  Calendar,
-  Clock,
-  MapPin,
-  ExternalLink,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { collection, getDocs } from "firebase/firestore";
+import { X, Clock, MapPin, ChevronDown, ChevronUp } from "lucide-react";
 import Footer from "../components/Footer";
 
 const AMURoboclubEvents = () => {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeFilter, setActiveFilter] = useState("upcoming");
-  const [selectedEvent, setSelectedEvent] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const [events, setEvents] = useState([]);
@@ -122,128 +115,10 @@ const AMURoboclubEvents = () => {
     return timeString;
   };
 
-  const truncateText = (text, maxLength = 120) => {
+  const truncateText = (text, maxLength = 100) => {
     if (!text) return "";
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
-  };
-
-  const formatDetailsText = (text) => {
-    if (!text) return "";
-    return text
-      .replace(/\*([^*]+)\*/g, "<strong>$1</strong>")
-      .replace(/\n/g, "<br/>");
-  };
-
-  const EventModal = ({ event, onClose }) => {
-    if (!event) return null;
-
-    return (
-      <div className="!font-mono fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-        <div className="bg-gray-900 border border-gray-700 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-          <div className="flex justify-between items-center p-6 border-b border-gray-700">
-            <h2 className="text-[16px] font-bold text-white">
-              {event.eventName}
-            </h2>
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-gray-800 rounded-full transition-colors"
-            >
-              <X className="w-6 h-6 text-gray-400" />
-            </button>
-          </div>
-
-          <div className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-4 ">
-                {event.posterURL ? (
-                  <img
-                    src={event.posterURL}
-                    alt={event.eventName}
-                    className="w-full h-64 md:h-80 object-cover rounded-2xl"
-                  />
-                ) : (
-                  <div className="w-full h-64 md:h-80 bg-gray-800 rounded-2xl flex items-center justify-center">
-                    <span className="text-gray-400 !text-lg">
-                      {event.eventName}
-                    </span>
-                  </div>
-                )}
-
-                <div className="flex flex-wrap gap-2">
-                  <span className={`!text-lg ${getStatusBadge(event.status)}`}>
-                    {event.status}
-                  </span>
-                  <span className="inline-block px-3 py-1.5 rounded-full !text-lg font-medium bg-gray-800 text-gray-300 border border-gray-600">
-                    {event.category}
-                  </span>
-                </div>
-              </div>
-
-              {/* Event Details */}
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3 text-gray-300">
-                    <Calendar className="w-5 h-5 text-cyan-400" />
-                    <span className="text-[16px] sm:text-xl">
-                      {event.date != "" ? formatDate(event.date) : "TBD"}
-                    </span>
-                  </div>
-
-                  {(event.startTime || event.endTime) && (
-                    <div className="flex items-center gap-3 text-gray-300">
-                      <Clock className="w-5 h-5 text-cyan-400" />
-                      <span className="text-[16px] sm:text-xl">
-                        {event.startTime && formatTime(event.startTime)}
-                        {event.startTime && event.endTime && " - "}
-                        {event.endTime && formatTime(event.endTime)}
-                      </span>
-                    </div>
-                  )}
-
-                  {event.place && (
-                    <div className="flex items-center gap-3 text-gray-300">
-                      <MapPin className="w-5 h-5 text-cyan-400" />
-                      <span className="text-[16px] sm:text-xl">
-                        {event.place}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {event.details && (
-                  <div className="space-y-3">
-                    <h3 className="!text-lg font-semibold text-white">
-                      Event Details
-                    </h3>
-                    <div
-                      className="text-gray-300 text-[16px] sm:text-xl leading-relaxed prose prose-invert max-w-[90%] text-wrap"
-                      dangerouslySetInnerHTML={{
-                        __html: formatDetailsText(event.details),
-                      }}
-                    />
-                  </div>
-                )}
-
-                {event.regFormLink && (
-                  <div className="pt-4">
-                    <a
-                      href={event.regFormLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[16px] sm:text-xl inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-3 rounded-full font-medium transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Registration / More Info
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   return (
@@ -445,7 +320,9 @@ const AMURoboclubEvents = () => {
               {filteredEvents.map((event, index) => (
                 <div
                   key={event.id}
-                  onClick={() => setSelectedEvent(event)}
+                  onClick={() =>
+                    router.push(`/events/${event.eventName.replace(/ /g, "_")}`)
+                  }
                   className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden transition-all duration-500 hover:border-cyan-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-400/15 group cursor-pointer"
                   style={{
                     animation: `fadeInUp 0.6s ease forwards`,
@@ -478,39 +355,43 @@ const AMURoboclubEvents = () => {
                   </div>
 
                   {/* Event Content */}
-                  <div className=" flex flex-col justify-between p-4 sm:p-6 ">
-                    <div className="text-cyan-400 !text-sm font-medium mb-3 flex items-center gap-4">
-                      <span className="!text-lg  !font-mono">
-                        {event.date != "" ? formatDate(event.date) : "TBD"}
-                      </span>
-                      {event.startTime && (
-                        <span className="flex !text-lg  !font-mono items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {formatTime(event.startTime)}
+                  <div className="flex flex-col p-4 sm:p-6 ">
+                    {/* Top Content - grows to push bottom content down */}
+                    <div className="flex-grow">
+                      <div className="text-cyan-400 !text-sm font-medium mb-3 flex items-center gap-4">
+                        <span className="!text-lg !font-mono">
+                          {event.date != "" ? formatDate(event.date) : "TBD"}
                         </span>
+                        {event.startTime && (
+                          <span className="flex !text-lg !font-mono items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {formatTime(event.startTime)}
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="!text-[14px] sm:!text-xl leading-[1.5rem] h-[85px] font-semibold text-white mb-3">
+                        {event.eventName}
+                      </h3>
+
+                      {event.details && (
+                        <p className="!font-mono text-gray-400 !text-sm sm:!text-lg !leading-relaxed mb-4 h-[100px]">
+                          {truncateText(
+                            event.details
+                              .replace(/\*([^*]+)\*/g, "$1")
+                              .replace(/\n/g, " ")
+                          )}
+                        </p>
                       )}
                     </div>
 
-                    <h3 className="!text-[14px] sm:!text-xl leading-[1.5rem] font-semibold text-white mb-3">
-                      {event.eventName}
-                    </h3>
-
-                    {event.details && (
-                      <p className=" !font-mono text-gray-400 !text-sm sm:!text-lg !leading-relaxed mb-4">
-                        {truncateText(
-                          event.details
-                            .replace(/\*([^*]+)\*/g, "$1")
-                            .replace(/\n/g, " ")
-                        )}
-                      </p>
-                    )}
-
-                    <div className="flex items-center justify-between  !font-mono">
+                    {/* Bottom Content - pinned to bottom */}
+                    <div className="flex items-center justify-between !font-mono mt-auto pt-4">
                       <span className="!text-sm text-gray-500 bg-gray-800 px-2 py-1 rounded">
                         {event.category}
                       </span>
                       {event.place && (
-                        <span className="!text-sm text-gray-400  !font-mono flex items-center gap-1">
+                        <span className="!text-sm text-gray-400 !font-mono flex items-center gap-1">
                           <MapPin className="w-3 h-3" />
                           {event.place}
                         </span>
@@ -524,14 +405,6 @@ const AMURoboclubEvents = () => {
         </div>
       </main>
       <Footer />
-
-      {/* Event Modal */}
-      {selectedEvent && (
-        <EventModal
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-        />
-      )}
 
       <style jsx>{`
         @keyframes fadeInUp {
