@@ -123,6 +123,12 @@ export default function Navbar() {
         >
           <p className="text-[14px]">MEMBERS</p>
         </Link>
+        <Link
+          href={"/faculty"}
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+        >
+          <p className="text-[14px]">FACULTY</p>
+        </Link>
         {/* <Link
           href={"/membershipForm"}
           className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
