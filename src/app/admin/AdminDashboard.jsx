@@ -10,6 +10,7 @@ import {
   UserCheck,
   Settings,
   LogOut,
+  GraduationCap,
 } from "lucide-react";
 
 export default function AdminDashboard() {
@@ -64,8 +65,16 @@ export default function AdminDashboard() {
       title: "Team",
       description: "Manage team members and roles",
       icon: UserCheck,
-      color: "from-cyan-500 to-cyan-600",
-      hoverColor: "hover:border-cyan-400",
+      color: "from-indigo-500 to-indigo-600",
+      hoverColor: "hover:border-indigo-400",
+    },
+    {
+      id: "faculty",
+      title: "Faculty",
+      description: "Manage faculty members and advisors",
+      icon: GraduationCap,
+      color: "from-teal-500 to-teal-600",
+      hoverColor: "hover:border-teal-400",
     },
   ];
 
