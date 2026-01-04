@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import ProtectedRoute from "../ProtectedRoute";
 import {
   getAllDocuments,
   updateDocument,
@@ -25,7 +26,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 
-export default function FacultyManagement() {
+function FacultyManagementContent() {
   const router = useRouter();
   const [faculty, setFaculty] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -692,5 +693,13 @@ export default function FacultyManagement() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function FacultyManagement() {
+  return (
+    <ProtectedRoute>
+      <FacultyManagementContent />
+    </ProtectedRoute>
   );
 }

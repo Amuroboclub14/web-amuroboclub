@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth } from "../../firebase";
+import ProtectedRoute from "../ProtectedRoute";
+
 import {
   getAllDocuments,
   updateDocument,
@@ -19,10 +20,8 @@ import {
   Trash2,
   Calendar,
 } from "lucide-react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 
-export default function EventsManagement() {
+function EventsManagementContent() {
   const router = useRouter();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -561,5 +560,13 @@ export default function EventsManagement() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function EventsManagement() {
+  return (
+    <ProtectedRoute>
+      <EventsManagementContent />
+    </ProtectedRoute>
   );
 }
