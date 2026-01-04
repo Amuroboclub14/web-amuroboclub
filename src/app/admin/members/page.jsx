@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth } from "../../firebase";
+import ProtectedRoute from "../ProtectedRoute";
+
 import {
   getAllDocuments,
   updateDocument,
@@ -23,7 +24,7 @@ import {
   Clock,
 } from "lucide-react";
 
-export default function MembersManagement() {
+export default function MembersManagementContent() {
   const router = useRouter();
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -663,5 +664,13 @@ export default function MembersManagement() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function MembersManagement() {
+  return (
+    <ProtectedRoute>
+      <MembersManagementContent />
+    </ProtectedRoute>
   );
 }

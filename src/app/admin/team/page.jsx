@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth } from "../../firebase";
+import ProtectedRoute from "../ProtectedRoute";
+
 import {
   getAllDocuments,
   updateDocument,
@@ -27,7 +28,7 @@ import {
   Link,
 } from "lucide-react";
 
-export default function TeamsManagement() {
+function TeamsManagementContent() {
   const router = useRouter();
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -869,5 +870,13 @@ export default function TeamsManagement() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function TeamsManagement() {
+  return (
+    <ProtectedRoute>
+      <TeamsManagementContent />
+    </ProtectedRoute>
   );
 }

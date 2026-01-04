@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import ProtectedRoute from "../ProtectedRoute";
 
 import {
   getAllDocuments,
@@ -20,7 +21,7 @@ import {
   FolderOpen,
 } from "lucide-react";
 
-export default function ProjectsManagement() {
+function ProjectsManagementContent() {
   const router = useRouter();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -875,5 +876,13 @@ export default function ProjectsManagement() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ProjectsManagement() {
+  return (
+    <ProtectedRoute>
+      <ProjectsManagementContent />
+    </ProtectedRoute>
   );
 }

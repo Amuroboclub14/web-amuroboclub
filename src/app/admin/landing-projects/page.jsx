@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth } from "../../firebase";
+import ProtectedRoute from "../ProtectedRoute";
+
 import {
   getAllDocuments,
   updateDocument,
@@ -23,7 +24,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
-export default function SpecialProjectsManagement() {
+function SpecialProjectsManagementContent() {
   const router = useRouter();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -853,5 +854,13 @@ export default function SpecialProjectsManagement() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function SpecialProjectsManagement() {
+  return (
+    <ProtectedRoute>
+      <SpecialProjectsManagementContent />
+    </ProtectedRoute>
   );
 }
