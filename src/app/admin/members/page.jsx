@@ -24,7 +24,7 @@ import {
   Clock,
 } from "lucide-react";
 
-export default function MembersManagementContent() {
+function MembersManagementContent() {
   const router = useRouter();
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
