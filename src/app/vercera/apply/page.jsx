@@ -9,14 +9,42 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import ReCAPTCHAComponent from "../../components/ReCAPTCHA";
 import Image from "next/image";
+import verceraLogoFull from "../../../assets/vercera_full_logo.png";
 
 const TEAMS = [
-  { id: "management", name: "Management", description: "Coordinate events, logistics, and team operations for Vercera 5.0." },
-  { id: "video_editing", name: "Video Editing", description: "Create and edit promotional videos, reels, and event coverage." },
-  { id: "sponsorship", name: "Sponsorship", description: "Reach out to sponsors and manage partnerships for the fest." },
-  { id: "graphic_design", name: "Graphic Design", description: "Design posters, social media creatives, and branding assets." },
-  { id: "hospitality", name: "Hospitality", description: "Manage guest relations, accommodation, and on-ground support." },
-  { id: "decor", name: "Decor Team", description: "Plan and execute venue decoration and stage setup." },
+  {
+    id: "management",
+    name: "Management",
+    description:
+      "Coordinate events, logistics, and team operations for Vercera 5.0.",
+  },
+  {
+    id: "video_editing",
+    name: "Video Editing",
+    description:
+      "Create and edit promotional videos, reels, and event coverage.",
+  },
+  {
+    id: "sponsorship",
+    name: "Sponsorship",
+    description: "Reach out to sponsors and manage partnerships for the fest.",
+  },
+  {
+    id: "graphic_design",
+    name: "Graphic Design",
+    description: "Design posters, social media creatives, and branding assets.",
+  },
+  {
+    id: "hospitality",
+    name: "Hospitality",
+    description:
+      "Manage guest relations, accommodation, and on-ground support.",
+  },
+  {
+    id: "decor",
+    name: "Decor Team",
+    description: "Plan and execute venue decoration and stage setup.",
+  },
 ];
 
 const YEARS = ["1st", "2nd", "3rd", "4th", "5th", "Other"];
@@ -37,7 +65,6 @@ export default function VerceraApplyPage() {
   const [yearOfStudy, setYearOfStudy] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
-  const [bannerImageError, setBannerImageError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -124,28 +151,16 @@ export default function VerceraApplyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="relative w-full rounded-2xl overflow-hidden bg-gradient-to-r from-violet-900/40 via-fuchsia-900/40 to-cyan-900/40 border border-white/10"
+            className="relative w-full rounded-2xl overflow-hidden bg-black border border-white/10"
           >
-            <div className="relative flex items-center justify-center min-h-[140px] md:min-h-[180px] py-8 px-4">
-              {/* Add your wide Vercera 5.0 logo at public/vercera-5-banner.png to use the image */}
-              <div className="relative w-full max-w-4xl aspect-[3/1] flex items-center justify-center">
-                {!bannerImageError ? (
-                  <Image
-                    src="/vercera-5-banner.png"
-                    alt="Vercera 5.0"
-                    fill
-                    className="object-contain object-center"
-                    unoptimized
-                    onError={() => setBannerImageError(true)}
-                  />
-                ) : null}
-                <div className={`${bannerImageError ? "flex" : "hidden"} absolute inset-0 flex-col items-center justify-center gap-1`}>
-                  <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">
-                    Vercera 5.0
-                  </h1>
-                  <p className="text-gray-400 text-lg md:text-xl">National Level Fest · Team Recruitment</p>
-                </div>
-              </div>
+            <div className="relative w-full aspect-[3/1] min-h-[120px] md:min-h-[160px]">
+              <Image
+                src={verceraLogoFull}
+                alt="Vercera 5.0 - AMU Roboclub"
+                fill
+                className="object-contain object-center"
+                priority
+              />
             </div>
           </motion.div>
         </section>
@@ -187,14 +202,20 @@ export default function VerceraApplyPage() {
               className="max-w-3xl mx-auto flex flex-col gap-8 bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 p-6 md:p-8 rounded-2xl shadow-2xl"
             >
               <div className="text-center mb-4">
-                <h2 className="text-2xl font-bold text-white">Application Form</h2>
-                <p className="text-gray-400 mt-1">Apply for Vercera 5.0 team (2 preferences)</p>
+                <h2 className="text-2xl font-bold text-white">
+                  Application Form
+                </h2>
+                <p className="text-gray-400 mt-1">
+                  Apply for Vercera 5.0 team (2 preferences)
+                </p>
               </div>
 
               {/* Personal */}
               <div className="space-y-6">
                 <div className="border-l-4 border-violet-400 pl-4">
-                  <h3 className="text-lg font-semibold text-violet-400">Personal Information</h3>
+                  <h3 className="text-lg font-semibold text-violet-400">
+                    Personal Information
+                  </h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
@@ -224,7 +245,8 @@ export default function VerceraApplyPage() {
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-medium text-gray-300">
-                    Contact Number (preferably WhatsApp) <span className="text-red-500">*</span>
+                    Contact Number (preferably WhatsApp){" "}
+                    <span className="text-red-500">*</span>
                   </label>
                   <Input
                     value={contact}
@@ -239,8 +261,12 @@ export default function VerceraApplyPage() {
               {/* Team preferences */}
               <div className="space-y-6">
                 <div className="border-l-4 border-fuchsia-400 pl-4">
-                  <h3 className="text-lg font-semibold text-fuchsia-400">Team Preferences</h3>
-                  <p className="text-gray-400 text-sm mt-1">Select your first and second preference (must be different)</p>
+                  <h3 className="text-lg font-semibold text-fuchsia-400">
+                    Team Preferences
+                  </h3>
+                  <p className="text-gray-400 text-sm mt-1">
+                    Select your first and second preference (must be different)
+                  </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-3">
@@ -265,7 +291,9 @@ export default function VerceraApplyPage() {
                             onChange={(e) => setPreference1(e.target.value)}
                             className="sr-only"
                           />
-                          <span className="text-sm text-white">{team.name}</span>
+                          <span className="text-sm text-white">
+                            {team.name}
+                          </span>
                         </label>
                       ))}
                     </div>
@@ -292,7 +320,9 @@ export default function VerceraApplyPage() {
                             onChange={(e) => setPreference2(e.target.value)}
                             className="sr-only"
                           />
-                          <span className="text-sm text-white">{team.name}</span>
+                          <span className="text-sm text-white">
+                            {team.name}
+                          </span>
                         </label>
                       ))}
                     </div>
@@ -303,11 +333,14 @@ export default function VerceraApplyPage() {
               {/* Why applying & experience */}
               <div className="space-y-6">
                 <div className="border-l-4 border-cyan-400 pl-4">
-                  <h3 className="text-lg font-semibold text-cyan-400">Application Details</h3>
+                  <h3 className="text-lg font-semibold text-cyan-400">
+                    Application Details
+                  </h3>
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-medium text-gray-300">
-                    Why do you want to join this team? <span className="text-red-500">*</span>
+                    Why do you want to join this team?{" "}
+                    <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     value={whyApplying}
@@ -319,7 +352,9 @@ export default function VerceraApplyPage() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium text-gray-300">Previous experience (if any)</label>
+                  <label className="text-sm font-medium text-gray-300">
+                    Previous experience (if any)
+                  </label>
                   <textarea
                     value={previousExperience}
                     onChange={(e) => setPreviousExperience(e.target.value)}
@@ -329,7 +364,9 @@ export default function VerceraApplyPage() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium text-gray-300">CV / Resume link</label>
+                  <label className="text-sm font-medium text-gray-300">
+                    CV / Resume link
+                  </label>
                   <Input
                     value={cvLink}
                     onChange={(e) => setCvLink(e.target.value)}
@@ -343,7 +380,9 @@ export default function VerceraApplyPage() {
               {/* Academic */}
               <div className="space-y-6">
                 <div className="border-l-4 border-emerald-400 pl-4">
-                  <h3 className="text-lg font-semibold text-emerald-400">Academic Information</h3>
+                  <h3 className="text-lg font-semibold text-emerald-400">
+                    Academic Information
+                  </h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
@@ -418,7 +457,9 @@ export default function VerceraApplyPage() {
               {/* reCAPTCHA */}
               <div className="space-y-4">
                 <div className="border-l-4 border-amber-400 pl-4">
-                  <h3 className="text-lg font-semibold text-amber-400">Security Verification</h3>
+                  <h3 className="text-lg font-semibold text-amber-400">
+                    Security Verification
+                  </h3>
                 </div>
                 <div className="flex justify-center bg-gray-800/50 border border-gray-700/50 rounded-lg p-4">
                   <ReCAPTCHAComponent
