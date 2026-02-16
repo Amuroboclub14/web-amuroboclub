@@ -11,6 +11,7 @@ import {
   Settings,
   LogOut,
   GraduationCap,
+  FileCheck,
 } from "lucide-react";
 
 export default function AdminDashboard() {
@@ -75,6 +76,14 @@ export default function AdminDashboard() {
       icon: GraduationCap,
       color: "from-teal-500 to-teal-600",
       hoverColor: "hover:border-teal-400",
+    },
+    {
+      id: "applications",
+      title: "Vercera 5.0 Applications",
+      description: "Team recruitment applications (management, design, etc.)",
+      icon: FileCheck,
+      color: "from-violet-500 to-violet-600",
+      hoverColor: "hover:border-violet-400",
     },
   ];
 

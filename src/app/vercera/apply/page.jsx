@@ -87,6 +87,7 @@ export default function VerceraApplyPage() {
         yearOfStudy,
         submittedTimestamp: Date.now(),
         recaptchaToken,
+        status: "pending",
       });
 
       alert("Your application has been submitted successfully!");
