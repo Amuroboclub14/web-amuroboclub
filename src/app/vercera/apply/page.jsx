@@ -47,6 +47,7 @@ export default function VerceraApplyPage() {
       !email ||
       !contact ||
       !preference1 ||
+      !preference2 ||
       !whyApplying ||
       !departmentName ||
       !facultyName ||
@@ -127,18 +128,17 @@ export default function VerceraApplyPage() {
             <div className="relative flex items-center justify-center min-h-[140px] md:min-h-[180px] py-8 px-4">
               {/* Add your wide Vercera 5.0 logo at public/vercera-5-banner.png to use the image */}
               <div className="relative w-full max-w-4xl aspect-[3/1] flex items-center justify-center">
-                <Image
-                  src="/vercera-5-banner.png"
-                  alt="Vercera 5.0"
-                  fill
-                  className="object-contain object-center"
-                  unoptimized
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                    e.target.nextSibling?.classList.remove("hidden");
-                  }}
-                />
-                <div className="hidden absolute inset-0 flex flex-col items-center justify-center gap-1">
+                {!bannerImageError ? (
+                  <Image
+                    src="/vercera-5-banner.png"
+                    alt="Vercera 5.0"
+                    fill
+                    className="object-contain object-center"
+                    unoptimized
+                    onError={() => setBannerImageError(true)}
+                  />
+                ) : null}
+                <div className={`${bannerImageError ? "flex" : "hidden"} absolute inset-0 flex-col items-center justify-center gap-1`}>
                   <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">
                     Vercera 5.0
                   </h1>
