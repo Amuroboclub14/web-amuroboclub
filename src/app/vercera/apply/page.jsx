@@ -13,6 +13,12 @@ import verceraLogoFull from "../../../assets/vercera_full_logo.png";
 
 const TEAMS = [
   {
+    id: "outreach",
+    name: "Outreach",
+    description:
+      "Connect with communities, colleges, and participants to expand Vercera 5.0's reach.",
+  },
+  {
     id: "management",
     name: "Management",
     description:
@@ -44,11 +50,6 @@ const TEAMS = [
     id: "decor",
     name: "Decor Team",
     description: "Plan and execute venue decoration and stage setup.",
-  },
-  {
-    id: "outreach",
-    name: "Outreach",
-    description: "Connect with communities, colleges, and participants to expand Vercera 5.0's reach.",
   },
 ];
 

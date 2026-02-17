@@ -18,13 +18,13 @@ const COLLECTION = "vercera_5_team_registrations";
 const STATUSES = ["pending", "reviewed", "shortlisted", "rejected"];
 
 const TEAM_LABELS = {
+  outreach: "Outreach",
   management: "Management",
   video_editing: "Video Editing",
   sponsorship: "Sponsorship",
   graphic_design: "Graphic Design",
   hospitality: "Hospitality",
   decor: "Decor Team",
-  outreach: "Outreach",
 };
 
 function formatDate(timestamp) {
@@ -126,7 +126,9 @@ function ApplicationModal({ application, onClose, onStatusChange, onRefresh }) {
                 <div className="text-sm text-white font-mono break-words">
                   {link && value ? (
                     <a
-                      href={value.startsWith("http") ? value : `https://${value}`}
+                      href={
+                        value.startsWith("http") ? value : `https://${value}`
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-violet-400 hover:text-violet-300"
@@ -179,21 +181,21 @@ function ApplicationsContent() {
     }
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
-      list = list.filter((a) =>
-        (a.name || "").toLowerCase().includes(q)
-      );
+      list = list.filter((a) => (a.name || "").toLowerCase().includes(q));
     }
     return list.sort(
-      (a, b) => (b.submittedTimestamp ?? 0) - (a.submittedTimestamp ?? 0)
+      (a, b) => (b.submittedTimestamp ?? 0) - (a.submittedTimestamp ?? 0),
     );
   }, [applications, statusFilter, searchQuery]);
 
   const handleStatusChange = (id, newStatus) => {
     setApplications((prev) =>
-      prev.map((a) => (a.id === id ? { ...a, status: newStatus } : a))
+      prev.map((a) => (a.id === id ? { ...a, status: newStatus } : a)),
     );
     if (selectedApplication?.id === id) {
-      setSelectedApplication((prev) => (prev ? { ...prev, status: newStatus } : null));
+      setSelectedApplication((prev) =>
+        prev ? { ...prev, status: newStatus } : null,
+      );
     }
   };
 
@@ -237,7 +239,7 @@ function ApplicationsContent() {
       "\n" +
       rows
         .map((row) =>
-          row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+          row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","),
         )
         .join("\n");
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -280,7 +282,8 @@ function ApplicationsContent() {
                     Vercera 5.0 Team Applications
                   </h1>
                   <p className="text-gray-400 text-sm font-mono">
-                    {applications.length} total · {filteredApplications.length} shown
+                    {applications.length} total · {filteredApplications.length}{" "}
+                    shown
                   </p>
                 </div>
               </div>
@@ -379,10 +382,14 @@ function ApplicationsContent() {
                     {app.contactNumber || "—"}
                   </td>
                   <td className="py-3 px-2 text-sm font-mono text-gray-300">
-                    {TEAM_LABELS[app.teamPreference1] || app.teamPreference1 || "—"}
+                    {TEAM_LABELS[app.teamPreference1] ||
+                      app.teamPreference1 ||
+                      "—"}
                   </td>
                   <td className="py-3 px-2 text-sm font-mono text-gray-300 hidden xl:table-cell">
-                    {TEAM_LABELS[app.teamPreference2] || app.teamPreference2 || "—"}
+                    {TEAM_LABELS[app.teamPreference2] ||
+                      app.teamPreference2 ||
+                      "—"}
                   </td>
                   <td className="py-3 px-2">
                     {app.cvResumeLink ? (
@@ -408,19 +415,24 @@ function ApplicationsContent() {
                       value={status}
                       onChange={async (e) => {
                         const newStatus = e.target.value;
-                        const result = await updateDocument(COLLECTION, app.id, {
-                          status: newStatus,
-                        });
-                        if (result.success) handleStatusChange(app.id, newStatus);
+                        const result = await updateDocument(
+                          COLLECTION,
+                          app.id,
+                          {
+                            status: newStatus,
+                          },
+                        );
+                        if (result.success)
+                          handleStatusChange(app.id, newStatus);
                       }}
                       className={`bg-gray-800 border rounded-lg px-2 py-1 text-xs font-mono focus:outline-none focus:ring-1 ${
                         status === "shortlisted"
                           ? "border-emerald-500/50 text-emerald-400"
                           : status === "rejected"
-                          ? "border-red-500/50 text-red-400"
-                          : status === "reviewed"
-                          ? "border-amber-500/50 text-amber-400"
-                          : "border-gray-600 text-gray-300"
+                            ? "border-red-500/50 text-red-400"
+                            : status === "reviewed"
+                              ? "border-amber-500/50 text-amber-400"
+                              : "border-gray-600 text-gray-300"
                       }`}
                     >
                       {STATUSES.map((s) => (
