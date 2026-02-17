@@ -45,6 +45,11 @@ const TEAMS = [
     name: "Decor Team",
     description: "Plan and execute venue decoration and stage setup.",
   },
+  {
+    id: "outreach",
+    name: "Outreach",
+    description: "Connect with communities, colleges, and participants to expand Vercera 5.0's reach.",
+  },
 ];
 
 const YEARS = ["1st", "2nd", "3rd", "4th", "5th", "Other"];

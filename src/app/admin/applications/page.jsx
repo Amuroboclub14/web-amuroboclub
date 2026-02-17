@@ -24,6 +24,7 @@ const TEAM_LABELS = {
   graphic_design: "Graphic Design",
   hospitality: "Hospitality",
   decor: "Decor Team",
+  outreach: "Outreach",
 };
 
 function formatDate(timestamp) {
