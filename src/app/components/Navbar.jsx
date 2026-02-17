@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../assets/Vlogo.d83a8feb5370b0b7c52a.png";
+import verceraLogoFull from "../../assets/vercera_full_logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,13 +34,16 @@ export default function Navbar() {
     if (isOpen) {
       setVisibleItems([false, false, false, false]);
       const timeouts = [0, 1, 2, 3].map((i) =>
-        setTimeout(() => {
-          setVisibleItems((prev) => {
-            const next = [...prev];
-            next[i] = true;
-            return next;
-          });
-        }, 100 + i * 100)
+        setTimeout(
+          () => {
+            setVisibleItems((prev) => {
+              const next = [...prev];
+              next[i] = true;
+              return next;
+            });
+          },
+          100 + i * 100,
+        ),
       );
       return () => timeouts.forEach((t) => clearTimeout(t));
     } else {
@@ -91,6 +95,19 @@ export default function Navbar() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex justify-between items-center gap-10">
+        <Link
+          href={"/vercera/apply"}
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 flex flex-col items-center justify-center"
+        >
+          <Image
+            src={verceraLogoFull}
+            alt="Vercera 5.0 - AMU Roboclub"
+            width={100}
+            height={100}
+            className="w-full h-10"
+          />
+          <p className="text-[12px]">Organizing Team</p>
+        </Link>
         <Link
           href={"/projects"}
           className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
