@@ -154,6 +154,7 @@ function ApplicationsContent() {
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showDuplicatesOnly, setShowDuplicatesOnly] = useState(false);
   const [selectedApplication, setSelectedApplication] = useState(null);
 
   const fetchApplications = async () => {
@@ -174,8 +175,26 @@ function ApplicationsContent() {
     fetchApplications();
   }, []);
 
+  const duplicateEmails = useMemo(() => {
+    const byEmail = {};
+    applications.forEach((a) => {
+      const email = (a.email || "").trim().toLowerCase();
+      if (email) byEmail[email] = (byEmail[email] || 0) + 1;
+    });
+    return new Set(
+      Object.entries(byEmail)
+        .filter(([, count]) => count > 1)
+        .map(([email]) => email),
+    );
+  }, [applications]);
+
   const filteredApplications = useMemo(() => {
     let list = applications;
+    if (showDuplicatesOnly && duplicateEmails.size > 0) {
+      list = list.filter((a) =>
+        duplicateEmails.has((a.email || "").trim().toLowerCase()),
+      );
+    }
     if (statusFilter !== "all") {
       list = list.filter((a) => (a.status ?? "pending") === statusFilter);
     }
@@ -186,7 +205,7 @@ function ApplicationsContent() {
     return list.sort(
       (a, b) => (b.submittedTimestamp ?? 0) - (a.submittedTimestamp ?? 0),
     );
-  }, [applications, statusFilter, searchQuery]);
+  }, [applications, statusFilter, searchQuery, showDuplicatesOnly, duplicateEmails]);
 
   const handleStatusChange = (id, newStatus) => {
     setApplications((prev) =>
@@ -282,8 +301,10 @@ function ApplicationsContent() {
                     Vercera 5.0 Team Applications
                   </h1>
                   <p className="text-gray-400 text-sm font-mono">
-                    {applications.length} total · {filteredApplications.length}{" "}
-                    shown
+                    {applications.length} total
+                    {showDuplicatesOnly
+                      ? ` · ${filteredApplications.length} entries from ${duplicateEmails.size} duplicate submitter(s)`
+                      : ` · ${filteredApplications.length} shown`}
                   </p>
                 </div>
               </div>
@@ -328,6 +349,33 @@ function ApplicationsContent() {
               ))}
             </select>
           </div>
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <span className="text-sm font-mono text-gray-400">
+              Duplicates only
+            </span>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={showDuplicatesOnly}
+              onClick={() => setShowDuplicatesOnly((v) => !v)}
+              className={`relative inline-flex h-6 w-11 shrink-0 rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-black ${
+                showDuplicatesOnly
+                  ? "border-amber-500/50 bg-amber-500/30"
+                  : "border-gray-600 bg-gray-800"
+              }`}
+            >
+              <span
+                className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow ring-0 transition translate-x-0.5 mt-0.5 ${
+                  showDuplicatesOnly ? "translate-x-5" : "translate-x-0.5"
+                }`}
+              />
+            </button>
+            {duplicateEmails.size > 0 && (
+              <span className="text-xs font-mono text-amber-400/90">
+                ({duplicateEmails.size} person{duplicateEmails.size !== 1 ? "s" : ""})
+              </span>
+            )}
+          </label>
         </div>
       </div>
 
