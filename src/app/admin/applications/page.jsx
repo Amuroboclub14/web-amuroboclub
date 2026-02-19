@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 const COLLECTION = "vercera_5_team_registrations";
-const STATUSES = ["pending", "reviewed", "shortlisted", "rejected"];
+const STATUSES = ["pending", "reviewed", "shortlisted", "interview", "YOU'RE IN!", "rejected"];
 
 const TEAM_LABELS = {
   outreach: "Outreach",
@@ -108,7 +108,7 @@ function ApplicationModal({ application, onClose, onStatusChange, onRefresh }) {
             >
               {STATUSES.map((s) => (
                 <option key={s} value={s}>
-                  {s.charAt(0).toUpperCase() + s.slice(1)}
+                  {s === "YOU'RE IN!" ? s : s.charAt(0).toUpperCase() + s.slice(1)}
                 </option>
               ))}
             </select>
@@ -344,7 +344,7 @@ function ApplicationsContent() {
               <option value="all">All statuses</option>
               {STATUSES.map((s) => (
                 <option key={s} value={s}>
-                  {s.charAt(0).toUpperCase() + s.slice(1)}
+                  {s === "YOU'RE IN!" ? s : s.charAt(0).toUpperCase() + s.slice(1)}
                 </option>
               ))}
             </select>
@@ -474,13 +474,17 @@ function ApplicationsContent() {
                           handleStatusChange(app.id, newStatus);
                       }}
                       className={`bg-gray-800 border rounded-lg px-2 py-1 text-xs font-mono focus:outline-none focus:ring-1 ${
-                        status === "shortlisted"
-                          ? "border-emerald-500/50 text-emerald-400"
-                          : status === "rejected"
-                            ? "border-red-500/50 text-red-400"
-                            : status === "reviewed"
-                              ? "border-amber-500/50 text-amber-400"
-                              : "border-gray-600 text-gray-300"
+                        status === "YOU'RE IN!"
+                          ? "border-emerald-500/50 text-emerald-400 font-bold"
+                          : status === "shortlisted"
+                            ? "border-emerald-500/50 text-emerald-400"
+                            : status === "interview"
+                              ? "border-cyan-500/50 text-cyan-400"
+                              : status === "rejected"
+                                ? "border-red-500/50 text-red-400"
+                                : status === "reviewed"
+                                  ? "border-amber-500/50 text-amber-400"
+                                  : "border-gray-600 text-gray-300"
                       }`}
                     >
                       {STATUSES.map((s) => (
