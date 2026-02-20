@@ -461,7 +461,22 @@ function ApplicationsContent() {
           <thead>
             <tr className="border-b border-gray-700">
               <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider">
-                Name
+                <button
+                  type="button"
+                  onClick={() => handleSort("name")}
+                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
+                >
+                  Name
+                  {sortBy === "name" ? (
+                    sortOrder === "asc" ? (
+                      <ArrowUp className="w-3.5 h-3.5" />
+                    ) : (
+                      <ArrowDown className="w-3.5 h-3.5" />
+                    )
+                  ) : (
+                    <ArrowUpDown className="w-3.5 h-3.5 opacity-50" />
+                  )}
+                </button>
               </th>
               <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider hidden md:table-cell">
                 Email
@@ -476,10 +491,28 @@ function ApplicationsContent() {
                 Preference 2
               </th>
               <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider">
-                CV / Resume
+                CV
               </th>
               <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider">
                 Status
+              </th>
+              <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider">
+                <button
+                  type="button"
+                  onClick={() => handleSort("submittedTimestamp")}
+                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
+                >
+                  Submitted
+                  {sortBy === "submittedTimestamp" ? (
+                    sortOrder === "asc" ? (
+                      <ArrowUp className="w-3.5 h-3.5" />
+                    ) : (
+                      <ArrowDown className="w-3.5 h-3.5" />
+                    )
+                  ) : (
+                    <ArrowUpDown className="w-3.5 h-3.5 opacity-50" />
+                  )}
+                </button>
               </th>
             </tr>
           </thead>
@@ -531,7 +564,7 @@ function ApplicationsContent() {
                         Open
                       </a>
                     ) : (
-                      <span className="text-gray-500 text-sm">—</span>
+                      <span className="text-gray-500 text-sm">No</span>
                     )}
                   </td>
                   <td className="py-3 px-2">
@@ -565,10 +598,13 @@ function ApplicationsContent() {
                     >
                       {STATUSES.map((s) => (
                         <option key={s} value={s}>
-                          {s.charAt(0).toUpperCase() + s.slice(1)}
+                          {s === "YOU'RE IN!" ? s : s.charAt(0).toUpperCase() + s.slice(1)}
                         </option>
                       ))}
                     </select>
+                  </td>
+                  <td className="py-3 px-2 text-sm font-mono text-gray-400 whitespace-nowrap">
+                    {formatDate(app.submittedTimestamp)}
                   </td>
                 </tr>
               );
