@@ -12,6 +12,9 @@ import {
   Download,
   X,
   UserCheck,
+  ArrowUpDown,
+  ArrowUp,
+  ArrowDown,
 } from "lucide-react";
 
 const COLLECTION = "vercera_5_team_registrations";
@@ -153,9 +156,22 @@ function ApplicationsContent() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("all");
+  const [preferenceFilter, setPreferenceFilter] = useState("all");
+  const [cvFilter, setCvFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showDuplicatesOnly, setShowDuplicatesOnly] = useState(false);
+  const [sortBy, setSortBy] = useState("submittedTimestamp");
+  const [sortOrder, setSortOrder] = useState("desc");
   const [selectedApplication, setSelectedApplication] = useState(null);
+
+  const handleSort = (field) => {
+    if (sortBy === field) {
+      setSortOrder((o) => (o === "asc" ? "desc" : "asc"));
+    } else {
+      setSortBy(field);
+      setSortOrder(field === "name" ? "asc" : "desc");
+    }
+  };
 
   const fetchApplications = async () => {
     setLoading(true);
@@ -198,14 +214,47 @@ function ApplicationsContent() {
     if (statusFilter !== "all") {
       list = list.filter((a) => (a.status ?? "pending") === statusFilter);
     }
+    if (preferenceFilter !== "all") {
+      list = list.filter(
+        (a) =>
+          a.teamPreference1 === preferenceFilter ||
+          a.teamPreference2 === preferenceFilter,
+      );
+    }
+    if (cvFilter === "yes") {
+      list = list.filter((a) => (a.cvResumeLink || "").trim() !== "");
+    } else if (cvFilter === "no") {
+      list = list.filter((a) => (a.cvResumeLink || "").trim() === "");
+    }
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
       list = list.filter((a) => (a.name || "").toLowerCase().includes(q));
     }
-    return list.sort(
-      (a, b) => (b.submittedTimestamp ?? 0) - (a.submittedTimestamp ?? 0),
-    );
-  }, [applications, statusFilter, searchQuery, showDuplicatesOnly, duplicateEmails]);
+    const sorted = [...list].sort((a, b) => {
+      let cmp = 0;
+      if (sortBy === "name") {
+        const na = (a.name || "").toLowerCase();
+        const nb = (b.name || "").toLowerCase();
+        cmp = na.localeCompare(nb);
+      } else {
+        const ta = a.submittedTimestamp ?? 0;
+        const tb = b.submittedTimestamp ?? 0;
+        cmp = ta - tb;
+      }
+      return sortOrder === "asc" ? cmp : -cmp;
+    });
+    return sorted;
+  }, [
+    applications,
+    statusFilter,
+    preferenceFilter,
+    cvFilter,
+    searchQuery,
+    showDuplicatesOnly,
+    duplicateEmails,
+    sortBy,
+    sortOrder,
+  ]);
 
   const handleStatusChange = (id, newStatus) => {
     setApplications((prev) =>
@@ -347,6 +396,33 @@ function ApplicationsContent() {
                   {s === "YOU'RE IN!" ? s : s.charAt(0).toUpperCase() + s.slice(1)}
                 </option>
               ))}
+            </select>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-mono text-gray-400">Preference:</span>
+            <select
+              value={preferenceFilter}
+              onChange={(e) => setPreferenceFilter(e.target.value)}
+              className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm font-mono text-white focus:border-violet-500 focus:outline-none"
+            >
+              <option value="all">All preferences</option>
+              {Object.entries(TEAM_LABELS).map(([id, label]) => (
+                <option key={id} value={id}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-mono text-gray-400">CV:</span>
+            <select
+              value={cvFilter}
+              onChange={(e) => setCvFilter(e.target.value)}
+              className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm font-mono text-white focus:border-violet-500 focus:outline-none"
+            >
+              <option value="all">All</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
             </select>
           </div>
           <label className="flex items-center gap-2 cursor-pointer select-none">
