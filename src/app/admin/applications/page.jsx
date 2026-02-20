@@ -12,9 +12,6 @@ import {
   Download,
   X,
   UserCheck,
-  ArrowUpDown,
-  ArrowUp,
-  ArrowDown,
 } from "lucide-react";
 
 const COLLECTION = "vercera_5_team_registrations";
@@ -160,18 +157,7 @@ function ApplicationsContent() {
   const [cvFilter, setCvFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showDuplicatesOnly, setShowDuplicatesOnly] = useState(false);
-  const [sortBy, setSortBy] = useState("name");
-  const [sortOrder, setSortOrder] = useState("asc");
   const [selectedApplication, setSelectedApplication] = useState(null);
-
-  const handleSort = (field) => {
-    if (sortBy === field) {
-      setSortOrder((o) => (o === "asc" ? "desc" : "asc"));
-    } else {
-      setSortBy(field);
-      setSortOrder(field === "name" ? "asc" : "desc");
-    }
-  };
 
   const fetchApplications = async () => {
     setLoading(true);
@@ -230,13 +216,9 @@ function ApplicationsContent() {
       const q = searchQuery.trim().toLowerCase();
       list = list.filter((a) => (a.name || "").toLowerCase().includes(q));
     }
-    const sorted = [...list].sort((a, b) => {
-      const na = (a.name || "").toLowerCase();
-      const nb = (b.name || "").toLowerCase();
-      const cmp = na.localeCompare(nb);
-      return sortOrder === "asc" ? cmp : -cmp;
-    });
-    return sorted;
+    return list.sort(
+      (a, b) => (b.submittedTimestamp ?? 0) - (a.submittedTimestamp ?? 0),
+    );
   }, [
     applications,
     statusFilter,
@@ -245,8 +227,6 @@ function ApplicationsContent() {
     searchQuery,
     showDuplicatesOnly,
     duplicateEmails,
-    sortBy,
-    sortOrder,
   ]);
 
   const handleStatusChange = (id, newStatus) => {
@@ -454,22 +434,7 @@ function ApplicationsContent() {
           <thead>
             <tr className="border-b border-gray-700">
               <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider">
-                <button
-                  type="button"
-                  onClick={() => handleSort("name")}
-                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  Name
-                  {sortBy === "name" ? (
-                    sortOrder === "asc" ? (
-                      <ArrowUp className="w-3.5 h-3.5" />
-                    ) : (
-                      <ArrowDown className="w-3.5 h-3.5" />
-                    )
-                  ) : (
-                    <ArrowUpDown className="w-3.5 h-3.5 opacity-50" />
-                  )}
-                </button>
+                Name
               </th>
               <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider hidden md:table-cell">
                 Email
