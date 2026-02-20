@@ -160,8 +160,8 @@ function ApplicationsContent() {
   const [cvFilter, setCvFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showDuplicatesOnly, setShowDuplicatesOnly] = useState(false);
-  const [sortBy, setSortBy] = useState("submittedTimestamp");
-  const [sortOrder, setSortOrder] = useState("desc");
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc");
   const [selectedApplication, setSelectedApplication] = useState(null);
 
   const handleSort = (field) => {
@@ -231,16 +231,9 @@ function ApplicationsContent() {
       list = list.filter((a) => (a.name || "").toLowerCase().includes(q));
     }
     const sorted = [...list].sort((a, b) => {
-      let cmp = 0;
-      if (sortBy === "name") {
-        const na = (a.name || "").toLowerCase();
-        const nb = (b.name || "").toLowerCase();
-        cmp = na.localeCompare(nb);
-      } else {
-        const ta = a.submittedTimestamp ?? 0;
-        const tb = b.submittedTimestamp ?? 0;
-        cmp = ta - tb;
-      }
+      const na = (a.name || "").toLowerCase();
+      const nb = (b.name || "").toLowerCase();
+      const cmp = na.localeCompare(nb);
       return sortOrder === "asc" ? cmp : -cmp;
     });
     return sorted;
@@ -496,24 +489,6 @@ function ApplicationsContent() {
               <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider">
                 Status
               </th>
-              <th className="text-left py-3 px-2 text-xs font-mono text-gray-400 uppercase tracking-wider">
-                <button
-                  type="button"
-                  onClick={() => handleSort("submittedTimestamp")}
-                  className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  Submitted
-                  {sortBy === "submittedTimestamp" ? (
-                    sortOrder === "asc" ? (
-                      <ArrowUp className="w-3.5 h-3.5" />
-                    ) : (
-                      <ArrowDown className="w-3.5 h-3.5" />
-                    )
-                  ) : (
-                    <ArrowUpDown className="w-3.5 h-3.5 opacity-50" />
-                  )}
-                </button>
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -602,9 +577,6 @@ function ApplicationsContent() {
                         </option>
                       ))}
                     </select>
-                  </td>
-                  <td className="py-3 px-2 text-sm font-mono text-gray-400 whitespace-nowrap">
-                    {formatDate(app.submittedTimestamp)}
                   </td>
                 </tr>
               );
