@@ -11,8 +11,10 @@ import { v4 } from "uuid";
 import { motion } from "framer-motion";
 import ReCAPTCHAComponent from "../../components/ReCAPTCHA";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function AlumniRegisterPage() {
+  const router = useRouter();
   const [fileInputKey, setFileInputKey] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -107,6 +109,7 @@ export default function AlumniRegisterPage() {
       });
 
       alert("Thank you! Your alumni profile has been submitted successfully.");
+      router.push("/alumni");
       setFullName("");
       setEmail("");
       setPositionOrRole("");
