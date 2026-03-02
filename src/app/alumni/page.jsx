@@ -5,11 +5,10 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { db } from "../firebase";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
-  Mail,
   Briefcase,
   GraduationCap,
   Calendar,
@@ -187,17 +186,15 @@ export default function AlumniPage() {
   useEffect(() => {
     const fetchAlumni = async () => {
       try {
-        const q = query(
-          collection(db, "alumni"),
-          orderBy("submittedTimestamp", "desc")
+        const snapshot = await getDocs(collection(db, "alumni"));
+        const list = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        list.sort(
+          (a, b) => (b.submittedTimestamp || 0) - (a.submittedTimestamp || 0)
         );
-        const snapshot = await getDocs(q);
-        setAlumni(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-        );
+        setAlumni(list);
       } catch (err) {
         console.error("Error fetching alumni:", err);
         setError("Unable to load alumni. Please try again later.");

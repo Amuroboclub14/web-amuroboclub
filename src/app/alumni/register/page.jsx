@@ -12,14 +12,6 @@ import { motion } from "framer-motion";
 import ReCAPTCHAComponent from "../../components/ReCAPTCHA";
 import Link from "next/link";
 
-const REQUIRED_FIELDS = [
-  "fullName",
-  "email",
-  "positionOrRole",
-  "graduationYear",
-  "activeYears",
-];
-
 export default function AlumniRegisterPage() {
   const [fileInputKey, setFileInputKey] = useState(0);
   const [fullName, setFullName] = useState("");
@@ -39,22 +31,6 @@ export default function AlumniRegisterPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const [submitError, setSubmitError] = useState("");
-
-  const formData = {
-    fullName,
-    email,
-    positionOrRole,
-    phoneNumber,
-    graduationYear,
-    activeYears,
-    degreeProgram,
-    currentOccupation,
-    companyName,
-    linkedInOrSocial,
-    professionalGrowth,
-    briefSummary,
-    inspireNextGen,
-  };
 
   const isRequiredFilled = () => {
     if (!fullName?.trim()) return false;

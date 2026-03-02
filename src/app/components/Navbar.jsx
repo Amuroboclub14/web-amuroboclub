@@ -146,6 +146,12 @@ export default function Navbar() {
         >
           <p className="text-[14px]">FACULTY</p>
         </Link>
+        <Link
+          href={"/alumni"}
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+        >
+          <p className="text-[14px]">ALUMNI</p>
+        </Link>
         {/* <Link
           href={"/membershipForm"}
           className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
@@ -239,6 +245,17 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             >
               Members
+            </Link>
+            <Link
+              href={"/alumni"}
+              className={`flex justify-center hover:text-blue-600 text-[white] !font-mono text-[16px] transition-all duration-500 transform ${
+                visibleItems[2]
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Alumni
             </Link>
           </div>
           <div
