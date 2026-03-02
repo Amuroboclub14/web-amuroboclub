@@ -46,7 +46,9 @@ export default function AlumniRegisterPage() {
     setSubmitError("");
 
     if (!isRequiredFilled()) {
-      setSubmitError("Please fill all required fields (Full Name, Email, Position/Role, Graduation Year, Active Years).");
+      setSubmitError(
+        "Please fill all required fields (Full Name, Email, Position/Role, Graduation Year, Active Years).",
+      );
       return;
     }
 
@@ -61,10 +63,7 @@ export default function AlumniRegisterPage() {
       let photoUrl = "";
       if (photoFile) {
         const ext = photoFile.name.split(".").pop()?.toLowerCase() || "jpg";
-        const storageRef = ref(
-          storage,
-          `alumni_photos/${v4()}.${ext}`
-        );
+        const storageRef = ref(storage, `alumni_photos/${v4()}.${ext}`);
         await uploadBytes(storageRef, photoFile);
         photoUrl = await getDownloadURL(storageRef);
       }
@@ -222,9 +221,9 @@ export default function AlumniRegisterPage() {
                   Academic & Club
                 </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="graduationYear" className={labelClass}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                <div className="flex flex-col gap-2 w-full">
+                  <label htmlFor="graduationYear" className={`${labelClass} min-h-[2.75rem] block`}>
                     Graduation Year <span className="text-red-500">*</span>
                   </label>
                   <Input
@@ -236,8 +235,8 @@ export default function AlumniRegisterPage() {
                     className={inputClass}
                   />
                 </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="activeYears" className={labelClass}>
+                <div className="flex flex-col gap-2 w-full">
+                  <label htmlFor="activeYears" className={`${labelClass} min-h-[2.75rem] block`}>
                     In which year(s) were you an active member?{" "}
                     <span className="text-red-500">*</span>
                   </label>
@@ -268,9 +267,7 @@ export default function AlumniRegisterPage() {
 
             <div className="space-y-6">
               <div className="border-l-4 border-teal-400 pl-4">
-                <h2 className="text-lg font-semibold text-teal-400">
-                  Career
-                </h2>
+                <h2 className="text-lg font-semibold text-teal-400">Career</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
@@ -412,10 +409,7 @@ export default function AlumniRegisterPage() {
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center gap-2">
-                    <svg
-                      className="animate-spin h-5 w-5"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
                       <circle
                         className="opacity-25"
                         cx="12"
