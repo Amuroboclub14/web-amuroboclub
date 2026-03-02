@@ -45,14 +45,20 @@ function AlumniCard({ alum, index }) {
       className="rounded-2xl overflow-hidden border border-gray-700 bg-gradient-to-b from-gray-800/90 to-gray-900/90 hover:border-cyan-500/40 transition-all duration-300 shadow-xl hover:shadow-cyan-500/10"
     >
       <div className="relative h-56 sm:h-64 bg-gray-800">
-        <Image
-          src={alum.photoUrl || "/api/placeholder/400/320"}
-          alt={alum.fullName}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          unoptimized={alum.photoUrl?.startsWith("http")}
-        />
+        {alum.photoUrl ? (
+          <Image
+            src={alum.photoUrl}
+            alt={alum.fullName}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            unoptimized
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-900/40 to-gray-800 text-4xl font-bold text-cyan-400/80">
+            {alum.fullName?.charAt(0) || "?"}
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <h3 className="text-xl font-bold text-white drop-shadow-lg">
