@@ -95,7 +95,7 @@ export default function Navbar() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex justify-between items-center gap-10">
-        <Link
+        {/* <Link
           href={"/vercera/apply"}
           className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 flex flex-col items-center justify-center"
         >
@@ -107,7 +107,7 @@ export default function Navbar() {
             className="w-full h-10"
           />
           <p className="text-[12px]">Organizing Team</p>
-        </Link>
+        </Link> */}
         <Link
           href={"/projects"}
           className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
