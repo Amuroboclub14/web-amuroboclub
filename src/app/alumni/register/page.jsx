@@ -12,6 +12,11 @@ import { motion } from "framer-motion";
 import ReCAPTCHAComponent from "../../components/ReCAPTCHA";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 export default function AlumniRegisterPage() {
   const router = useRouter();
@@ -58,7 +63,7 @@ export default function AlumniRegisterPage() {
     if (!email?.trim()) return false;
     if (!positionOrRole?.trim()) return false;
     if (!graduationYear?.trim()) return false;
-    if (!activeYears?.trim()) return false;
+    //if (!activeYears?.trim()) return false;
     return true;
   };
 
@@ -68,7 +73,7 @@ export default function AlumniRegisterPage() {
 
     if (!isRequiredFilled()) {
       setSubmitError(
-        "Please fill all required fields (Full Name, Email, Position/Role, Graduation Year, Active Years).",
+        "Please fill all required fields (Full Name, Email, Position/Role, Graduation Year).",
       );
       return;
     }
@@ -95,7 +100,7 @@ export default function AlumniRegisterPage() {
         positionOrRole: positionOrRole.trim(),
         phoneNumber: phoneNumber.trim() || null,
         graduationYear: graduationYear.trim(),
-        activeYears: activeYears.trim(),
+        activeYears: activeYears.trim() || null,
         degreeProgram: degreeProgram.trim() || null,
         currentOccupation: currentOccupation.trim() || null,
         companyName: companyName.trim() || null,
@@ -136,10 +141,10 @@ export default function AlumniRegisterPage() {
 
   const inputClass =
     "p-3 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200";
-  const labelClass = "!font-mono text-[16px] font-medium text-gray-300";
+  const labelClass = "text-[16px] font-medium text-gray-300";
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className={`${inter.className} min-h-screen bg-black text-white`}>
       <Navbar />
       <div className="pb-16">
         <motion.div
@@ -259,8 +264,8 @@ export default function AlumniRegisterPage() {
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                   <label htmlFor="activeYears" className={`${labelClass} min-h-[2.75rem] block`}>
-                    In which year(s) were you an active member?{" "}
-                    <span className="text-red-500">*</span>
+                    In which year(s) were you an active member?
+                    
                   </label>
                   <Input
                     id="activeYears"

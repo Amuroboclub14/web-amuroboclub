@@ -17,6 +17,11 @@ import {
   ChevronUp,
   User,
 } from "lucide-react";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 const AlumniSkeleton = () => (
   <div className="animate-pulse flex flex-col rounded-2xl overflow-hidden border border-gray-700 bg-gray-800/50 h-[420px]">
@@ -206,7 +211,7 @@ export default function AlumniPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className={`${inter.className} min-h-screen bg-black text-white`}>
       <Navbar />
       <section className="px-4 py-12 lg:px-10 pb-20">
         <motion.div
