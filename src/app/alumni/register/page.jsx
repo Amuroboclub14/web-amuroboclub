@@ -100,7 +100,7 @@ export default function AlumniRegisterPage() {
         positionOrRole: positionOrRole.trim(),
         phoneNumber: phoneNumber.trim() || null,
         graduationYear: graduationYear.trim(),
-        activeYears: activeYears.trim() || null,
+        activeYears: activeYears ? Number(activeYears) : null,
         degreeProgram: degreeProgram.trim() || null,
         currentOccupation: currentOccupation.trim() || null,
         companyName: companyName.trim() || null,
@@ -251,31 +251,36 @@ export default function AlumniRegisterPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 <div className="flex flex-col gap-2 w-full">
                   <label htmlFor="graduationYear" className={`${labelClass} min-h-[2.75rem] block`}>
-                    Graduation Year <span className="text-red-500">*</span>
-                  </label>
-                  <Input
-                    id="graduationYear"
-                    value={graduationYear}
-                    onChange={(e) => setGraduationYear(e.target.value)}
-                    type="text"
-                    placeholder="e.g. 2022"
-                    className={inputClass}
-                  />
-                </div>
-                <div className="flex flex-col gap-2 w-full">
-                  <label htmlFor="activeYears" className={`${labelClass} min-h-[2.75rem] block`}>
-                    In which year(s) were you an active member?
-                    
-                  </label>
-                  <Input
-                    id="activeYears"
-                    value={activeYears}
-                    onChange={(e) => setActiveYears(e.target.value)}
-                    type="text"
-                    placeholder="e.g. 2019-2022"
-                    className={inputClass}
-                  />
-                </div>
+                        Graduation Year <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        id="graduationYear"
+                        value={graduationYear}
+                        onChange={(e) => setGraduationYear(e.target.value)}
+                        className={`${inputClass} cursor-pointer`}
+  >
+    <option value="" disabled>Select year</option>
+    {Array.from({ length: 20 }, (_, i) => new Date().getFullYear() - i).map((year) => (
+      <option key={year} value={year}>{year}</option>
+    ))}
+  </select>
+</div>
+               <div className="flex flex-col gap-2 w-full">
+  <label htmlFor="activeYears" className={`${labelClass} min-h-[2.75rem] block`}>
+    Number of active years
+  </label>
+  <select
+    id="activeYears"
+    value={activeYears}
+    onChange={(e) => setActiveYears(e.target.value)}
+    className={`${inputClass} cursor-pointer`}
+  >
+    <option value="" disabled>Select</option>
+    {[1, 2, 3, 4, 5, 6].map((n) => (
+      <option key={n} value={n}>{n}</option>
+    ))}
+  </select>
+</div>
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="degreeProgram" className={labelClass}>
