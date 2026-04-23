@@ -85,6 +85,14 @@ export default function AdminDashboard() {
       color: "from-violet-500 to-violet-600",
       hoverColor: "hover:border-violet-400",
     },
+    {
+      id: "core-team-applications",
+      title: "Core Team 2026-27 Applications",
+      description: "Manage AMURoboclub core-team recruitment submissions",
+      icon: UserCheck,
+      color: "from-fuchsia-500 to-pink-600",
+      hoverColor: "hover:border-fuchsia-400",
+    },
   ];
 
   return (
