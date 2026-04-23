@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import { Input } from "@heroui/input";
 import { motion } from "framer-motion";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../../firebase";
-import ReCAPTCHAComponent from "../../../components/ReCAPTCHA";
+import { db } from "../../firebase";
+import ReCAPTCHAComponent from "../../components/ReCAPTCHA";
 import Link from "next/link";
 
 const courseOptions = ["B.Tech", "B.E", "M.Tech", "Other"];
