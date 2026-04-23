@@ -235,12 +235,6 @@ export default function CoreTeamRecruitment2026Page() {
             onSubmit={handleSubmit}
             className="space-y-8 bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 p-6 md:p-8 rounded-2xl shadow-2xl"
           >
-            {submitError && (
-              <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
-                {submitError}
-              </div>
-            )}
-
             <div className="space-y-6">
               <div className="border-l-4 border-cyan-400 pl-4">
                 <h2 className="text-lg font-semibold text-cyan-400">Basic Information</h2>
@@ -445,13 +439,22 @@ export default function CoreTeamRecruitment2026Page() {
             </div>
 
             <div className="flex justify-center pt-4">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="px-8 py-4 rounded-xl text-white text-lg font-bold bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 transition-all duration-300 hover:from-emerald-400 hover:via-teal-400 hover:to-cyan-400 hover:shadow-xl hover:shadow-emerald-500/40 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none min-w-[180px]"
-              >
-                {isSubmitting ? "Submitting..." : "Submit Application"}
-              </button>
+              <div className="w-full max-w-xl space-y-4">
+                {submitError && (
+                  <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm text-center">
+                    {submitError}
+                  </div>
+                )}
+                <div className="flex justify-center">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-8 py-4 rounded-xl text-white text-lg font-bold bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 transition-all duration-300 hover:from-emerald-400 hover:via-teal-400 hover:to-cyan-400 hover:shadow-xl hover:shadow-emerald-500/40 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none min-w-[180px]"
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit Application"}
+                  </button>
+                </div>
+              </div>
             </div>
           </form>
         </motion.div>
