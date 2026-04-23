@@ -18,6 +18,7 @@ import { Button } from "@heroui/button";
 import { useDisclosure } from "@heroui/use-disclosure";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 // Skeleton component
 const MemberSkeleton = () => (
@@ -121,9 +122,17 @@ export default function Team() {
           transition={{ duration: 0.9 }}
           className=" flex flex-col px-5"
         >
-          <h1 className="text-[1.5rem] leading-[2.7rem] md:leading-[5rem] md:text-[2rem] font-bold text-center pt-[8vh] leading-tight bg-gradient-to-br from-white to-sky-300 bg-clip-text text-transparent pb-5 md:pb-10">
+          <h1 className="text-[1.5rem] leading-[2.7rem] md:leading-[5rem] md:text-[2rem] font-bold text-center pt-[8vh] bg-gradient-to-br from-white to-sky-300 bg-clip-text text-transparent pb-5 md:pb-10">
             AMURoboclub Team {year}-{parseInt(year) + 1}
           </h1>
+          <div className="flex justify-center pb-6">
+            <Link
+              href="/recruitments/core-team-2026-27"
+              className="!font-mono px-5 py-2 rounded-full border border-cyan-500 text-cyan-300 hover:bg-cyan-500/10 transition-colors duration-200"
+            >
+              Apply for Core Team Recruitment 2026-27
+            </Link>
+          </div>
         </motion.div>
 
         {isSmallScreen ? (
