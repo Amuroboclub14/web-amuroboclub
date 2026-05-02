@@ -37,6 +37,35 @@ const postOptions = [
   "Volunteer",
 ];
 
+/** Maps Firestore/network errors to a readable message + code for support (no console needed on mobile). */
+function formatSubmitFailureMessage(error) {
+  const code = typeof error?.code === "string" ? error.code : "";
+  const message = typeof error?.message === "string" ? error.message : "";
+
+  let detail =
+    "Something went wrong while submitting. Please try again in a moment.";
+  if (code === "permission-denied") {
+    detail =
+      "The server rejected this submission (access rules). If you are an applicant, contact the team with the error code below—this is usually a configuration issue on our side.";
+  } else if (code === "unavailable" || code === "deadline-exceeded") {
+    detail =
+      "We could not reach the database (network hiccup or service busy). Check your internet connection and try again.";
+  } else if (code === "resource-exhausted") {
+    detail =
+      "The service is temporarily overloaded. Wait a short time and try again.";
+  } else if (code === "failed-precondition") {
+    detail = "The request could not be completed. Try again or use another browser.";
+  } else if (code === "unauthenticated") {
+    detail = "You are not signed in for this action. This form should work without login—contact us with the error code below.";
+  } else if (message && /network|fetch|Failed to fetch|load failed/i.test(message)) {
+    detail =
+      "A network error occurred. Try switching Wi‑Fi/mobile data, disable VPN, or try again when the connection is stable.";
+  }
+
+  const ref = code || (message ? message.split("\n")[0].slice(0, 120) : "unknown");
+  return `${detail} If it keeps happening, share this code with the team: ${ref}`;
+}
+
 export default function CoreTeamRecruitment2026Page() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
@@ -199,7 +228,7 @@ export default function CoreTeamRecruitment2026Page() {
       setRecaptchaToken(null);
     } catch (error) {
       console.error("Error submitting recruitment form:", error);
-      setSubmitError("Something went wrong while submitting. Please try again.");
+      setSubmitError(formatSubmitFailureMessage(error));
     } finally {
       setIsSubmitting(false);
     }
