@@ -535,3 +535,10 @@ function CoreTeamRecruitmentFormOpen() {
     </main>
   );
 }
+
+export default function CoreTeamRecruitment2026Page() {
+  if (!IS_CORE_TEAM_RECRUITMENT_PORTAL_OPEN) {
+    return <CoreTeamRecruitmentPortalClosed />;
+  }
+  return <CoreTeamRecruitmentFormOpen />;
+}
