@@ -66,7 +66,50 @@ function formatSubmitFailureMessage(error) {
   return `${detail} If it keeps happening, share this code with the team: ${ref}`;
 }
 
-export default function CoreTeamRecruitment2026Page() {
+/** Set to `true` only if you reopen applications for another round. */
+const IS_CORE_TEAM_RECRUITMENT_PORTAL_OPEN = false;
+
+function CoreTeamRecruitmentPortalClosed() {
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <Navbar />
+      <div className="pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mx-auto px-4 py-16 md:py-24"
+        >
+          <div className="text-center space-y-6 bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 p-8 md:p-10 rounded-2xl shadow-2xl">
+            <p className="text-sm font-mono uppercase tracking-widest text-fuchsia-400">
+              Applications closed
+            </p>
+            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
+              Core Team Recruitment 2026-27
+            </h1>
+            <p className="text-gray-300 font-mono text-base leading-relaxed">
+              The application portal is now closed. Thank you to everyone who applied—your
+              submissions are being reviewed.
+            </p>
+            <p className="text-gray-500 text-sm font-mono leading-relaxed">
+              If you already submitted an application, you do not need to apply again. For
+              questions, please reach out through the club&apos;s official channels.
+            </p>
+            <Link
+              href="/team"
+              className="inline-block mt-2 text-cyan-400 hover:text-cyan-300 text-sm font-mono"
+            >
+              ← Back to Team
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+      <Footer />
+    </main>
+  );
+}
+
+function CoreTeamRecruitmentFormOpen() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const [submitError, setSubmitError] = useState("");
@@ -491,4 +534,11 @@ export default function CoreTeamRecruitment2026Page() {
       <Footer />
     </main>
   );
+}
+
+export default function CoreTeamRecruitment2026Page() {
+  if (!IS_CORE_TEAM_RECRUITMENT_PORTAL_OPEN) {
+    return <CoreTeamRecruitmentPortalClosed />;
+  }
+  return <CoreTeamRecruitmentFormOpen />;
 }
