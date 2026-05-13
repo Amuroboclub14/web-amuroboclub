@@ -18,7 +18,6 @@ import { Button } from "@heroui/button";
 import { useDisclosure } from "@heroui/use-disclosure";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 
 // Skeleton component
 const MemberSkeleton = () => (
