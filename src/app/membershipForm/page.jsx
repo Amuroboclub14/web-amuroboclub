@@ -67,12 +67,12 @@ export default function MemberForm() {
       const idProofURL = await getDownloadURL(idProofRef);
 
       // Upload Payment Proof
-      const paymentProofRef = ref(storage, `paymentproof_2025/${v4()}`);
+      const paymentProofRef = ref(storage, `paymentproof_2026/${v4()}`);
       await uploadBytes(paymentProofRef, paymentproof);
       const paymentProofURL = await getDownloadURL(paymentProofRef);
 
       // Add Firestore document
-      await addDoc(collection(db, "members_2025"), {
+      await addDoc(collection(db, "members_2026"), {
         name: name,
         submittedTimestamp: Date.now(),
         course: course,
@@ -524,7 +524,7 @@ export default function MemberForm() {
 
                             <div className="text-center space-y-2 max-w-xs">
                               <p className="text-white font-medium text-lg">
-                                Membership Fee: ₹250
+                                Membership Fee: ₹350
                               </p>
                               <p className="text-gray-400 text-sm">
                                 After payment, upload the screenshot as payment
@@ -637,7 +637,7 @@ export default function MemberForm() {
                     <div className="space-y-4">
                       <div className="bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border border-cyan-500/30 rounded-lg p-4 backdrop-blur-sm">
                         <p className="text-cyan-400 font-semibold text-lg">
-                          Membership Fee: ₹250
+                          Membership Fee: ₹350
                         </p>
                       </div>
                       <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50">
