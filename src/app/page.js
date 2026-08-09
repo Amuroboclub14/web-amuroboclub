@@ -36,13 +36,42 @@ export default function Home() {
             doing cool projects together.
           </p>
 
-          <div className="flex items-center justify-between gap-[24px] w-fit">
+          <Link
+            href="/recruitments/technoxian-11"
+            className="group relative mb-6 block w-full max-w-md overflow-hidden rounded-2xl border border-orange-400/50 bg-gradient-to-br from-orange-500/20 via-amber-500/10 to-black/40 p-[1px] shadow-[0_0_40px_-14px_rgba(251,146,60,0.6)] transition-transform duration-300 hover:scale-[1.015]"
+          >
+            <div className="relative rounded-2xl bg-black/80 px-4 py-3.5 backdrop-blur-sm">
+              <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-orange-500/25 blur-2xl transition-opacity group-hover:opacity-80" />
+              <div className="relative flex items-center justify-between gap-3">
+                <div className="min-w-0 text-left">
+                  <div className="mb-1 inline-flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-400" />
+                    </span>
+                    <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-orange-400">
+                      Now recruiting
+                    </p>
+                  </div>
+                  <p className="text-[16px] md:text-[18px] font-bold text-white !font-mono">
+                    Technoxian 11.0 Project Teams
+                  </p>
+                  <p className="text-[12px] text-gray-400 !font-mono mt-0.5">
+                    Join our championship builds — applications open.
+                  </p>
+                </div>
+                <span className="shrink-0 rounded-full bg-gradient-to-r from-orange-400 to-amber-300 px-3.5 py-2 text-[12px] font-bold text-black !font-mono shadow-md transition-transform group-hover:translate-x-0.5">
+                  Apply →
+                </span>
+              </div>
+            </div>
+          </Link>
+
+          <div className="flex items-center justify-between gap-[24px] w-fit flex-wrap">
             <a
               className="group flex items-center gap-5 border-2 border-green-600 cursor-pointer bg-green-600 text-white transition-colors duration-300 px-5 py-3 rounded-full font-bold text-[1.1rem]"
-              target="_blank" // Optional: Opens in a new tab
-              // href="https://drive.google.com/file/d/1RFu5NtxDXvg54ka9GJcrxYiexZaR1wXk/view?usp=sharing"
-
-              rel="noopener noreferrer" // Optional: Security for external links
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Link href={"/membershipForm"}>
                 <p className="text-[18px] text-white !font-mono">
@@ -52,8 +81,8 @@ export default function Home() {
             </a>
             <a
               className="group cursor-pointer flex items-center gap-5 border-2 border-green-600  transition-colors duration-300 px-5 py-3 rounded-full font-bold text-[1.1rem]"
-              target="_blank" // Optional: Opens in a new tab
-              rel="noopener noreferrer" // Optional: Security for external links
+              target="_blank"
+              rel="noopener noreferrer"
               download={true}
               href="/app.apk"
             >
@@ -77,6 +106,18 @@ export default function Home() {
             placeholder="blur"
             className="w-full  md:w-[40vw] rounded-l-[3rem] relative max-w-full"
           />
+          <Link
+            href="/recruitments/technoxian-11"
+            className="absolute bottom-4 left-8 z-10 inline-flex items-center gap-2 rounded-full border border-orange-400/60 bg-black/75 px-3 py-1.5 text-white backdrop-blur-md transition hover:bg-orange-500 hover:text-black"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-400" />
+            </span>
+            <span className="text-[12px] font-mono font-semibold">
+              Technoxian 11.0 — Apply
+            </span>
+          </Link>
         </motion.div>
       </div>
       {/* What Opportunities do we offer */}
