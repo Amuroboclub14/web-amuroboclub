@@ -47,14 +47,9 @@ const RESOURCES = [
     href: "https://www.technoxian.com/",
   },
   {
-    title: "RoboClub Registration Portal",
-    description: "Club registration and competition management.",
-    href: "https://roboclub.technoxian.com/",
-  },
-  {
-    title: "WRC Registration Guide",
-    description: "World Robotics Championship registration details.",
-    href: "https://www.technoxian.com/wrc-registration",
+    title: "Our Past Technoxian Projects",
+    description: "Explore AMURoboclub projects from previous Technoxian seasons.",
+    href: "/projects",
   },
 ];
 
