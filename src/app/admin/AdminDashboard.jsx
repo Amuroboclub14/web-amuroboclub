@@ -12,6 +12,7 @@ import {
   LogOut,
   GraduationCap,
   FileCheck,
+  Rocket,
 } from "lucide-react";
 
 export default function AdminDashboard() {
@@ -92,6 +93,14 @@ export default function AdminDashboard() {
       icon: UserCheck,
       color: "from-fuchsia-500 to-pink-600",
       hoverColor: "hover:border-fuchsia-400",
+    },
+    {
+      id: "technoxian-applications",
+      title: "Technoxian 11.0 Applications",
+      description: "Manage Technoxian 11.0 project recruitment submissions",
+      icon: Rocket,
+      color: "from-orange-500 to-amber-600",
+      hoverColor: "hover:border-orange-400",
     },
   ];
 
