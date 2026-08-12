@@ -70,13 +70,13 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`flex justify-between items-center px-4 py-5 md:pt-10 md:h-[13vh]`}
+      className={`relative flex justify-between items-center px-3 lg:px-4 py-4 lg:py-5 xl:py-6`}
     >
-      <Link href={"/"}>
+      <Link href={"/"} className="flex-shrink-0">
         <Image
           src={Logo}
           alt="amuroboclub logo"
-          className="p-2 bg-black h-[40px] md:h-[50px] w-fit"
+          className="p-2 bg-black h-[36px] lg:h-[40px] xl:h-[45px] w-fit"
         />
       </Link>
 
@@ -84,7 +84,7 @@ export default function Navbar() {
       <button
         ref={menuButtonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden focus:outline-none"
+        className="lg:hidden focus:outline-none"
       >
         <div className="space-y-2   scale-75">
           <span className="block w-8 h-0.5 bg-white"></span>
@@ -94,13 +94,13 @@ export default function Navbar() {
       </button>
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex justify-between items-center gap-10">
-        <div>
+      <div className="hidden lg:flex flex-nowrap flex-shrink-0 items-center gap-1.5 xl:gap-4 2xl:gap-7">
+        <div className="shrink-0">
           <Link
             href="/recruitments/technoxian-11"
-            className="group flex text-white items-center gap-5 w-fit border-2 border-orange-500 hover:bg-orange-500 hover:text-white transition-colors duration-300 px-5 py-2 rounded-full font-bold text-[1.1rem]"
+            className="group flex text-white items-center gap-1 xl:gap-2 2xl:gap-4 w-fit shrink-0 border-2 border-orange-500 hover:bg-orange-500 hover:text-white transition-colors duration-300 px-2 xl:px-3 2xl:px-4 py-1 xl:py-1.5 rounded-full font-bold text-[1.1rem] whitespace-nowrap"
           >
-            <p className="text-[14px]">Technoxian 11.0</p>
+            <p className="text-[10px] xl:text-[12px] 2xl:text-[14px] whitespace-nowrap">Technoxian 11.0</p>
             <span className="flex justify-end w-0 h-4 -ml-2 pointer-events-none overflow-hidden transition-[width] duration-300 group-hover:w-6">
               <svg
                 className="block w-4 h-4 flex-initial pointer-events-none fill-current"
@@ -128,47 +128,47 @@ export default function Navbar() {
         </Link> */}
         <Link
           href={"/projects"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 whitespace-nowrap shrink-0"
         >
-          <p className="text-[14px]">PROJECTS</p>
+          <p className="text-[10px] xl:text-[12px] 2xl:text-[14px]">PROJECTS</p>
         </Link>
         <Link
           href={"/team"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 whitespace-nowrap shrink-0"
         >
-          <p className="text-[14px]">TEAM</p>
+          <p className="text-[10px] xl:text-[12px] 2xl:text-[14px]">TEAM</p>
         </Link>
         <Link
           href={"/events"}
           prefetch={true}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 whitespace-nowrap shrink-0"
         >
-          <p className="text-[14px]">EVENTS</p>
+          <p className="text-[10px] xl:text-[12px] 2xl:text-[14px]">EVENTS</p>
         </Link>
         <Link
           href={"https://chat.whatsapp.com/ICdFEUDdiyp95wRIAA9cpQ"}
           prefetch={true}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 whitespace-nowrap shrink-0"
         >
-          <p className="text-[14px]">COMMMUNITY</p>
+          <p className="text-[10px] xl:text-[12px] 2xl:text-[14px]">COMMUNITY</p>
         </Link>
         <Link
           href={"/members"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 whitespace-nowrap shrink-0"
         >
-          <p className="text-[14px]">MEMBERS</p>
+          <p className="text-[10px] xl:text-[12px] 2xl:text-[14px]">MEMBERS</p>
         </Link>
         <Link
           href={"/faculty"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 whitespace-nowrap shrink-0"
         >
-          <p className="text-[14px]">FACULTY</p>
+          <p className="text-[10px] xl:text-[12px] 2xl:text-[14px]">FACULTY</p>
         </Link>
         <Link
           href={"/alumni"}
-          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50"
+          className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 whitespace-nowrap shrink-0"
         >
-          <p className="text-[14px]">ALUMNI</p>
+          <p className="text-[10px] xl:text-[12px] 2xl:text-[14px]">ALUMNI</p>
         </Link>
         {/* <Link
           href={"/membershipForm"}
@@ -176,12 +176,14 @@ export default function Navbar() {
         >
           <p className="text-[14px]">MEMBERSHIP</p>
         </Link> */}
+      </div>
+      <div className="hidden lg:flex items-center flex-shrink-0">
         <div>
           <Link
             href="/membershipForm"
-            className="group flex text-white items-center gap-5 w-fit border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 px-5 py-2 rounded-full font-bold text-[1.1rem]"
+            className="group flex text-white items-center gap-1 xl:gap-3 2xl:gap-5 w-fit shrink-0 border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 px-2 xl:px-4 2xl:px-5 py-1 xl:py-2 rounded-full font-bold text-[1.1rem] whitespace-nowrap"
           >
-            <p className="text-[14px]">Become a Member</p>
+            <p className="text-[10px] xl:text-[13px] 2xl:text-[14px] whitespace-nowrap">Become a Member</p>
             <span className="flex justify-end w-0 h-4 -ml-2 pointer-events-none overflow-hidden transition-[width] duration-300 group-hover:w-6">
               <svg
                 className="block w-4 h-4 flex-initial pointer-events-none fill-current"
@@ -201,7 +203,7 @@ export default function Navbar() {
         <div
           ref={menuRef}
           style={{ zIndex: "100" }}
-          className={`md:hidden absolute top-[13vh] left-0 w-full bg-black px-3 py-5 transition-all duration-400 transform ${
+          className={`lg:hidden absolute top-full left-0 w-full bg-black px-3 py-5 transition-all duration-400 transform ${
             isOpen
               ? "opacity-100 translate-y-0"
               : "opacity-0 -translate-y-4 pointer-events-none"
