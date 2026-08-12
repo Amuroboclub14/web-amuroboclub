@@ -24,6 +24,8 @@ import {
   Clock,
 } from "lucide-react";
 
+const COLLECTION_NAME = "members_2026";
+
 function MembersManagementContent() {
   const router = useRouter();
   const [members, setMembers] = useState([]);
@@ -54,7 +56,7 @@ function MembersManagementContent() {
 
   const fetchMembers = async () => {
     try {
-      const result = await getAllDocuments("members_2025");
+      const result = await getAllDocuments(COLLECTION_NAME);
       if (result.success) {
         setMembers(result.data);
       } else {
@@ -77,7 +79,7 @@ function MembersManagementContent() {
     try {
       const { id, createdAt, updatedAt, ...dataToUpdate } = editData;
       const result = await updateDocument(
-        "members_2025",
+        COLLECTION_NAME,
         editingMember,
         dataToUpdate
       );
@@ -107,7 +109,7 @@ function MembersManagementContent() {
     if (newField.key && newField.value) {
       try {
         const result = await addFieldToDocument(
-          "members_2025",
+          COLLECTION_NAME,
           editingMember,
           newField.key,
           newField.value
@@ -131,7 +133,7 @@ function MembersManagementContent() {
   const handleDeleteField = async (fieldKey) => {
     try {
       const result = await deleteFieldFromDocument(
-        "members_2025",
+        COLLECTION_NAME,
         editingMember,
         fieldKey
       );
@@ -165,7 +167,7 @@ function MembersManagementContent() {
       )
     ) {
       try {
-        const result = await deleteDocument("members_2025", memberId);
+        const result = await deleteDocument(COLLECTION_NAME, memberId);
 
         if (result.success) {
           await fetchMembers();
@@ -183,7 +185,7 @@ function MembersManagementContent() {
 
   const handleAddMember = async () => {
     try {
-      const result = await createDocument("members_2025", newMemberData);
+      const result = await createDocument(COLLECTION_NAME, newMemberData);
 
       if (result.success) {
         await fetchMembers();
