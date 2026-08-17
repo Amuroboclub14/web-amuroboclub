@@ -11,18 +11,27 @@ import {
   Hash,
   BadgeIcon as IdCard,
   Calendar,
+  ChevronDown,
 } from "lucide-react";
 import Footer from "../components/Footer";
+
+// Add new years here as you create new members_XXXX collections
+const AVAILABLE_YEARS = ["2026", "2025"];
 
 export default function Members() {
   const [membersData, setMembersData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedYear, setSelectedYear] = useState(AVAILABLE_YEARS[0]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const fetchMembers = async () => {
+      setLoading(true);
       try {
-        const querySnapshot = await getDocs(collection(db, "members_2025"));
+        const querySnapshot = await getDocs(
+          collection(db, `members_${selectedYear}`)
+        );
         const membersList = querySnapshot.docs
           .map((doc) => {
             const data = doc.data();
@@ -39,13 +48,14 @@ export default function Members() {
         setMembersData(membersList);
       } catch (error) {
         console.error("Error fetching members:", error);
+        setMembersData([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchMembers();
-  }, []);
+  }, [selectedYear]);
 
   const filteredMembers = membersData.filter(
     (member) =>
@@ -84,19 +94,66 @@ export default function Members() {
           </h1>
           <br />
 
-          {/* Search + Counter */}
+          {/* Search + Year Dropdown + Counter */}
           <div className="flex flex-col md:flex-row md:justify-between items-stretch md:items-center gap-4 mb-8">
-            <div className="flex w-full md:max-w-xl">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search Member"
-                className="flex-1 px-4 py-3 w-[70vw] md:w-full rounded bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button className="bg-sky-400 hover:bg-sky-600 px-4 rounded-r-lg flex items-center justify-center text-white">
-                <Search size={22} />
-              </button>
+            <div className="flex w-full md:max-w-xl gap-3">
+              <div className="flex flex-1">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Search Member"
+                  className="flex-1 px-4 py-3 w-[70vw] md:w-full rounded-l bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button className="bg-sky-400 hover:bg-sky-600 px-4 rounded-r-lg flex items-center justify-center text-white">
+                  <Search size={22} />
+                </button>
+              </div>
+
+              {/* Year dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  className="h-full flex items-center gap-2 px-4 py-3 rounded bg-gray-800 border border-gray-700 text-white hover:border-sky-400 transition-colors"
+                >
+                  <span className="font-mono text-sm">{selectedYear}</span>
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform ${
+                      dropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {dropdownOpen && (
+                  <>
+                    {/* backdrop to close on outside click */}
+                    <div
+                      className="fixed inset-0 z-10"
+                      onClick={() => setDropdownOpen(false)}
+                    />
+                    <div className="absolute right-0 mt-2 w-28 bg-gray-900 border border-gray-700 rounded-lg shadow-lg shadow-black/40 z-20 overflow-hidden">
+                      {AVAILABLE_YEARS.map((year) => (
+                        <button
+                          key={year}
+                          onClick={() => {
+                            setSelectedYear(year);
+                            setDropdownOpen(false);
+                            setSearchTerm("");
+                          }}
+                          className={`w-full text-left px-4 py-2.5 font-mono text-sm transition-colors ${
+                            year === selectedYear
+                              ? "bg-sky-400/20 text-sky-400"
+                              : "text-gray-300 hover:bg-gray-800"
+                          }`}
+                        >
+                          {year}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
 
             <div className="flex justify-center md:justify-end">
