@@ -22,12 +22,18 @@ import {
   CheckCircle,
   XCircle,
   Clock,
+  ChevronDown,
 } from "lucide-react";
+
+// Add new years here as you create new members_20XX collections
+const AVAILABLE_YEARS = ["2026", "2025"];
 
 function MembersManagementContent() {
   const router = useRouter();
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedYear, setSelectedYear] = useState(AVAILABLE_YEARS[0]);
+  const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
   const [editingMember, setEditingMember] = useState(null);
   const [editData, setEditData] = useState({});
   const [newField, setNewField] = useState({ key: "", value: "" });
@@ -48,20 +54,31 @@ function MembersManagementContent() {
     recaptchaToken: "",
   });
 
+  // collection name derived from the currently selected year
+  const collectionName = `members_${selectedYear}`;
+
   useEffect(() => {
     fetchMembers();
-  }, []);
+    // reset any open edit/expand state when switching years
+    setEditingMember(null);
+    setEditData({});
+    setExpandedMembers(new Set());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedYear]);
 
   const fetchMembers = async () => {
+    setLoading(true);
     try {
-      const result = await getAllDocuments("members_2025");
+      const result = await getAllDocuments(collectionName);
       if (result.success) {
         setMembers(result.data);
       } else {
         console.error("Error fetching members:", result.error);
+        setMembers([]);
       }
     } catch (error) {
       console.error("Error fetching members:", error);
+      setMembers([]);
     } finally {
       setLoading(false);
     }
@@ -77,7 +94,7 @@ function MembersManagementContent() {
     try {
       const { id, createdAt, updatedAt, ...dataToUpdate } = editData;
       const result = await updateDocument(
-        "members_2025",
+        collectionName,
         editingMember,
         dataToUpdate
       );
@@ -107,7 +124,7 @@ function MembersManagementContent() {
     if (newField.key && newField.value) {
       try {
         const result = await addFieldToDocument(
-          "members_2025",
+          collectionName,
           editingMember,
           newField.key,
           newField.value
@@ -131,7 +148,7 @@ function MembersManagementContent() {
   const handleDeleteField = async (fieldKey) => {
     try {
       const result = await deleteFieldFromDocument(
-        "members_2025",
+        collectionName,
         editingMember,
         fieldKey
       );
@@ -165,7 +182,7 @@ function MembersManagementContent() {
       )
     ) {
       try {
-        const result = await deleteDocument("members_2025", memberId);
+        const result = await deleteDocument(collectionName, memberId);
 
         if (result.success) {
           await fetchMembers();
@@ -183,7 +200,7 @@ function MembersManagementContent() {
 
   const handleAddMember = async () => {
     try {
-      const result = await createDocument("members_2025", newMemberData);
+      const result = await createDocument(collectionName, newMemberData);
 
       if (result.success) {
         await fetchMembers();
@@ -253,7 +270,7 @@ function MembersManagementContent() {
       {/* Header */}
       <div className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-6">
+          <div className="flex items-center justify-between py-6 flex-wrap gap-4">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.push("/admin")}
@@ -269,20 +286,68 @@ function MembersManagementContent() {
               </div>
             </div>
 
-            <button
-              onClick={() => setShowAddForm(true)}
-              className="flex items-center gap-2 bg-green-500/20 border border-green-500/40 text-green-400 px-4 py-2 rounded-lg hover:bg-green-500/30 transition-colors font-mono"
-            >
-              <Plus className="w-5 h-5" />
-              Add Member
-            </button>
+            <div className="flex items-center gap-3">
+              {/* Year dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setYearDropdownOpen((prev) => !prev)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white hover:border-blue-400 transition-colors font-mono"
+                >
+                  <span className="text-sm">{selectedYear}</span>
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform ${
+                      yearDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {yearDropdownOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-10"
+                      onClick={() => setYearDropdownOpen(false)}
+                    />
+                    <div className="absolute right-0 mt-2 w-28 bg-gray-900 border border-gray-700 rounded-lg shadow-lg shadow-black/40 z-20 overflow-hidden">
+                      {AVAILABLE_YEARS.map((year) => (
+                        <button
+                          key={year}
+                          onClick={() => {
+                            setSelectedYear(year);
+                            setYearDropdownOpen(false);
+                          }}
+                          className={`w-full text-left px-4 py-2.5 font-mono text-sm transition-colors ${
+                            year === selectedYear
+                              ? "bg-blue-400/20 text-blue-400"
+                              : "text-gray-300 hover:bg-gray-800"
+                          }`}
+                        >
+                          {year}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="flex items-center gap-2 bg-green-500/20 border border-green-500/40 text-green-400 px-4 py-2 rounded-lg hover:bg-green-500/30 transition-colors font-mono"
+              >
+                <Plus className="w-5 h-5" />
+                Add Member
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6 flex items-center gap-6">
+        <div className="mb-6 flex items-center gap-6 flex-wrap">
+          <p className="text-gray-400 font-mono">
+            Collection: <span className="text-white">{collectionName}</span>
+          </p>
           <p className="text-gray-400 font-mono">
             Total Members: {members.length}
           </p>
@@ -558,7 +623,9 @@ function MembersManagementContent() {
         {members.length === 0 && (
           <div className="text-center py-12">
             <Users className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400 font-mono">No members found</p>
+            <p className="text-gray-400 font-mono">
+              No members found in {collectionName}
+            </p>
           </div>
         )}
       </div>
@@ -569,7 +636,7 @@ function MembersManagementContent() {
           <div className="bg-gray-900 border border-gray-700 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center p-6 border-b border-gray-700">
               <h2 className="text-xl font-bold font-mono text-green-400">
-                Add New Member
+                Add New Member to {collectionName}
               </h2>
               <button
                 onClick={() => setShowAddForm(false)}
