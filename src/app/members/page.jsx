@@ -96,25 +96,25 @@ export default function Members() {
 
           {/* Search + Year Dropdown + Counter */}
           <div className="flex flex-col md:flex-row md:justify-between items-stretch md:items-center gap-4 mb-8">
-            <div className="flex w-full md:max-w-xl gap-3">
-              <div className="flex flex-1">
+            <div className="flex flex-col sm:flex-row w-full md:max-w-xl gap-3">
+              <div className="flex flex-1 min-w-0">
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search Member"
-                  className="flex-1 px-4 py-3 w-[70vw] md:w-full rounded-l bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 min-w-0 px-4 py-3 rounded-l bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <button className="bg-sky-400 hover:bg-sky-600 px-4 rounded-r-lg flex items-center justify-center text-white">
+                <button className="shrink-0 bg-sky-400 hover:bg-sky-600 px-4 rounded-r-lg flex items-center justify-center text-white">
                   <Search size={22} />
                 </button>
               </div>
 
               {/* Year dropdown */}
-              <div className="relative">
+              <div className="relative shrink-0 self-start sm:self-auto">
                 <button
                   onClick={() => setDropdownOpen((prev) => !prev)}
-                  className="h-full flex items-center gap-2 px-4 py-3 rounded bg-gray-800 border border-gray-700 text-white hover:border-sky-400 transition-colors"
+                  className="w-full sm:w-auto flex items-center justify-between sm:justify-center gap-2 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white hover:border-sky-400 transition-colors"
                 >
                   <span className="font-mono text-sm">{selectedYear}</span>
                   <ChevronDown
@@ -132,7 +132,7 @@ export default function Members() {
                       className="fixed inset-0 z-10"
                       onClick={() => setDropdownOpen(false)}
                     />
-                    <div className="absolute right-0 mt-2 w-28 bg-gray-900 border border-gray-700 rounded-lg shadow-lg shadow-black/40 z-20 overflow-hidden">
+                    <div className="absolute left-0 sm:left-auto sm:right-0 mt-2 w-full sm:w-28 bg-gray-900 border border-gray-700 rounded-lg shadow-lg shadow-black/40 z-20 overflow-hidden">
                       {AVAILABLE_YEARS.map((year) => (
                         <button
                           key={year}
