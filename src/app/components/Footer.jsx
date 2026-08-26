@@ -1,8 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { Phone, X } from "lucide-react";
 import Logo from "../../assets/Vlogo.d83a8feb5370b0b7c52a.png";
 
+const COORDINATORS = [
+  { name: "Avyukt Soni", phone: "+91 63994 54765", tel: "+916399454765" },
+  { name: "Aman Javed", phone: "+91 90681 39222", tel: "+919068139222" },
+];
+
 export default function Footer() {
+  const [showContact, setShowContact] = useState(false);
+
   return (
     <footer
       className="w-full flex flex-col gap-10 md:px-20 px-10 pt-10 pb-5 bg-[#0A192F] border-t border-slate-700
@@ -61,9 +72,13 @@ export default function Footer() {
       {/* Contact Button and Socials */}
       <div className="flex md:flex-row flex-col items-center justify-between !font-mono border-t border-gray-600 pt-6">
         {/* Contact Button */}
-        <a className="h-[2.7rem] mb-4 md:mb-0 flex items-center gap-5 border-2 border-white hover:bg-white hover:text-mainblue transition-colors duration-200 px-5 py-1 cursor-pointer rounded-full font-medium text-[1rem]">
+        <button
+          type="button"
+          onClick={() => setShowContact(true)}
+          className="h-[2.7rem] mb-4 md:mb-0 flex items-center gap-5 border-2 border-white hover:bg-white hover:text-mainblue transition-colors duration-200 px-5 py-1 cursor-pointer rounded-full font-medium text-[1rem]"
+        >
           Contact
-        </a>
+        </button>
 
         {/* Social Icons */}
         <div className="flex items-center gap-5">
@@ -104,8 +119,64 @@ export default function Footer() {
 
       {/* Footer Bottom */}
       <div className="!font-mono text-center text-xs text-gray-400 mt-4">
-        &copy; 2025 AMURoboclub | Web Development Team
+        &copy; 2026 AMURoboclub | Web Development Team
       </div>
+
+      {/* Coordinator Contact Modal */}
+      <AnimatePresence>
+        {showContact && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+            onClick={() => setShowContact(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 20 }}
+              className="bg-[#0A192F] rounded-2xl w-full max-w-md border border-slate-700 shadow-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between p-5 border-b border-slate-700">
+                <h3 className="text-lg font-semibold !font-mono">
+                  Contact Coordinators
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setShowContact(false)}
+                  className="p-1.5 rounded-full hover:bg-slate-700 transition-colors"
+                  aria-label="Close"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="p-5 flex flex-col gap-4">
+                {COORDINATORS.map(({ name, phone, tel }) => (
+                  <a
+                    key={name}
+                    href={`tel:${tel}`}
+                    className="flex items-center gap-4 p-4 rounded-xl border border-slate-700 hover:border-white/40 hover:bg-slate-800/50 transition-colors group"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div className="!font-mono">
+                      <p className="font-medium text-white">{name}</p>
+                      <p className="text-sm text-gray-400 group-hover:text-gray-300">
+                        {phone}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </footer>
   );
 }
