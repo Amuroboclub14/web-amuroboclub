@@ -73,8 +73,6 @@ function formatSubmitFailureMessage(error) {
   return `${detail} If it keeps happening, share this code with the team: ${ref}`;
 }
 
-import { IS_CORE_TEAM_RECRUITMENT_PORTAL_OPEN } from "../../config/recruitment";
-
 function CoreTeamRecruitmentPortalClosed() {
   return (
     <main className="min-h-screen bg-black text-white">
