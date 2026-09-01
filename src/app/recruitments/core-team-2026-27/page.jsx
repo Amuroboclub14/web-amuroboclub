@@ -9,6 +9,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import ReCAPTCHAComponent from "../../components/ReCAPTCHA";
 import Link from "next/link";
+import { IS_CORE_TEAM_RECRUITMENT_PORTAL_OPEN } from "../../config/recruitment";
 
 const courseOptions = ["B.Tech", "B.E", "M.Tech", "Other"];
 
@@ -72,8 +73,7 @@ function formatSubmitFailureMessage(error) {
   return `${detail} If it keeps happening, share this code with the team: ${ref}`;
 }
 
-/** Set to `true` only if you reopen applications for another round. */
-const IS_CORE_TEAM_RECRUITMENT_PORTAL_OPEN = true;
+import { IS_CORE_TEAM_RECRUITMENT_PORTAL_OPEN } from "../../config/recruitment";
 
 function CoreTeamRecruitmentPortalClosed() {
   return (

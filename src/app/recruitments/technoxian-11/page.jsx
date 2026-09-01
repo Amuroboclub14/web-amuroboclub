@@ -9,6 +9,7 @@ import { db } from "../../firebase";
 import ReCAPTCHAComponent from "../../components/ReCAPTCHA";
 import Link from "next/link";
 import { ExternalLink, Volume2, VolumeX, Pause, Play } from "lucide-react";
+import { IS_TECHNOXIAN_RECRUITMENT_PORTAL_OPEN } from "../../config/recruitment";
 
 const courseOptions = ["B.Tech", "B.E", "M.Tech", "Other"];
 
@@ -26,9 +27,6 @@ const branchOptions = [
 ];
 
 const yearOptions = ["First Year", "Second Year", "Third Year", "Fourth Year"];
-
-/** Set to `false` when applications should close. */
-const IS_TECHNOXIAN_RECRUITMENT_PORTAL_OPEN = true;
 
 const LAST_YEAR_INSTAGRAM_PERMALINK =
   "https://www.instagram.com/reel/DPjmkg5AVtC/";

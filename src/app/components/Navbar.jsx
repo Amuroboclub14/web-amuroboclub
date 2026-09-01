@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../assets/Vlogo.d83a8feb5370b0b7c52a.png";
 import verceraLogoFull from "../../assets/vercera_full_logo.png";
+import { SHOW_TECHNOXIAN_RECRUITMENT_PROMO } from "../config/recruitment";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -95,6 +96,7 @@ export default function Navbar() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex justify-between items-center gap-10">
+        {SHOW_TECHNOXIAN_RECRUITMENT_PROMO && (
         <div>
           <Link
             href="/recruitments/technoxian-11"
@@ -113,6 +115,7 @@ export default function Navbar() {
             </span>
           </Link>
         </div>
+        )}
         {/* <Link
           href={"/vercera/apply"}
           className="hover:border-blue-600 hover:text-blue-600 text-white border-b-2 border-transparent transition-all duration-50 flex flex-col items-center justify-center"
@@ -207,6 +210,7 @@ export default function Navbar() {
               : "opacity-0 -translate-y-4 pointer-events-none"
           }`}
         >
+          {SHOW_TECHNOXIAN_RECRUITMENT_PROMO && (
           <div
             className={`mb-5 flex justify-center transition-all duration-500 transform ${
               visibleItems[3]
@@ -232,6 +236,7 @@ export default function Navbar() {
               </span>
             </Link>
           </div>
+          )}
           <div className="grid grid-cols-2 gap-4">
             <Link
               href={"/projects"}

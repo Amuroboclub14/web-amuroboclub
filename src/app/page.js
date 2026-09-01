@@ -11,6 +11,7 @@ import WhatSetsUsApart from "./components/WhatSetsUsApart";
 import SSAMUSAT from "./components/SSAMUSAT";
 import OurProjects from "./components/OurProjects";
 import Link from "next/link";
+import { SHOW_TECHNOXIAN_RECRUITMENT_PROMO } from "./config/recruitment";
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
             doing cool projects together.
           </p>
 
+          {SHOW_TECHNOXIAN_RECRUITMENT_PROMO && (
           <Link
             href="/recruitments/technoxian-11"
             className="group relative mb-6 block w-full max-w-md overflow-hidden rounded-2xl border border-orange-400/50 bg-gradient-to-br from-orange-500/20 via-amber-500/10 to-black/40 p-[1px] shadow-[0_0_40px_-14px_rgba(251,146,60,0.6)] transition-transform duration-300 hover:scale-[1.015]"
@@ -66,6 +68,7 @@ export default function Home() {
               </div>
             </div>
           </Link>
+          )}
 
           <div className="flex items-center justify-between gap-[24px] w-fit flex-wrap">
             <a
@@ -106,6 +109,7 @@ export default function Home() {
             placeholder="blur"
             className="w-full  md:w-[40vw] rounded-l-[3rem] relative max-w-full"
           />
+          {SHOW_TECHNOXIAN_RECRUITMENT_PROMO && (
           <Link
             href="/recruitments/technoxian-11"
             className="absolute bottom-4 left-8 z-10 inline-flex items-center gap-2 rounded-full border border-orange-400/60 bg-black/75 px-3 py-1.5 text-white backdrop-blur-md transition hover:bg-orange-500 hover:text-black"
@@ -118,6 +122,7 @@ export default function Home() {
               Technoxian 11.0 — Apply
             </span>
           </Link>
+          )}
         </motion.div>
       </div>
       {/* What Opportunities do we offer */}
