@@ -23,6 +23,7 @@ import {
   XCircle,
   Clock,
   ChevronDown,
+  Download,
 } from "lucide-react";
 
 // Add new years here as you create new members_20XX collections
@@ -254,6 +255,64 @@ function MembersManagementContent() {
     }
   };
 
+  const handleDownloadCSV = () => {
+    if (members.length === 0) {
+      alert(`No members to export for ${selectedYear}`);
+      return;
+    }
+
+    // Collect all unique keys across all members so the CSV covers
+    // members with different/extra fields too.
+    const allKeys = new Set();
+    members.forEach((member) => {
+      Object.keys(member).forEach((key) => allKeys.add(key));
+    });
+    // Keep "id" first if present, rest in encounter order
+    const headers = Array.from(allKeys);
+
+    const escapeCSVValue = (value) => {
+      if (value === null || value === undefined) return "";
+      let str =
+        typeof value === "object" ? JSON.stringify(value) : String(value);
+      if (str.includes('"') || str.includes(",") || str.includes("\n")) {
+        str = '"' + str.replace(/"/g, '""') + '"';
+      }
+      return str;
+    };
+
+    const rows = members.map((member) =>
+      headers
+        .map((key) => {
+          let value = member[key];
+          if (key === "submittedTimestamp" && value) {
+            value = formatDate(value);
+          } else if (key === "paymentStatus") {
+            value = value ? "Paid" : "Pending";
+          }
+          return escapeCSVValue(value);
+        })
+        .join(",")
+    );
+
+    const csvContent = [headers.join(","), ...rows].join("\n");
+
+    // BOM so Excel opens UTF-8 (names, special chars) correctly
+    const blob = new Blob(["\uFEFF" + csvContent], {
+      type: "text/csv;charset=utf-8;",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute(
+      "download",
+      `${collectionName}_${new Date().toISOString().split("T")[0]}.csv`
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -329,6 +388,15 @@ function MembersManagementContent() {
                   </>
                 )}
               </div>
+
+              <button
+                onClick={handleDownloadCSV}
+                title={`Download CSV for ${selectedYear}`}
+                className="flex items-center gap-2 bg-purple-500/20 border border-purple-500/40 text-purple-400 px-4 py-2 rounded-lg hover:bg-purple-500/30 transition-colors font-mono"
+              >
+                <Download className="w-5 h-5" />
+                Download CSV ({selectedYear})
+              </button>
 
               <button
                 onClick={() => setShowAddForm(true)}
