@@ -565,7 +565,7 @@ export default function MemberForm() {
                             <div className="text-center space-y-2 max-w-xs">
                               <p className="text-white font-medium text-lg">
                                 Membership Fee: ₹350
-                                <span className="text-red-500">*</span>
+                                <span className="text-red-500 text-sm">*</span>
                               </p>
 
                               <p className="text-gray-400 text-sm">
