@@ -689,7 +689,7 @@ export default function MemberForm() {
                       <div className="bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border border-cyan-500/30 rounded-lg p-4 backdrop-blur-sm">
                         <p className="text-cyan-400 font-semibold text-lg">
                           Membership Fee: ₹350
-                          <span className="text-red-500">*</span>
+                          <span className="text-red-500 text-sm">*</span>
                         </p>
                       </div>
 
