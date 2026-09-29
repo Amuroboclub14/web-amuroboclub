@@ -58,6 +58,7 @@ export default function MemberForm() {
       alert("Please complete the reCAPTCHA verification.");
       return;
     }
+
     setIsSubmitting(true);
 
     try {
@@ -87,10 +88,10 @@ export default function MemberForm() {
         recaptchaToken: recaptchaToken,
       });
 
-      // ✅ Alert on success
+      // Alert on success
       alert("Your form has been submitted successfully!");
 
-      // ✅ Reset form fields
+      // Reset form fields
       setName("");
       setEmail("");
       setCourse("");
@@ -138,6 +139,7 @@ export default function MemberForm() {
   const facultyHandler = (e) => {
     setFaculty(e.target.value);
   };
+
   const discordHandler = (e) => {
     setDiscord(e.target.value);
   };
@@ -185,6 +187,7 @@ export default function MemberForm() {
     <>
       <main className="bg-black min-h-screen text-white">
         <Navbar />
+
         <div className="pb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -200,7 +203,8 @@ export default function MemberForm() {
                 <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
                   Join Our Robotics Community
                 </h1>
-                <p className="text-lg !font-mono text-gray-300 max-w-2xl mx-auto ">
+
+                <p className="text-lg !font-mono text-gray-300 max-w-2xl mx-auto">
                   Take your robotics journey to the next level with exclusive
                   access to labs, competitions, and mentorship
                 </p>
@@ -218,21 +222,27 @@ export default function MemberForm() {
                 <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
                   Membership Benefits
                 </h2>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {membershipBenefits.map((benefit, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: 0.6 + index * 0.1,
+                      }}
                       className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300 hover:border-cyan-500/30 group"
                     >
                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
                         {benefit.icon}
                       </div>
+
                       <h3 className="text-lg !font-mono font-semibold mb-2 text-white">
                         {benefit.title}
                       </h3>
+
                       <p className="!font-mono text-gray-400 text-sm">
                         {benefit.description}
                       </p>
@@ -255,6 +265,7 @@ export default function MemberForm() {
                     <h2 className="text-2xl font-bold mb-2 text-white">
                       Membership Form
                     </h2>
+
                     <p className="!font-mono text-gray-400">
                       Fill in your details to join our robotics community
                     </p>
@@ -267,14 +278,17 @@ export default function MemberForm() {
                         Personal Information
                       </h3>
                     </div>
+
                     <div className="!font-mono grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-2">
                         <label
                           htmlFor="name"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Full Name <span className="text-red-500">*</span>
+                          Full Name{" "}
+                          <span className="text-red-500">*</span>
                         </label>
+
                         <Input
                           value={name}
                           onChange={nameHandler}
@@ -289,8 +303,10 @@ export default function MemberForm() {
                           htmlFor="email"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Email Address <span className="text-red-500">*</span>
+                          Email Address{" "}
+                          <span className="text-red-500">*</span>
                         </label>
+
                         <Input
                           value={email}
                           onChange={emailHandler}
@@ -306,8 +322,10 @@ export default function MemberForm() {
                         htmlFor="mobile"
                         className="!font-mono text-[18px] font-medium text-gray-300"
                       >
-                        Mobile Number <span className="text-red-500">*</span>
+                        Mobile Number{" "}
+                        <span className="text-red-500">*</span>
                       </label>
+
                       <Input
                         value={mobile}
                         onChange={mobileHandler}
@@ -319,12 +337,13 @@ export default function MemberForm() {
                   </div>
 
                   {/* Academic Information */}
-                  <div className=" space-y-6">
+                  <div className="space-y-6">
                     <div className="border-l-4 border-emerald-400 pl-4">
                       <h3 className="text-1xl font-semibold mb-4 text-emerald-400">
                         Academic Information
                       </h3>
                     </div>
+
                     <div className="!font-mono grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-2">
                         <label
@@ -333,6 +352,7 @@ export default function MemberForm() {
                         >
                           Course <span className="text-red-500">*</span>
                         </label>
+
                         <select
                           value={course}
                           onChange={courseHandler}
@@ -354,8 +374,10 @@ export default function MemberForm() {
                           htmlFor="year"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Year of Study <span className="text-red-500">*</span>
+                          Year of Study{" "}
+                          <span className="text-red-500">*</span>
                         </label>
+
                         <select
                           value={year}
                           onChange={yearHandler}
@@ -366,7 +388,9 @@ export default function MemberForm() {
                           <option>2nd</option>
                           <option>3rd</option>
                           <option>4th</option>
-                          <option>Not Applicable (for other courses)</option>
+                          <option>
+                            Not Applicable (for other courses)
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -380,6 +404,7 @@ export default function MemberForm() {
                           Enrollment Number{" "}
                           <span className="text-red-500">*</span>
                         </label>
+
                         <Input
                           value={enrollment}
                           onChange={enrollmentHandler}
@@ -388,13 +413,16 @@ export default function MemberForm() {
                           className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
                         />
                       </div>
+
                       <div className="flex flex-col gap-2">
                         <label
                           htmlFor="faculty"
                           className="!font-mono text-[18px] font-medium text-gray-300"
                         >
-                          Faculty Number <span className="text-red-500">*</span>
+                          Faculty Number{" "}
+                          <span className="text-red-500">*</span>
                         </label>
+
                         <Input
                           value={faculty}
                           onChange={facultyHandler}
@@ -413,6 +441,7 @@ export default function MemberForm() {
                             >
                               Discord Id (Optional)
                             </label>
+
                             <Input
                               value={discord}
                               onChange={discordHandler}
@@ -434,8 +463,9 @@ export default function MemberForm() {
                               viewBox="0 0 24 24"
                               fill="currentColor"
                             >
-                              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 0-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
                             </svg>
+
                             Join our Discord Server
                           </a>
                         </div>
@@ -444,12 +474,13 @@ export default function MemberForm() {
                   </div>
 
                   {/* Document Upload */}
-                  <div className=" space-y-6">
+                  <div className="space-y-6">
                     <div className="border-l-4 border-teal-400 pl-4">
                       <h3 className="text-2x1 font-semibold mb-4 text-teal-400">
                         Document Upload
                       </h3>
                     </div>
+
                     <div className="!font-mono grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-2">
                         <label
@@ -458,8 +489,11 @@ export default function MemberForm() {
                         >
                           ID Card <span className="text-red-500">*</span>
                         </label>
+
                         <Input
-                          onChange={(e) => setIDproof(e.target.files[0])}
+                          onChange={(e) =>
+                            setIDproof(e.target.files[0])
+                          }
                           key={fileInputKey + "_id"}
                           type="file"
                           className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-teal-600 file:text-white hover:file:bg-teal-700"
@@ -474,8 +508,11 @@ export default function MemberForm() {
                           Membership Fee Payment Proof{" "}
                           <span className="text-red-500">*</span>
                         </label>
+
                         <Input
-                          onChange={(e) => setPaymentproof(e.target.files[0])}
+                          onChange={(e) =>
+                            setPaymentproof(e.target.files[0])
+                          }
                           key={fileInputKey + "_payment"}
                           type="file"
                           className="p-1 rounded-lg bg-gray-800/80 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-teal-600 file:text-white hover:file:bg-teal-700"
@@ -488,9 +525,11 @@ export default function MemberForm() {
                   <div className="lg:hidden">
                     <div className="text-center space-y-4 p-6 bg-gray-800/30 rounded-xl border border-gray-700/50">
                       <div className="h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+
                       <p className="text-gray-400 text-sm">
                         Complete your payment to finalize membership
                       </p>
+
                       <Sheet>
                         <SheetTrigger asChild>
                           <Button
@@ -501,6 +540,7 @@ export default function MemberForm() {
                             QR Code
                           </Button>
                         </SheetTrigger>
+
                         <SheetContent
                           side="right"
                           className="bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 w-full max-h-screen overflow-y-auto p-4 rounded-t-2xl"
@@ -525,10 +565,16 @@ export default function MemberForm() {
                             <div className="text-center space-y-2 max-w-xs">
                               <p className="text-white font-medium text-lg">
                                 Membership Fee: ₹350
+                                <span className="text-red-500">*</span>
                               </p>
+
                               <p className="text-gray-400 text-sm">
                                 After payment, upload the screenshot as payment
                                 proof
+                              </p>
+
+                              <p className="text-gray-500 text-xs italic mt-2">
+                                * Membership fee once paid is non-refundable.
                               </p>
                             </div>
                           </div>
@@ -552,11 +598,13 @@ export default function MemberForm() {
                         Security Verification
                       </h3>
                     </div>
+
                     <div className="flex justify-center">
                       <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-4">
                         <p className="text-gray-400 text-sm mb-4 text-center">
                           Please verify you are not a robot
                         </p>
+
                         <ReCAPTCHAComponent
                           onVerify={setRecaptchaToken}
                           onError={(error) =>
@@ -590,12 +638,14 @@ export default function MemberForm() {
                               strokeWidth="4"
                               fill="none"
                             />
+
                             <path
                               className="opacity-75"
                               fill="currentColor"
                               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                             />
                           </svg>
+
                           Submitting...
                         </span>
                       ) : (
@@ -619,6 +669,7 @@ export default function MemberForm() {
                       <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
                         Scan to Pay
                       </h3>
+
                       <p className="text-gray-400">
                         Complete your membership payment
                       </p>
@@ -638,14 +689,20 @@ export default function MemberForm() {
                       <div className="bg-gradient-to-r from-cyan-600/20 to-emerald-600/20 border border-cyan-500/30 rounded-lg p-4 backdrop-blur-sm">
                         <p className="text-cyan-400 font-semibold text-lg">
                           Membership Fee: ₹350
+                          <span className="text-red-500">*</span>
                         </p>
                       </div>
+
                       <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50">
                         <p className="text-gray-400 text-sm">
                           After payment, upload the screenshot as payment proof
                           in the form above
                         </p>
                       </div>
+
+                      <p className="text-gray-500 text-xs italic text-center">
+                        * Membership fee once paid is non-refundable.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -654,6 +711,7 @@ export default function MemberForm() {
           </motion.div>
         </div>
       </main>
+
       <Footer />
     </>
   );
